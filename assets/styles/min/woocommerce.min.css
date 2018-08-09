@@ -840,7 +840,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 }
 
 .cart-count {
-	font-family: 'Muli', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 19.2px;
 	font-size: 1.2rem;
 	font-weight: 400;
@@ -939,7 +939,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 }
 
 .woocommerce a.added_to_cart {
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 22.4px;
 	font-size: 1.4rem;
 	padding-top: 16px;
@@ -1074,7 +1074,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 
 .woocommerce .woocommerce-pagination .page-numbers {
 	border: none;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 24px;
 	font-size: 1.5rem;
 }
@@ -1126,12 +1126,12 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 
 .woocommerce div.product .summary p.out-of-stock {
 	color: tomato;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .woocommerce div.product p.price,
 .woocommerce div.product span.price {
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 2em;
 	margin-bottom: 16px;
 	margin-bottom: 1rem;
@@ -1209,7 +1209,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 }
 
 .woocommerce div.product .woocommerce-tabs ul.tabs li a {
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 28.8px;
 	font-size: 1.8rem;
 	letter-spacing: 0.05em;
@@ -1647,7 +1647,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 
 .woocommerce-MyAccount-navigation ul li {
 	list-style-type: none;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .woocommerce-MyAccount-navigation ul li:first-of-type a {
@@ -1666,7 +1666,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	text-decoration: none;
 	font-size: 22.4px;
 	font-size: 1.4rem;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 }
 
 .content-sidebar.woocommerce-account .woocommerce-MyAccount-navigation,
@@ -1734,7 +1734,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 }
 
 .woocommerce .comment-reply-title {
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 32px;
 	font-size: 2rem;
 	padding: 0 0 1em;
@@ -1793,7 +1793,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 .woocommerce-message a,
 .woocommerce-error a,
 .woocommerce-info a {
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .woocommerce .woocommerce-error {

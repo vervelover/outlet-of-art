@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a01');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a01' . time());
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -193,7 +193,7 @@ function business_scripts_styles() {
 	wp_dequeue_style('woocommerce-layout');
 
 	// Enqueue Google fonts.
-	wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Muli:300,400,600,700|Adamina', array(), CHILD_THEME_VERSION);
+	wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,500,700|PT+Serif:400i,700', array(), CHILD_THEME_VERSION);
 
 	// Get Icon Widget plugin settings.
 	$icon_settings = get_option('icon_widget_settings');

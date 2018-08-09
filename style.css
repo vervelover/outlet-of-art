@@ -328,7 +328,7 @@ input,
 optgroup,
 select,
 textarea {
-	font-family: 'Muli', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	/* 1 */
 	font-size: 100%;
 	/* 1 */
@@ -618,7 +618,7 @@ html {
 body {
 	background-color: #ffffff;
 	color: #181307;
-	font-family: 'Muli', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 14.4px;
 	font-size: 1.8rem;
 	font-weight: 400;
@@ -671,7 +671,7 @@ hr {
 
 b,
 strong {
-	font-weight: 600;
+	font-weight: 500;
 }
 
 blockquote,
@@ -694,8 +694,8 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 	line-height: 1.2;
 	margin: 0 0 0.382em;
 }
@@ -779,7 +779,7 @@ input[type='submit'] {
 	border-radius: 2px;
 	color: #ffffff;
 	cursor: pointer;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 12px;
 	font-size: 1.5rem;
 	font-weight: 700;
@@ -1245,7 +1245,7 @@ img.alignright,
 	position: absolute;
 	width: 100%;
 	z-index: 100;
-	background-color: #0a0804;
+	background-color: #ffffff;
 	-webkit-transition: all 0.75s cubic-bezier(0, 1, 0.5, 1);
 	        transition: all 0.75s cubic-bezier(0, 1, 0.5, 1);
 }
@@ -1257,7 +1257,7 @@ img.alignright,
 }
 
 .has-fixed-header .site-header.shrink {
-	background-color: #0a0804;
+	background-color: #ffffff;
 	box-shadow: 0 0 2rem rgba(24, 19, 7, 0.2);
 }
 
@@ -1319,7 +1319,7 @@ img.alignright,
 .site-title {
 	font-size: 13.6px;
 	font-size: 1.7rem;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-weight: 700;
 	line-height: 1;
 	margin-bottom: 0;
@@ -1489,7 +1489,7 @@ img.alignright,
 	text-align: left;
 	font-size: 11.2px;
 	font-size: 1.4rem;
-	font-weight: 300;
+	font-weight: 400;
 	margin: 10.4px 0 0;
 	margin: 1.3rem 0 0;
 }
@@ -1542,7 +1542,7 @@ img.alignright,
 --------------------------------------------- */
 .menu {
 	width: 100%;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-weight: 400;
 	font-size: 14.4px;
 	font-size: 1.8rem;
@@ -2046,7 +2046,7 @@ img.alignright,
 	text-decoration: none;
 	padding: 1em 1.25em;
 	text-transform: uppercase;
-	font-weight: 600;
+	font-weight: 500;
 	vertical-align: baseline;
 	text-align: center;
 	width: auto;
@@ -2164,7 +2164,7 @@ img.alignright,
 	font-size: 12.8px;
 	font-size: 1.6rem;
 	text-decoration: none;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	text-align: center;
 	margin: 0 0 8px 0;
 	margin: 0 0 1rem 0;
@@ -2613,8 +2613,8 @@ img.alignright,
 p.entry-meta {
 	font-size: 9.6px;
 	font-size: 1.2rem;
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 }
 
 .entry-header p.entry-meta {
@@ -2676,10 +2676,10 @@ p.entry-meta {
 	padding: 32px 0;
 	padding: 4rem 0;
 	background-color: #cecece;
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 11.2px;
 	font-size: 1.4rem;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .adjacent-entry-pagination a {
@@ -2870,7 +2870,7 @@ p.entry-meta {
 
 .widgettitle,
 .widget-title {
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: 19.2px;
 	font-size: 2.4rem;
 }
@@ -3006,7 +3006,7 @@ p.entry-meta {
 	line-height: 1.618;
 	padding: 0;
 	margin: 0 0 1em;
-	font-family: 'Muli', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	text-transform: capitalize;
 }
@@ -3745,8 +3745,8 @@ a.flex-prev::before {
 	padding: 0.618em 1.618em;
 	font-size: 11.2px;
 	font-size: 1.4rem;
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 	margin-top: 1em;
 	width: auto;
 	background-color: #181307;
@@ -4017,8 +4017,8 @@ a.flex-prev::before {
 }
 
 .front-page-5 .title {
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 	position: absolute;
 	text-align: center;
 	display: block;
@@ -4136,9 +4136,9 @@ a.flex-prev::before {
 }
 
 .portfolio .filter {
-	font-family: 'Muli', sans-serif;
+	font-family: 'PT Serif', serif;
 	font-size: small;
-	font-weight: 600;
+	font-weight: 500;
 	text-align: center;
 	display: block;
 	margin-bottom: 32px;
@@ -4228,8 +4228,8 @@ a.flex-prev::before {
 .portfolio-item .entry-title {
 	text-align: center;
 	position: absolute;
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 	font-size: 12.8px;
 	font-size: 1.6rem;
 	color: #ffffff;
@@ -4300,8 +4300,8 @@ a.flex-prev::before {
 .archive.genesis-pro-portfolio .entry .entry-title {
 	text-align: center;
 	position: absolute;
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 	font-size: 12.8px;
 	font-size: 1.6rem;
 	color: #ffffff;
@@ -4408,8 +4408,8 @@ a.flex-prev::before {
 	text-transform: capitalize;
 	font-size: 11.2px;
 	font-size: 1.4rem;
-	font-family: 'Muli', sans-serif;
-	font-weight: 600;
+	font-family: 'PT Serif', serif;
+	font-weight: 500;
 	padding: 2em 0;
 	color: #544d3e;
 	box-shadow: 0 0 1rem -1rem rgba(24, 19, 7, 0);
@@ -4533,7 +4533,7 @@ a.flex-prev::before {
 }
 
 .pricing-table strong {
-	font-weight: 600;
+	font-weight: 500;
 	color: #544d3e;
 	font-size: 16px;
 	font-size: 2rem;
@@ -4554,8 +4554,8 @@ a.flex-prev::before {
 .pricing-table big {
 	font-size: 1.618em;
 	color: #181307;
-	font-weight: 600;
-	font-family: 'Muli', sans-serif;
+	font-weight: 500;
+	font-family: 'PT Serif', serif;
 }
 
 .pricing-table p {

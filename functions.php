@@ -193,7 +193,7 @@ function business_scripts_styles() {
 	wp_dequeue_style('woocommerce-layout');
 
 	// Enqueue Google fonts.
-	wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,500,700|PT+Serif:400i,700', array(), CHILD_THEME_VERSION);
+	wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,500,700|PT+Serif:400,400i,700', array(), CHILD_THEME_VERSION);
 
 	// Get Icon Widget plugin settings.
 	$icon_settings = get_option('icon_widget_settings');

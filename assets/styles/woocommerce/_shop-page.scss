@@ -1,0 +1,177 @@
+/* ### WooCommerce Shop Page */
+
+.woocommerce {
+    .content .entry {
+        border-bottom: 0;
+    }
+    .woocommerce-ordering {
+        width: auto;
+        float: left;
+        clear: left;
+        @include breakpoint(xs) {
+            float: right;
+            clear: none;
+        }
+        select {
+            height: auto;
+        }
+    }
+    .product {
+        .add_to_cart_button {
+            &:after {
+                display: inline-block;
+                margin-left: 1em;
+            }
+            &.loading {
+                &:after {
+                    top: 0 !important;
+                    right: 0;
+                    position: relative;
+                }
+            }
+        }
+    }
+    a.added_to_cart {
+        font-weight: $bolder;
+        font-size: 1.4rem;
+        padding-top: 1rem;
+        padding-left: 1rem;
+    }
+    a.button.loading,
+    button.button.loading,
+    input.button.loading,
+    #respond input#submit.loading {
+        &::after {
+            top: 1em;
+        }
+    }
+    ul.products {
+        @include breakpoint(sm) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        &:before,
+        &:after {
+            @include breakpoint(sm) {
+                display: none;
+            }
+        }
+        li.product {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            text-align: center;
+            background-color: $white;
+            box-shadow: 0 1rem 2rem -1rem rgba($dark,0.1);
+            padding-bottom: 2.5rem;
+            @include breakpoint(sm) {
+                margin-bottom: 3rem;
+            }
+            &:hover {
+                box-shadow: 0 2rem 2rem -1rem rgba($dark,0.1);
+            }
+            &:before,
+            &:after {
+                display: none;
+            }
+            &.first {
+                clear: both;
+                margin-left: 0;
+            }
+            a {
+                overflow: hidden;
+            }
+            img {
+                margin-bottom: 0 !important;
+                border-radius: $site-radius $site-radius 0 0;
+                @include transition;
+            }
+            h2,
+            .price .from,
+            a .woocommerce-loop-product__title {
+                background-color: $white;
+                font-size: 1.8rem;
+                position: relative;
+                margin-top: 1rem;
+            }
+            .price {
+                display: block;
+                clear: both;
+                float: none;
+                background-color: $white;
+                color: $dark;
+                margin-bottom: 0;
+                del,
+                ins {
+                    display: inline;
+                    margin-right: 0.5em;
+                }
+            }
+            span.onsale {
+                top: 2em;
+                &:after {
+                    border-left-color: transparent;
+                    border-right-color: black(0.146);
+                    transform: rotate(45deg);
+                    right: 0.15em;
+                    left: auto;
+                }
+            }
+            .star-rating {
+                margin: 0 auto 0.5em;
+                position: absolute;
+                bottom: -2em;
+                left: 0;
+                right: 0;
+                display: none;
+            }
+            .woocommerce-LoopProduct-link {
+                display: block;
+                align-self: flex-start;
+                @include transition;
+            }
+            .button {
+                text-align: center;
+                align-self: flex-end;
+                padding: 0.8em 1.6em;
+                margin-top: 1rem;
+            }
+        }
+    }
+    .woocommerce-pagination {
+        .page-numbers {
+            border: none;
+            font-family: $font-heading;
+            font-size: 1.5rem;
+            li {
+                display: inline;
+                border: none;
+            }
+            a,
+            li span {
+                cursor: pointer;
+                display: inline-block;
+                padding: 0.7rem;
+                text-decoration: none;
+                border-radius: $site-radius;
+                margin: 0 0.1em;
+                width: 3rem;
+                height: 3rem;
+            }
+            li a {
+                margin-bottom: 4px;
+                @include breakpoint(sm) {
+                    margin-bottom: 0;
+                }
+            }
+            a:hover,
+            .active a {
+                background-color: $accent;
+                color: $white;
+            }
+        }
+    }
+}

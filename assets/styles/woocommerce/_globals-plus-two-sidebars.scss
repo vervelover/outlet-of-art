@@ -1,0 +1,128 @@
+/* ### WooCommerce Globals */
+
+.woocommerce {
+    .entry.product {
+        padding: 0;
+    }
+    abbr.required,
+    ins {
+        text-decoration: none;
+    }
+    .products .star-rating {
+        padding: 10px;
+        clear: both;
+    }
+    p.stars {
+        a,
+        a:hover {
+            outline: 0;
+        }
+    }
+	td,
+	th {
+		border: none;
+	}
+    span.onsale {
+        position: absolute;
+        background-color: $dark;
+        border-radius: $site-radius;
+        font-weight: $normal;
+        font-size: 1.4rem;
+        letter-spacing: 0.05em;
+        height: 2em;
+        width: 4em;
+        min-height: 2em;
+        min-width: 4em;
+        line-height: 1.7;
+        left: -0.382em;
+        right: auto;
+        top: 2em;
+        &:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            border: 0.382em solid transparent;
+            border-left-color: black(0.146);
+            transform: rotate(-45deg);
+            left: 0.1em;
+            top: calc(2em - 0.38em);
+            border-radius: $site-radius;
+        }
+    }
+    .woocommerce-LoopProduct-link {
+        display: block;
+    }
+}
+
+.site-header .fa-shopping-cart {
+    position: relative;
+    display: block;
+    float: right;
+    padding: 0 0 0 1rem;
+    color: $dark;
+    font-size: 2rem;
+    @include breakpoint(sm) {
+        margin-right: 2em;
+    }
+    &:hover {
+        opacity: 1;
+        .cart-count {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.cart-count {
+    font-family: $font-body;
+    font-size: 1.2rem;
+    font-weight: $normal;
+    background-color: $accent;
+    color: $white;
+    height: 14px;
+    width: 14px;
+    display: block;
+    text-align: center;
+    position: absolute;
+    right: -0.6rem;
+    top: -0.6rem;
+    line-height: 14px;
+    border-radius: 99px;
+    border: 1px solid white(1);
+    transition: transform 0.316s ease;
+}
+
+.cart-total {
+    position: absolute;
+    text-indent: -9999px;
+    visibility: hidden;
+}
+
+/* Two Sidebar Layouts */
+
+.content-sidebar-sidebar,
+.sidebar-content-sidebar,
+.sidebar-sidebar-content {
+    &.woocommerce div.product .woocommerce-tabs ul.tabs {
+        padding: 0;
+        li {
+            display: block;
+            margin: 0;
+            background-color: $white;
+            border-bottom: 0;
+            &:last-child {
+                border-bottom: $site-border;
+            }
+            &.active {
+                border-bottom-color: $light;
+                a::after {
+                    content: "\f147";
+                    float: right;
+                    font-family: "dashicons";
+                }
+            }
+            a {
+                display: block;
+            }
+        }
+    }
+}

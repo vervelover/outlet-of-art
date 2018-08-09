@@ -1,0 +1,108 @@
+/* ### WooCommerce Checkout & Payment */
+
+.woocommerce-cart,
+.woocommerce-checkout,
+#add_payment_method {
+    table.cart {
+        td.actions .coupon input[type="text"] {
+            width: auto;
+            height: auto;
+            line-height: 2;
+            max-width: 50%;
+            border-color: $border;
+        }
+        img {
+            vertical-align: middle;
+        }
+        input {
+            vertical-align: top;
+        }
+    }
+    form.checkout {
+        .col2-set {
+            @include breakpoint(md) {
+                width: 48.717948717948715%;
+                float: left;
+            }
+            .col-1,
+            .col-2 {
+                width: 100%;
+            }
+        }
+        #order_review_heading {
+            margin-top: 1em;
+            @include breakpoint(md) {
+                margin-top: 0;
+                margin-bottom: 1em;
+            }
+        }
+        #order_review_heading,
+        .woocommerce-checkout-review-order {
+            @include breakpoint(md) {
+                width: 48.717948717948715%;
+                float: right;
+                margin-left: 2.564102564102564%;
+            }
+        }
+        .woocommerce-additional-fields {
+            h3 {
+                display: none;
+            }
+        }
+    }
+    .terms {
+        display: flex;
+        padding: 0 !important;
+        label {
+            position: relative;
+            float: none;
+            min-width: 100%;
+            display: block !important;
+        }
+        span {
+            font-size: 1.6rem;
+            line-height: 1;
+            width: 100%;
+        }
+        .required {
+            position: absolute;
+            left: auto;
+            right: 0;
+            top: 1rem;
+            float: right;
+            width: auto;
+        }
+    }
+    #payment {
+        background-color: $white;
+        border-radius: $site-radius;
+        border: $site-border;
+        padding: 0;
+        div.form-row {
+            margin-bottom: 0;
+            &.place-order {
+                background-color: $light;
+                .button {
+                    display: block;
+                    width: 100%;
+                    padding: 1em;
+                }
+            }
+        }
+        ul.payment_methods {
+            border-color: $border;
+            padding: 3rem;
+            li {
+                list-style-type: none;
+            }
+        }
+        div.payment_box {
+            background-color: $light;
+            border: $site-border;
+            border-radius: $site-radius;
+            &::before {
+                display: none;
+            }
+        }
+    }
+}

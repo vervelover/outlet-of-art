@@ -1,0 +1,78 @@
+/* ### WooCommerce Account Page */
+
+.woocommerce-account {
+    .woocommerce-Address-title h3 {
+        font-size: 2.6rem;
+    }
+    .woocommerce-Address {
+        margin-bottom: 20px;
+    }
+    table.order_details th.product-total {
+        min-width: 110px;
+    }
+    .woocommerce-MyAccount-navigation {
+        background-color: $white;
+        @include breakpoint(sm) {
+            float: left;
+            margin-right: 5%;
+            width: 20%;
+        }
+    }
+    .woocommerce-MyAccount-content {
+        @include breakpoint(sm) {
+            width: 75%;
+            float: right;
+        }
+    }
+}
+
+.woocommerce-MyAccount-navigation {
+    border: $site-border;
+    border-radius: $site-radius;
+    padding: 0;
+    margin-bottom: 40px;
+    ul {
+        margin-bottom: 0;
+        margin-left: 0;
+        li {
+            list-style-type: none;
+            font-weight: $bolder;
+            &:first-of-type {
+                a {
+                    border-top: none !important;
+                }
+            }
+            &.is-active>a {
+                background-color: $light;
+                padding: 0.618em 1.382em;
+            }
+            a {
+                padding: 0.5em 1.382em;
+                display: block;
+                border-top: $site-border;
+                text-decoration: none;
+                font-size: 1.4rem;
+                font-family: $font-heading;
+            }
+        }
+    }
+}
+
+.content-sidebar.woocommerce-account,
+.sidebar-content.woocommerce-account {
+    .woocommerce-MyAccount-navigation {
+        text-align: center;
+        margin-right: 0;
+        width: 100%;
+        ul {
+            text-align: center;
+        }
+        li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+    }
+    .woocommerce-MyAccount-content {
+        width: 100%;
+    }
+}

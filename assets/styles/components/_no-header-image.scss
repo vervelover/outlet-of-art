@@ -1,0 +1,59 @@
+.no-header-image {
+    .page-header {
+
+        padding: 3rem 0 3rem;
+        text-align: left;
+        width: 100%;
+
+        .wrap {
+            width: 100%;
+            padding: 0;
+        }
+
+        &::before {
+            display: none;
+        }
+        h1 {
+            color: $dark;
+            text-shadow: $lighter-shadow;
+            font-size: 3rem;
+            max-width: 100%;
+        }
+        p {
+            color: $dark;
+            text-shadow: $lighter-shadow;
+            text-align: left;
+            font-size: 1.4rem;
+            font-weight: $thin;
+            margin: 1.3rem 0 0;
+        }
+        .woocommerce-result-count {
+            float: left;
+            font-size: 1.4rem;
+        }
+    }
+
+    .content-sidebar-wrap {
+        padding-top: 0;
+    }
+}
+
+.page.no-header-image, .single.no-header-image, .post-type-archive-portfolio.no-header-image {
+
+    .page-header {
+        width: 100%;
+        text-align: center;
+        padding-top: 6rem;
+
+        h1, h1.archive-title {
+            font-size: 5rem;
+        }
+        p {
+            text-align: center;
+            margin: 2rem auto;
+        }
+    }
+    .entry {
+        margin-top: 4rem;
+    }
+}

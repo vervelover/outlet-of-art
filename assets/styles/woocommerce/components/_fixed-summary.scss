@@ -1,0 +1,137 @@
+.fixed-summary, .fixed-summary.scroll {
+    position: relative;
+    float: left;
+    padding-top: 3rem;
+    top: 0;
+    text-align: center;
+    @include breakpoint(md){
+        text-align: left;
+    }
+}
+
+.fixed-summary {
+
+    @include breakpoint(md) {
+        position: static;
+        padding-top: 0;
+        max-width: 63rem;
+        z-index: 6;
+        margin-top: 0;
+        &.scroll {
+            position: fixed;
+            top: 13rem;
+        }
+    }
+    form.cart button {
+        float: none;
+        padding: 2rem 10rem;
+        min-width: 70%;
+        @include breakpoint(md){
+            float: left;
+            width: 100%;
+        }
+        &.alt.disabled {
+            background-color: $accent;
+            opacity: .8;
+        }
+    }
+    &__go-to-details {
+        text-align: center;
+        width: 100%;
+        border-top: $site-border;
+        border-bottom: $site-border;
+        margin-bottom: 1rem;
+        display: none;
+        @include breakpoint(md) {
+            display: block;
+        }
+        &--link {
+            font-size: 1.6rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+
+    &__shipping-info {
+        display: flex;
+        justify-content: center;
+        @include breakpoint(md) {
+            display: block;
+        }
+    }
+
+    li a {
+        text-decoration: none;
+    }
+
+}
+
+@media screen and (max-width: 56em) {
+    .fixed-summary.scroll {
+        margin-top: 0 !important;
+    }
+}
+
+.single-product-additional-info {
+	width: 100%;
+	float: left;
+    position: relative;
+	margin: 2rem 0;
+	border-bottom: 1px solid $border;
+	text-align: left;
+
+    @include breakpoint(md) {
+		max-width: 48%;
+		padding: 0;
+    }
+    @include breakpoint(lg) {
+        margin-left: 5%;
+    }
+
+	& .option-heading {
+        border-top: 1px solid $border;
+		display: block;
+		float: left;
+		width: 100%;
+        text-transform: uppercase;
+		cursor: pointer;
+	}
+
+	& h2 {
+		margin: 0;
+		line-height: 1;
+		font-size: 2rem;
+		padding: 3.2rem 0 3.2rem 3.2rem;
+		margin-bottom: 0;
+		position: relative;
+		left: 0;
+		display: inline-block;
+		color: $black;
+	}
+
+	& .option-content h2, .option-content-first h2 {
+		display: none;
+	}
+	& .option-content, .option-content-first {
+		font-size: 1.6rem;
+        padding-left: 3.2rem;
+        padding-right: 3.2rem;
+        padding-bottom: 3.2rem;
+	}
+
+    & .arrow-down, .arrow-up, .arrow-up-nojquery {
+        float: right;
+    	margin-right: 3.2rem;
+    	line-height: 1;
+    	font-size: 3.2rem;
+    	padding-top: 2.7rem;
+    	color: $gray;
+    }
+
+    & li {
+        list-style-type: disc;
+        margin-left: 3.2rem;
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+}

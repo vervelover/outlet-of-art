@@ -1,0 +1,43 @@
+/* ### WooCommerce Misc */
+
+.woocommerce-message,
+.woocommerce-error,
+.woocommerce-info {
+    font-size: 1.8rem;
+    background-color: $light;
+    border-top-color: $gray;
+    &::before {
+        color: $gray;
+    }
+    .woocommerce-MyAccount-content & {
+        padding: 1em 1em 1em 3em;
+        overflow: auto;
+        .button {
+            float: right;
+            display: block;
+        }
+    }
+    a {
+        font-weight: $bolder;
+    }
+}
+
+.woocommerce {
+    .woocommerce-error {
+        border-top-color: tomato;
+        margin-left: 0;
+        &::before {
+            color: tomato;
+        }
+    }
+    .woocommerce-info {
+        border-top-color: $gray;
+        &::before {
+            color: $gray;
+        }
+    }
+}
+
+div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricted-content-message {
+    width: 48%;
+}

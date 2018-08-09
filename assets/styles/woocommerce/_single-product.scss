@@ -1,0 +1,97 @@
+/* ### WooCommerce Product */
+
+.woocommerce {
+    div.product {
+        position: relative;
+        .star-rating {
+            float: left;
+        }
+        .summary {
+            p {
+                color: $gray;
+                margin-bottom: 1rem;
+            }
+            p.out-of-stock {
+                color: tomato;
+                font-weight: $bolder;
+            }
+        }
+        p.price,
+        span.price {
+            font-family: $font-heading;
+            font-size: 2em;
+            margin-bottom: 1rem;
+            color: $accent;
+            line-height: 1.5;
+            float: left;
+            width: 100%;
+        }
+        .product_meta {
+            font-size: 1.5rem;
+            color: $gray;
+        }
+        form.cart {
+            clear: both;
+            padding: 1em 0 0;
+            .variations {
+                table-layout: fixed;
+            }
+        }
+    }
+    .woocommerce-result-count {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        float: none;
+        display: block;
+    }
+    .woocommerce-variation-price {
+        margin-bottom: 20px;
+    }
+    .woocommerce-product-details__short-description {
+        @include clearfix;
+    }
+}
+
+
+/* ### WooCommerce Product Tabs */
+
+.woocommerce div.product .woocommerce-tabs {
+
+    h2 {
+        display: none;
+    }
+
+    ul.tabs {
+        padding-left: .5rem;
+        &::before {
+            border: 1px solid $border;
+        }
+
+        li {
+            border: $site-border;
+            background-color: $light;
+            border-radius: 0;
+            padding: 0;
+            &::after,
+            &::before {
+                display: none;
+            }
+            a {
+                font-family: $font-heading;
+                font-size: 1.8rem;
+                letter-spacing: 0.05em;
+                color: $border;
+                padding: 0.5em 1em;
+                outline: none;
+                &:hover {
+                    color: $accent;
+                }
+            }
+            &.active a {
+                color: $gray;
+            }
+        }
+    }
+
+}

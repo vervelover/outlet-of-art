@@ -1,0 +1,178 @@
+/* # Variables
+-----------------------------------------------------------------------*/
+
+/**
+ * ### Breakpoints
+ *
+ * Based on the most common 16:9 screen resolutions.
+ * @link https://pacoup.com/2011/06/12/list-of-true-169-resolutions/
+ */
+
+$breakpoints: (
+	xs: 32em,
+	sm: 48em,
+	md: 56em,
+	lg: 72em,
+	xl: 100em
+);
+
+/* ### Colors */
+
+/** palette here:
+http://paletton.com/#uid=10+0u0k8jax00pSjdmWlZ2Zk11g */
+
+$accent:  #b79449;
+$black:   #0a0804;
+$dark:    #181307;
+$gray:    #544d3e;
+$medium:  rgba( $gray, 0.7 );
+$border:  rgba( $gray, 0.5 );
+$light:   #cecece;
+$white:   #ffffff;
+$overlay: rgba(0, 0, 0, .1);
+
+/* ### Typography */
+
+$font-heading: 'Muli', sans-serif;
+$font-body:    'Muli', sans-serif;
+$thin:		   300;
+$normal:  	   400;
+$bolder:  	   600;
+$bold:    	   700;
+
+/* ### Other */
+
+$site-radius:     2px;
+$site-border:     2px solid $border;
+$site-transition: 0.75s cubic-bezier(0, 1, 0.5, 1);
+$heading-shadow:  0 1rem 2rem rgba(0, 0, 0, 0.4);
+$lighter-shadow:  0 0.5rem 2rem rgba(0, 0, 0, .2);
+
+/* ### Column widths */
+
+// DO NOT USE REM for margin-left
+$margin-left:   10px;
+
+$one-half :     calc((100% - #{$margin-left}) / 2);
+$one-third:     calc((100% - 2 * #{$margin-left}) / 3);
+$one-fourth:    calc((100% - 3 * #{$margin-left}) / 4);
+$one-fifth:     calc((100% - 4 * #{$margin-left}) / 5);
+$one-sixth:     calc((100% - 5 * #{$margin-left}) / 6);
+$two-thirds:    calc(2 * ((100% - 2 * #{$margin-left}) / 3) + #{$margin-left});
+$two-fifths:    calc(2 * ((100% - 4 * #{$margin-left}) / 5) + #{$margin-left});
+$three-fourths: calc(3 * ((100% - 3 * #{$margin-left}) / 4) + 2 * #{$margin-left});
+$three-fifths:  calc(3 * ((100% - 4 * #{$margin-left}) / 5) + 2 * #{$margin-left});
+$four-fifths:   calc(4 * ((100% - 4 * #{$margin-left}) / 5) + 3 * #{$margin-left});
+$five-sixths:   calc(5 * ((100% - 5 * #{$margin-left}) / 6) + 4 * #{$margin-left});
+
+$woocommerce-columns: $one-fourth;
+
+/* ### Column widths for non-woocommerce archives */
+
+$margin-left-blog:   15px;
+$margin-bottom-blog: $margin-left-blog;
+
+$one-half-blog:      calc((100% - #{$margin-left-blog}) / 2);
+$one-third-blog:     calc((100% - 2 * #{$margin-left-blog}) / 3);
+$one-fourth-blog:    calc((100% - 3 * #{$margin-left-blog}) / 4);
+$one-fifth-blog:     calc((100% - 4 * #{$margin-left-blog}) / 5);
+$one-sixth-blog:     calc((100% - 5 * #{$margin-left-blog}) / 6);
+$two-thirds-blog:    calc(2 * ((100% - 2 * #{$margin-left-blog}) / 3) + #{$margin-left-blog});
+$two-fifths-blog:    calc(2 * ((100% - 4 * #{$margin-left-blog}) / 5) + #{$margin-left-blog});
+$three-fourths-blog: calc(3 * ((100% - 3 * #{$margin-left-blog}) / 4) + 2 * #{$margin-left-blog});
+$three-fifths-blog:  calc(3 * ((100% - 4 * #{$margin-left-blog}) / 5) + 2 * #{$margin-left-blog});
+$four-fifths-blog:   calc(4 * ((100% - 4 * #{$margin-left-blog}) / 5) + 3 * #{$margin-left-blog});
+$five-sixths-blog:   calc(5 * ((100% - 5 * #{$margin-left-blog}) / 6) + 4 * #{$margin-left-blog});
+
+$blog-columns: $one-third-blog;
+
+@mixin first-of-row {
+	&:nth-of-type(3n+1) {
+		margin-left: 0;
+	}
+}
+
+
+/* # Mixins
+-----------------------------------------------------------------------*/
+
+/* ### Media Queries */
+
+@mixin breakpoint( $breakpoint ) {
+
+    @if map-has-key( $breakpoints, $breakpoint ) {
+
+        @media ( min-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
+            @content;
+        }
+
+    } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
+
+        @media (min-width: $breakpoint ) {
+            @content;
+        }
+
+    } @else {
+
+        @warn "No value could be retrieved from `#{$breakpoint}`. "
+              + "Please make sure it is defined in `$breakpoints` map, or it is a valid number with supported unit of px, em or rem.";
+    }
+}
+
+/* ### Clearfix */
+
+@mixin clearfix {
+	clear: both;
+	&:before,
+	&:after {
+		clear: both;
+		display: block;
+		content: '';
+	}
+}
+
+/* ### Flexfix */
+
+@mixin flexfix {
+	&:before,
+	&:after {
+		position: absolute;
+	}
+}
+
+/* ### Transitions */
+
+@mixin transition {
+	-webkit-transition: all $site-transition;
+	-moz-transition: all $site-transition;
+	-o-transition: all $site-transition;
+	transition: all $site-transition;
+}
+
+/* ### Overlay */
+
+@mixin overlay {
+	position: relative;
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: $overlay;
+		z-index: 1;
+		pointer-events: none;
+	}
+}
+
+/* ### Overlay */
+
+@mixin center {
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}

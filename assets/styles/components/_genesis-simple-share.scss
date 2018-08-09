@@ -1,0 +1,8 @@
+/* Genesis Simple Share */
+
+.content .share-filled .facebook .share, .content .share-filled .facebook:hover .count, .content .share-filled .googlePlus .share, .content .share-filled .googlePlus:hover .count, .content .share-filled .linkedin .share, .content .share-filled .linkedin:hover .count, .content .share-filled .pinterest .share, .content .share-filled .pinterest:hover .count, .content .share-filled .stumbleupon .share, .content .share-filled .stumbleupon:hover .count, .content .share-filled .twitter .share, .content .share-filled .twitter:hover .count {
+    background: $medium;
+    &:hover {
+        background: $gray;
+    }
+}

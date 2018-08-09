@@ -1,0 +1,25 @@
+/* ### Woo Shopping Cart */
+
+.woocommerce .widget_shopping_cart,
+.woocommerce.widget_shopping_cart {
+    ul.cart_list li {
+        padding-top: 15px;
+    }
+    .cart_list li a.remove {
+        top: 15px;
+        color: tomato !important;
+        &:hover {
+            color: $white !important;
+            background-color: tomato;
+        }
+    }
+    .total {
+        border-top: $site-border;
+    }
+    .buttons a {
+        margin-bottom: 5px;
+    }
+    .cart_list li.empty {
+        padding-left: 0;
+    }
+}

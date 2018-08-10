@@ -1,0 +1,28 @@
+.nav-secondary {
+    @include breakpoint(sm) {
+        display: block;
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .wrap {
+        width: 100%;
+        border-bottom: 2px solid $light;
+    }
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        li {
+            padding: 0;
+        }
+    }
+    .menu-item {
+        a {
+            padding: 1.5rem 2rem;
+        }
+    }
+
+}

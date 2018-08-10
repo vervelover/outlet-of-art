@@ -47,7 +47,6 @@ add_post_type_support('page', 'excerpt');
 
 // Add support for structural wraps.
 add_theme_support('genesis-structural-wraps', array(
-		'header',
 		'menu-primary',
 		'menu-secondary',
 		'footer-widgets',
@@ -64,13 +63,38 @@ add_theme_support('genesis-accessibility', array(
 		'skip-links',
 	));
 
-// Reinstate Genesis Featured Products widget after 1.0 update
-add_theme_support( 'gencwooc-featured-products-widget' );
-
 // Enable custom navigation menus.
 add_theme_support('genesis-menus', array(
 		'primary' => __('Header Menu', 'business-pro-theme'),
+		'top-menu' => __('Top Menu', 'business-pro-theme'),
 	));
+
+// Reinstate Genesis Featured Products widget after 1.0 update
+add_theme_support( 'gencwooc-featured-products-widget' );
+
+// Register secondary menu
+// function register_additional_menu() {
+// 	register_nav_menu( 'top-menu' ,__( 'Top Menu' ));
+// }
+// add_action( 'init', 'register_additional_menu' );
+
+// Add secondary menu before header (remove header from structural wraps above)
+add_action( 'genesis_header', 'opening_header_divs', 9 );
+function opening_header_divs() {
+	wp_nav_menu( array( 'theme_location' => 'top-menu', 'items_wrap' => '<div class="wrap"><ul id="%1$s" class="%2$s">%3$s</ul></div>', 'container_class' => 'nav-secondary genesis-nav-menu' ) );
+	echo '<div class="wrap">';
+}
+add_action( 'genesis_header', 'closing_header_divs' );
+function closing_header_divs() {
+	echo '</div>';
+}
+
+// add_filter( 'genesis_attr_nav-secondary', 'themeprefix_primary_nav_id' );
+// function themeprefix_primary_nav_id( $attributes ) {
+//
+//  $attributes['class'] = 'nav-secondary genesis-responsive-menu';
+//  return $attributes;
+// }
 
 // Enable support for footer widgets.
 add_theme_support('genesis-footer-widgets', 4);
@@ -234,6 +258,7 @@ function business_scripts_styles() {
 			'menuClasses'      => array(
 				'combine'         => array(
 					'.nav-primary',
+					'.nav-secondary'
 				),
 			),
 		));

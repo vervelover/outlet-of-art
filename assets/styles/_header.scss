@@ -18,7 +18,7 @@
     }
     &.shrink > .wrap {
         @include breakpoint(md) {
-            padding: 0;
+            padding: 2.5rem 0;
         }
     }
     .page-template-page-builder & {
@@ -35,7 +35,7 @@
         flex-wrap: wrap;
         @include transition;
         @include breakpoint(md) {
-            padding: 1rem 0;
+            padding: 3rem 0;
             flex-wrap: nowrap;
             position: relative;
         }

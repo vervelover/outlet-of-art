@@ -205,9 +205,9 @@
 
 		// If the responsive menu is active, append items in 'combinedMenus' object to the 'primaryMenu' object.
 		if ( 'none' !== _getDisplayValue( buttons ) ) {
-
+			// Note: modified for Max Mega Menu. For regular menus, replace ul.max-mega-menu with ul.genesis-nav-menu
 			$.each( combinedMenus, function( key, value ) {
-				$(value).find( '.menu > li' ).addClass( 'moved-item-' + value.replace( '.','' ) ).appendTo( primaryMenu + ' ul.genesis-nav-menu' );
+				$(value).find( '.menu > li' ).addClass( 'moved-item-' + value.replace( '.','' ) ).appendTo( primaryMenu + ' ul.max-mega-menu' );
 			});
 			$( _getMenuSelectorString( combinedMenus ) ).hide();
 
@@ -215,7 +215,7 @@
 
 			$( _getMenuSelectorString( combinedMenus ) ).show();
 			$.each( combinedMenus, function( key, value ) {
-				$( '.moved-item-' + value.replace( '.','' ) ).appendTo( value + ' ul.genesis-nav-menu' ).removeClass( 'moved-item-' + value.replace( '.','' ) );
+				$( '.moved-item-' + value.replace( '.','' ) ).appendTo( value + ' ul#menu-top-menu' ).removeClass( 'moved-item-' + value.replace( '.','' ) );
 			});
 
 		}

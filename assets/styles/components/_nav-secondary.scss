@@ -9,19 +9,40 @@
 
     .wrap {
         width: 100%;
-        border-bottom: 2px solid $light;
+        border-bottom: 1px solid $light;
+        @include breakpoint(md){
+            padding: 0 2vw;
+        }
     }
     ul {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        li {
+    }
+    .menu {
+        > li {
             padding: 0;
+            @include breakpoint(md){
+                &:nth-child(1),
+                &:nth-child(2) {
+                    border-right: 1px solid $light;
+                }
+                &:nth-child(3) {
+                    margin-left: auto;
+                }
+            }
         }
     }
     .menu-item {
         a {
+            font-family: $font-body;
+            font-size: 1.2rem;
             padding: 1.5rem 2rem;
+        }
+    }
+    .sub-menu {
+        @include breakpoint(md) {
+            width: 100%;
         }
     }
 

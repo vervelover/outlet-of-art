@@ -306,7 +306,7 @@ add_filter( 'wp_nav_menu_items', 'ap_top_menu_items', 10, 2 );
 function ap_top_menu_items ( $items, $args ) {
 
 	if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li>' . do_shortcode('[currency_switcher switcher_style="wcml-dropdown" format="%symbol% %name%"]') . '</li>' . $items;
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items;
     }
     return $items;
 }

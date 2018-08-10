@@ -72,13 +72,7 @@ add_theme_support('genesis-menus', array(
 // Reinstate Genesis Featured Products widget after 1.0 update
 add_theme_support( 'gencwooc-featured-products-widget' );
 
-// Register secondary menu
-// function register_additional_menu() {
-// 	register_nav_menu( 'top-menu' ,__( 'Top Menu' ));
-// }
-// add_action( 'init', 'register_additional_menu' );
-
-// Add secondary menu before header (remove header from structural wraps above)
+// Add secondary menu before header (removed header from structural wraps above, and added menu to genesis-menus above)
 add_action( 'genesis_header', 'opening_header_divs', 9 );
 function opening_header_divs() {
 	wp_nav_menu( array( 'theme_location' => 'top-menu', 'items_wrap' => '<div class="wrap"><ul id="%1$s" class="%2$s">%3$s</ul></div>', 'container_class' => 'nav-secondary genesis-nav-menu' ) );
@@ -88,13 +82,6 @@ add_action( 'genesis_header', 'closing_header_divs' );
 function closing_header_divs() {
 	echo '</div>';
 }
-
-// add_filter( 'genesis_attr_nav-secondary', 'themeprefix_primary_nav_id' );
-// function themeprefix_primary_nav_id( $attributes ) {
-//
-//  $attributes['class'] = 'nav-secondary genesis-responsive-menu';
-//  return $attributes;
-// }
 
 // Enable support for footer widgets.
 add_theme_support('genesis-footer-widgets', 4);
@@ -312,4 +299,42 @@ function ap_custom_footer() {
 		 Copyright <?php echo date('Y');
 	?> Manfredi Style Singapore Pte. Ltd. (Holding Company) Reg 201610326W / International Visionary Excellence Srl - P.Iva: 02329120972</p>
 	<?php
+}
+
+// Add customized wcml language selector and currency switcher to top menu
+add_filter( 'wp_nav_menu_items', 'ap_top_menu_items', 10, 2 );
+function ap_top_menu_items ( $items, $args ) {
+
+	if ($args->theme_location == 'top-menu') {
+        $items = ap_language_selector() . '<li>' . do_shortcode('[currency_switcher switcher_style="wcml-dropdown" format="%symbol% %name%"]') . '</li>' . $items;
+    }
+    return $items;
+}
+add_filter( 'woocommerce_currencies', 'ap_custom_currency_names' );
+function ap_custom_currency_names( $currencies ) {
+  // select currency by currency abbreviation.
+  $currencies['USD']="Usd";
+  $currencies['EUR']="Eur";
+  return $currencies;
+}
+
+function ap_language_selector(){
+    $languages = icl_get_languages('skip_missing=0');
+	foreach($languages as $l){
+		if ($l['active']) {
+			$langs = '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children"><a href="'.$l['url'].'"><span class="wpml-ls-display">'.$l['translated_name'].'</span></a><button class="sub-menu-toggle" aria-expanded="false" aria-pressed="false"><span class="screen-reader-text">Menu</span></button>';
+		}
+	}
+	if(1 < count($languages)){
+		$langs .= '<ul class="sub-menu">';
+		foreach($languages as $l){
+			if (!$l['active']) {
+				$langs .= '<li class="menu-item wpml-ls-item wpml-ls-item-it wpml-ls-menu-item wpml-ls-first-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item"><a href="'.$l['url'].'"><span class="wpml-ls-display">'.$l['translated_name'].'</span></a></li>';
+			}
+		}
+		$langs .= '</ul>';
+	}
+
+	$langs .= '</li>';
+	return $langs;
 }

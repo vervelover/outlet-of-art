@@ -940,22 +940,9 @@
     padding-left: 2rem;
   }
 }
-#mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children > a.mega-menu-link:after {
-  content: '\f140';
-  display: inline-block;
-  font-family: dashicons;
-  margin: 0;
-  vertical-align: top;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transform: rotate(0);
-  right: 0;
-  color: inherit;
-  position: absolute;
+#mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children > a.mega-menu-link {
   @include breakpoint(md) {
-    margin: 0 0 0 .6rem;
-    position: relative;
-    transform: translateX(0);
+    @include menu-has-children-arrow();
   }
 }
 @media only screen and (max-width: 56em) {

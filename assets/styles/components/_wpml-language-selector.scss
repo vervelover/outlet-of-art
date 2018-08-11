@@ -12,15 +12,17 @@
         width: 100%;
     }
 
+    a.wcml-cs-item-toggle {
+        @include breakpoint(md) {
+            @include menu-has-children-arrow();
+            &::after {
+                right: 2rem;
+            }
+        }
+    }
     a.wcml-cs-item-toggle:after {
-        content: '';
-        vertical-align: middle;
-        display: inline-block;
-        border: .35em solid transparent;
-        border-top: .5em solid;
-        position: absolute;
-        right: 1.5rem;
-        top: calc(50% - .175em);
+        border: none;
+        border-top: 0;
     }
 
     .wcml-cs-submenu {

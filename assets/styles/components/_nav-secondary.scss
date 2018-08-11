@@ -40,6 +40,28 @@
             padding: 1.5rem 2rem;
         }
     }
+    .menu-item-has-children {
+        >a {
+            >span {
+                @include breakpoint(md) {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+            @include menu-has-children-arrow();
+        }
+    }
+    .menu-item-has-children.wpml-ls-current-language {
+        >a {
+            width: 7rem;
+            &::after {
+                @include breakpoint(md) {
+                    right: 1.3rem;
+                }
+            }
+        }
+    }
     .sub-menu {
         @include breakpoint(md) {
             width: 100%;

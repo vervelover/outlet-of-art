@@ -45,14 +45,7 @@
         >a {
             >span {
                 @include breakpoint(md) {
-                    &:after {
-                        content: '';
-                        width: auto;
-                        display: inline-block;
-                        margin-left: 0.5em;
-                        border: 3px solid transparent;
-                        border-top-color: $light;
-                    }
+                    @include menu-has-children-arrow();
                 }
             }
         }

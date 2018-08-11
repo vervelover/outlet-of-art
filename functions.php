@@ -322,7 +322,11 @@ function ap_language_selector(){
     $languages = icl_get_languages('skip_missing=0');
 	foreach($languages as $l){
 		if ($l['active']) {
-			$langs = '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children"><a href="'.$l['url'].'"><span class="wpml-ls-display">'.$l['translated_name'].'</span></a><button class="sub-menu-toggle" aria-expanded="false" aria-pressed="false"><span class="screen-reader-text">Menu</span></button>';
+			$langs = '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item';
+			if(1 < count($languages)) {
+				$langs .= ' menu-item-has-children';
+			}
+			$langs .= '"><a href="'.$l['url'].'"><span class="wpml-ls-display">'.$l['translated_name'].'</span></a><button class="sub-menu-toggle" aria-expanded="false" aria-pressed="false"><span class="screen-reader-text">Menu</span></button>';
 		}
 	}
 	if(1 < count($languages)){

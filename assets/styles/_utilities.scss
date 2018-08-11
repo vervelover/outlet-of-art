@@ -99,6 +99,20 @@ $blog-columns: $one-third-blog;
 
 /* ### Media Queries */
 
+@mixin  menu-has-children-arrow {
+	&::after {
+		font-family: dashicons;
+		font-size: 0.8em;
+		content: "\f347";
+		width: auto;
+		display: inline-block;
+		position: absolute;
+		top: 45%;
+		right: 0;
+		color: inherit;
+	}
+}
+
 @mixin breakpoint( $breakpoint ) {
 
     @if map-has-key( $breakpoints, $breakpoint ) {

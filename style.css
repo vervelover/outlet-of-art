@@ -1246,6 +1246,7 @@ img.alignright,
 	width: 100%;
 	z-index: 100;
 	background-color: #ffffff;
+	border-bottom: 1px solid #e5e5e5;
 	-webkit-transition: all 0.75s cubic-bezier(0, 1, 0.5, 1);
 	        transition: all 0.75s cubic-bezier(0, 1, 0.5, 1);
 }
@@ -1297,7 +1298,7 @@ img.alignright,
 /* ## Title Area
 --------------------------------------------- */
 .title-area {
-	margin: 0 auto 0 0;
+	margin: 0 auto;
 	position: relative;
 	height: 100%;
 	display: block;
@@ -1312,8 +1313,8 @@ img.alignright,
 }
 
 .wp-custom-logo .title-area {
-	padding: 8px 0;
-	padding: 1rem 0;
+	padding: 16px 0;
+	padding: 2rem 0;
 }
 
 .site-title {
@@ -1760,7 +1761,8 @@ img.alignright,
 	position: absolute;
 	left: 16px;
 	left: 2rem;
-	top: 0;
+	top: 4px;
+	top: 0.5rem;
 	line-height: 1;
 	color: transparent;
 	letter-spacing: -0.5em;
@@ -5051,6 +5053,12 @@ a.flex-prev::before {
 		    -ms-flex-wrap: nowrap;
 		        flex-wrap: nowrap;
 		position: relative;
+	}
+	.title-area {
+		margin: 0 auto 0 0;
+	}
+	.wp-custom-logo .title-area {
+		padding: 1rem 0;
 	}
 	.site-description {
 		text-align: left;

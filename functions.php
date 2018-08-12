@@ -326,7 +326,7 @@ function ap_language_selector(){
 			if(1 < count($languages)) {
 				$langs .= ' menu-item-has-children';
 			}
-			$langs .= '"><a href="'.$l['url'].'"><span class="wpml-ls-display">'.$l['translated_name'].'</span></a><button class="sub-menu-toggle" aria-expanded="false" aria-pressed="false"><span class="screen-reader-text">Menu</span></button>';
+			$langs .= '"><a href="'.$l['url'].'"><span class="wpml-ls-display">'.$l['translated_name'].'</span></a>';
 		}
 	}
 	if(1 < count($languages)){

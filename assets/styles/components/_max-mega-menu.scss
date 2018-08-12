@@ -142,7 +142,7 @@
   opacity: 1;
   pointer-events: auto;
 }
-@media only screen and (min-width: 57em) {
+@include breakpoint(md) {
   #mega-menu-wrap-primary #mega-menu-primary[data-effect="fade"] li.mega-menu-item > ul.mega-sub-menu {
     opacity: 0;
     transition-duration: 200ms;
@@ -250,35 +250,35 @@
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-toggle-on > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:hover, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:focus {
 
 }
-@media only screen and (max-width: 56em) {
-  #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-toggle-on > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:hover, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:focus {
-    color: $white;
-  }
-}
+// @media only screen and (max-width: 56em) {
+//   #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-toggle-on > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:hover, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:focus {
+//     color: $white;
+//   }
+// }
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-menu-item > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-menu-ancestor > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-page-ancestor > a.mega-menu-link {
-  font-weight: $bold;
+  color: $gray;
   text-decoration: none;
 }
-@media only screen and (max-width: 56em) {
-  #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-menu-item > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-menu-ancestor > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-page-ancestor > a.mega-menu-link {
-    color: $white;
-  }
-}
+// @media only screen and (max-width: 56em) {
+//   #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-menu-item > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-menu-ancestor > a.mega-menu-link, #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item.mega-current-page-ancestor > a.mega-menu-link {
+//     color: $white;
+//   }
+// }
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link {
-  border-top: 0px solid $white;
-  border-left: 0px solid $white;
-  border-right: 0px solid $white;
-  border-bottom: 0px solid $white;
+  // border-top: 0px solid $white;
+  // border-left: 0px solid $white;
+  // border-right: 0px solid $white;
+  // border-bottom: 0px solid $white;
+  border-top: 1px solid $light;
   outline: none;
   text-decoration: none;
-  padding: 1em 1.25em;
+  padding: 2rem 1em 2rem 3.5rem;
   text-transform: capitalize;
   font-weight: $bolder;
   vertical-align: baseline;
-  text-align: center;
+  text-align: left;
   width: auto;
   display: block;
-  color: $dark;
   text-decoration: none;
   -webkit-border-radius: 0px 0px 0px 0px;
   -moz-border-radius: 0px 0px 0px 0px;
@@ -289,6 +289,9 @@
   font-size: 1.5rem;
   @include breakpoint(md) {
     font-size: 1.5rem;
+    padding: 1em 1.25em;
+    text-align: center;
+    border-top: none;
   }
 }
 @media only screen and (min-width: 57em) {
@@ -597,9 +600,6 @@
 #mega-menu-wrap-primary ul#mega-menu-primary > li.mega-menu-item {
     background-color: transparent;
     position: relative;
-    &:hover {
-        background-color: rgba( $dark, .5 );
-    }
 }
 @media only screen and (max-width: 56em) {
   #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-megamenu > ul.mega-sub-menu {
@@ -869,7 +869,7 @@
   border-right: 0px solid $white;
   border-bottom: 0px solid $white;
   padding: 0px 0px 0px 0px;
-  background: $light;
+  background: $white;
   max-width: none;
 }
 @media only screen and (max-width: 56em) {
@@ -888,12 +888,13 @@
 }
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-flyout ul.mega-sub-menu li.mega-menu-item a.mega-menu-link {
   display: block;
-  background: $light;
-  color: $gray;
-  font-family: inherit;
-  font-size: 1.4rem;
+  background: $white;
+  color: $dark;
+  font-family: $font-body;
+  font-size: 1.5rem;
   font-weight: normal;
-  padding: 0px 1rem 0px 1rem;
+  padding: 1.5rem 1em 1.5rem 4.5rem;
+  border-top: 1px solid $light;
   line-height: 3.5rem;
   text-decoration: none;
   text-transform: none;
@@ -945,9 +946,61 @@
     @include menu-has-children-arrow();
   }
 }
+#mega-menu-wrap-primary #mega-menu-primary li > a.mega-menu-link:after,
+#mega-menu-wrap-primary #mega-menu-primary li > a:after, .sub-menu-toggle {
+  content: "\f345";
+  display: inline-block;
+  font-family: dashicons;
+  font-size: 1.3em;
+  margin: 0;
+  vertical-align: top;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: rotate(0);
+  right: 2rem;
+  color: $dark;
+  position: absolute;
+  @include breakpoint(md) {
+    display: none;
+  }
+}
+#mega-menu-wrap-primary #mega-menu-primary li > a.wcml-cs-item-toggle:after {
+    margin-top: -4px;
+}
+.sub-menu-toggle:after,
+.sub-menu-toggle.activated:after {
+  content: "\f345";
+  display: inline-block;
+  font-family: dashicons;
+  font-size: 1em;
+  margin: -4px 0 0;
+  vertical-align: top;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: rotate(0);
+  right: 0;
+  color: $dark;
+  font-weight: 400;
+  position: absolute;
+  @include breakpoint(md) {
+    display: none;
+  }
+}
+#mega-menu-wrap-primary #mega-menu-primary li.menu-item-has-children > a:after {
+    display: none;
+}
+#mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children > a.mega-menu-link:after {
+    @include breakpoint(md) {
+      font-size: 1em;
+      right: 0;
+      margin: 0 0 0 .6rem;
+      // position: relative;
+      transform: translateX(0);
+    }
+}
 @media only screen and (max-width: 56em) {
-   #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children.mega-toggle-on > a.mega-menu-link:after {
-    content: '\f142';
+   #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children.mega-toggle-on > a.mega-menu-link:after, .sub-menu-toggle.activated:after {
+    content: "\f343";
   }
   #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children.mega-hide-sub-menu-on-mobile > a.mega-menu-link:after {
     display: none;

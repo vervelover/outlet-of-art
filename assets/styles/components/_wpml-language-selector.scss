@@ -1,5 +1,8 @@
 .wcml-dropdown {
-    width: 6.5em;
+    width: 100%;
+    @include breakpoint(md) {
+        width: 9rem;
+    }
     max-width: 100%;
     position: relative;
 
@@ -13,6 +16,7 @@
     }
 
     a.wcml-cs-item-toggle {
+        width: 100%;
         @include breakpoint(md) {
             @include menu-has-children-arrow();
             &::after {

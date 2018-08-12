@@ -19,13 +19,17 @@
 
 .menu-item {
     display: block;
-    padding: 0.5em 0;
     width: 100%;
     position: relative;
+    font-size: 1.5rem;
+    border-top: 1px solid $light;
     @include breakpoint(md) {
+        font-size: 1.8rem;
+        padding: 0.5em 0;
         display: inline-block;
         padding: 0;
         width: auto;
+        border-top: none;
     }
     &.right {
         margin-left: auto;
@@ -78,10 +82,14 @@
     a {
         width: auto;
         text-decoration: none;
+        line-height: 1;
         display: inline-block;
-        padding: 0.5em 0;
+        padding: 2rem 1em 2rem 3.5rem;
         color: $dark;
+        font-weight: $bolder;
+        font-family: $font-body;
         @include breakpoint(md) {
+            font-weight: $normal;
             padding: 1.5em 1em;
             width: 100%;
         }
@@ -108,8 +116,7 @@
 
 .sub-menu {
     display: none;
-    font-size: 1.4rem;
-    padding: 1em 0;
+    font-size: 1.5rem;
     @include clearfix;
     @include breakpoint(md) {
         position: absolute;
@@ -141,7 +148,11 @@
                 margin-top: 0;
             }
             a {
-                padding-left: 1em;
+                font-weight: $normal;
+                padding-left: 4.5rem;
+                @include breakpoint(md) {
+                    padding-left: 2rem;
+                }
             }
         }
     }
@@ -185,7 +196,7 @@
     width: 100vw;
     margin: auto;
     padding: 5vw;
-    background-color: rgba($dark,0.98);
+    background-color: rgba($dark,0.8);
     border-top: $site-border;
     border-bottom: $site-border;
     position: fixed;
@@ -234,7 +245,17 @@
         }
     }
     .wrap {
-        height: 100%;
+        height: auto;
+        background: $white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 7rem);
+        overflow-y: visible;
+        @include breakpoint(md) {
+            position: relative;
+            width: 100%;
+        }
     }
     .menu {
         min-height: 100%;
@@ -260,7 +281,7 @@
     background-color: transparent;
     display: block;
     position: absolute;
-    right: 5vw;
+    left: 2rem;
     top: 0;
     line-height: 1;
     color: transparent;
@@ -278,6 +299,8 @@
     }
     &.activated {
         position: fixed;
+        left: auto;
+        right: 2rem;
     }
     span {
         display: block;
@@ -327,29 +350,32 @@
     }
 }
 
-.sub-menu-toggle {
-    position: absolute;
+.sub-menu-toggle, .sub-menu-toggle:hover {
+    line-height: 1;
+    // position: absolute;
+    // background-color: transparent;
+    // padding: 0.9em;
+    // margin: 0 -1em 0 1em;
+    // @include breakpoint(md) {
+    //     display: none;
+    // }
+    // &:hover,
+    // &:focus {
+    //     background: none;
+    // }
+    // &:before {
+    //     content: "";
+    //     display: block;
+    //     margin: 0.2rem 0 -0.2rem;
+    //     border: 0.4rem solid transparent;
+    //     border-top-color: $light;
+    // }
+    // &.activated {
+    //     &:before {
+    //         transform: rotate(180deg);
+    //         margin: -0.2rem 0 0.2rem;
+    //     }
+    // }
+    box-shadow: none;
     background-color: transparent;
-    padding: 0.9em;
-    margin: 0 -1em 0 1em;
-    @include breakpoint(md) {
-        display: none;
-    }
-    &:hover,
-    &:focus {
-        background: none;
-    }
-    &:before {
-        content: "";
-        display: block;
-        margin: 0.2rem 0 -0.2rem;
-        border: 0.4rem solid transparent;
-        border-top-color: $light;
-    }
-    &.activated {
-        &:before {
-            transform: rotate(180deg);
-            margin: -0.2rem 0 0.2rem;
-        }
-    }
 }

@@ -1,0 +1,113 @@
+.post-type-archive-artist {
+
+    &.archive {
+        .page-header {
+            padding: 6rem 0 3rem;
+            p {
+                max-width: 48em;
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    .content {
+        max-width: 31.2rem;
+        margin: 0 auto;
+        @include breakpoint(xs) {
+            max-width: 80rem;
+        }
+        @include breakpoint(md) {
+            max-width: 136rem;
+            padding: 0 $margin-left-blog;
+        }
+    }
+
+    .entry {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .entry-image-link {
+            margin-bottom: 1rem;
+            img {
+                @include breakpoint(xl) {
+                    padding-top: 1.4rem;
+                }
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 2rem;
+        }
+    }
+
+    footer.entry-footer {
+        margin-top: auto;
+    }
+
+    a.about-artworks {
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        font-weight: $bolder;
+    }
+}
+
+/* Artists single page styles */
+
+
+.archive.single-artist {
+
+    .artists-wrapper {
+
+        @include breakpoint(md) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            margin-bottom: 0;
+        }
+
+        .entry {
+            width: 100%;
+            margin-bottom: 0;
+
+            @include breakpoint(md) {
+                width: 60%;
+                margin: 0;
+                margin-left: $margin-left-blog;
+            }
+
+            background: none;
+            box-shadow: none;
+            line-height: 2;
+
+            .entry-footer {
+                display: none;
+            }
+        }
+
+        .entry-content {
+            color: $dark;
+        }
+    }
+
+    .related-artworks {
+        width: 100%;
+        text-align: center;
+        margin: 6rem 0;
+    }
+
+    .site-inner {
+        padding-bottom: 6rem;
+    }
+
+
+}

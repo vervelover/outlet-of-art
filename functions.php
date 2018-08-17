@@ -39,8 +39,8 @@ add_filter('widget_text', 'do_shortcode');
 // Set hero image size.
 add_image_size('hero', 1920, 720, true);
 
-// Set portfolio image size to override plugin.
-add_image_size('portfolio', 620, 380, true);
+// Set artist image size to override plugin.
+add_image_size('artist-thumbnail', 300, 300, true);
 
 // Enable support for page excerpts.
 add_post_type_support('page', 'excerpt');

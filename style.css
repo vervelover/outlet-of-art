@@ -2924,6 +2924,102 @@ p.entry-meta {
 	margin-bottom: 0;
 }
 
+.post-type-archive-artist.archive .page-header {
+	padding: 48px 0 24px;
+	padding: 6rem 0 3rem;
+}
+
+.post-type-archive-artist.archive .page-header p {
+	max-width: 48em;
+	font-size: 11.2px;
+	font-size: 1.4rem;
+}
+
+.post-type-archive-artist .content {
+	max-width: 249.6px;
+	max-width: 31.2rem;
+	margin: 0 auto;
+}
+
+.post-type-archive-artist .entry {
+	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	        justify-content: flex-start;
+}
+
+.post-type-archive-artist .entry .entry-image-link {
+	margin-bottom: 8px;
+	margin-bottom: 1rem;
+}
+
+.post-type-archive-artist .entry h2 {
+	font-size: 16px;
+	font-size: 2rem;
+	margin-bottom: 16px;
+	margin-bottom: 2rem;
+}
+
+.post-type-archive-artist .entry p {
+	margin-bottom: 16px;
+	margin-bottom: 2rem;
+}
+
+.post-type-archive-artist footer.entry-footer {
+	margin-top: auto;
+}
+
+.post-type-archive-artist a.about-artworks {
+	text-transform: uppercase;
+	font-size: 12.8px;
+	font-size: 1.6rem;
+	font-weight: 500;
+}
+
+/* Artists single page styles */
+
+.archive.single-artist .artists-wrapper img {
+	margin-bottom: 0;
+}
+
+.archive.single-artist .artists-wrapper .entry {
+	width: 100%;
+	margin-bottom: 0;
+	background: none;
+	box-shadow: none;
+	line-height: 2;
+}
+
+.archive.single-artist .artists-wrapper .entry .entry-footer {
+	display: none;
+}
+
+.archive.single-artist .artists-wrapper .entry-content {
+	color: #212121;
+}
+
+.archive.single-artist .related-artworks {
+	width: 100%;
+	text-align: center;
+	margin: 48px 0;
+	margin: 6rem 0;
+}
+
+.archive.single-artist .site-inner {
+	padding-bottom: 48px;
+	padding-bottom: 6rem;
+}
+
 /* ## Widgets
 --------------------------------------------- */
 .sidebar-primary {
@@ -4342,6 +4438,9 @@ ul.slides {
 		width:         calc((100% - 10px) / 2);
 		margin-bottom: 10px;
 	}
+	.post-type-archive-artist .content {
+		max-width: 80rem;
+	}
 	.woocommerce-demo-store .menu-toggle {
 		top: 42px;
 	}
@@ -4957,6 +5056,29 @@ ul.slides {
 	.adjacent-entry-pagination {
 		margin: 0;
 	}
+	.post-type-archive-artist .content {
+		max-width: 136rem;
+		padding: 0 15px;
+	}
+	.archive.single-artist .artists-wrapper {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display:         flex;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		        align-items: center;
+	}
+	.archive.single-artist .artists-wrapper .entry {
+		width: 60%;
+		margin: 0;
+		margin-left: 15px;
+	}
 	.sidebar-primary {
 		-webkit-box-ordinal-group: 3;
 		-webkit-order: 2;
@@ -5433,6 +5555,9 @@ ul.slides {
 	.comment-respond input[type='text'],
 	.comment-respond input[type='url'] {
 		width: 50%;
+	}
+	.post-type-archive-artist .entry .entry-image-link img {
+		padding-top: 1.4rem;
 	}
 }
 

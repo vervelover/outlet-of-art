@@ -1,8 +1,9 @@
 <?php
 
 /**
- *
+ * 
  * Custom Flexslider implementation. Requires the Advanced Custom Fields plugin.
+ *
  * @author Olaf Lederer, Alessio Pangos
  * @link https://www.web-development-blog.com/archives/wordpress-image-slider/
  *
@@ -87,21 +88,6 @@ function ap_create_slider_posttype() {
     );
     register_post_type( 'slider', $args );
 }
-
-// add_action( 'init', 'ap_create_slider_location_tax' );
-// function ap_create_slider_location_tax() {
-// 	register_taxonomy(
-// 		'slider-loc',
-// 		'slider',
-// 		array(
-// 			'label' => 'Slider location',
-// 			'public' => false,
-// 			'show_ui' => true,
-// 			'show_admin_column' => true,
-// 			'rewrite' => false
-// 		)
-// 	);
-// }
 
 add_action('wp_insert_post', 'ap_set_default_slidermeta');
 

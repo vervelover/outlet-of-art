@@ -54,10 +54,13 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 		$custom_header = ob_get_clean();
 
 		// Display Front Page 1 widget area.
-		genesis_widget_area( 'front-page-1', array(
-			'before' => '<div class="front-page-1 page-header" role="banner" ' . business_custom_header() . '>' . $custom_header . '<div class="wrap">',
-			'after'  => '</div></div>',
-		) );
+		// genesis_widget_area( 'front-page-1', array(
+		// 	'before' => '<div class="front-page-1 page-header" role="banner" ' . business_custom_header() . '>' . $custom_header . '<div class="wrap">',
+		// 	'after'  => '</div></div>',
+		// ) );
+		echo '<div class="front-page-1 page-header" role="banner" ' . business_custom_header() . '>' . $custom_header;
+		echo do_shortcode('[shortcode-flexslider ulid="homeslider" location="homepage" animation="slide" slideshowspeed="6"]');
+		echo '</div>';
 
 		// Front page 2 widget area.
 		genesis_widget_area( 'front-page-2', array(

@@ -217,7 +217,7 @@ function business_scripts_styles() {
 	}
 
 	// Enqueue WooCommerce styles conditionally.
-	if (class_exists('WooCommerce') && (is_woocommerce() || is_shop() || is_product_category() || is_product_tag() || is_product() || is_cart() || is_checkout() || is_account_page())) {
+	if (class_exists('WooCommerce') && (is_woocommerce() || is_shop() || is_product_category() || is_product_tag() || is_front_page() || is_product() || is_cart() || is_checkout() || is_account_page())) {
 
 		wp_enqueue_style('business-woocommerce', get_stylesheet_directory_uri().'/assets/styles/min/woocommerce.min.css', array(), CHILD_THEME_VERSION);
 
@@ -229,9 +229,8 @@ function business_scripts_styles() {
 	wp_enqueue_script('business-pro-theme', get_stylesheet_directory_uri().'/assets/scripts/min/business-pro.min.js', array('jquery'), CHILD_THEME_VERSION, true);
 
 	// Enqueue page-header margin-top js fix
-	if ( !is_front_page() ) {
-		wp_enqueue_script( 'header-height', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/header-height.min.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
-	}
+
+	wp_enqueue_script( 'header-height', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/header-height.min.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
 
 	// Enqueue responsive menu script.
 	wp_enqueue_script('business-menu', get_stylesheet_directory_uri().'/assets/scripts/min/menus.min.js', array('jquery'), CHILD_THEME_VERSION, true);
@@ -272,6 +271,9 @@ include_once (get_stylesheet_directory().'/includes/defaults.php');
 // Load theme's recommended plugins.
 include_once (get_stylesheet_directory().'/includes/plugins.php');
 
+// Load Flexslider
+include_once (get_stylesheet_directory().'/includes/flexslider.php');
+
 // Modify woocommerce smallscreen breakpoint
 function ap_filter_woocommerce_style_smallscreen_breakpoint($breakpoint) {
 	$breakpoint = '48em';
@@ -295,9 +297,7 @@ remove_action('genesis_footer', 'genesis_do_footer');
 add_action('genesis_footer', 'ap_custom_footer');
 function ap_custom_footer() {
 	?>
-			<p><a href="<?php site_url(); ?>">Manfredi Style</a> &copy;
-		 Copyright <?php echo date('Y');
-	?> Manfredi Style Singapore Pte. Ltd. (Holding Company) Reg 201610326W / International Visionary Excellence Srl - P.Iva: 02329120972</p>
+		<p><a href="<?php site_url(); ?>">Outlet Of Art</a> &copy; Copyright <?php echo date('Y'); ?></p>
 	<?php
 }
 

@@ -193,6 +193,9 @@
 .page-header {
     color: $white;
     padding: 10vh 0 10vh;
+    .home & {
+        padding: 0;
+    }
     text-align: center;
     background-size: cover;
     background-position: center;
@@ -200,9 +203,15 @@
     @include overlay;
     @include breakpoint(sm) {
         padding: 15vh 0 15vh;
+        .home & {
+            padding: 0;
+        }
     }
     @include breakpoint(lg) {
         padding: 20vh 0 20vh;
+        .home & {
+            padding: 0;
+        }
     }
     .wrap {
         position: relative;

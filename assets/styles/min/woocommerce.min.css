@@ -1226,6 +1226,133 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	color: #9b9b9b;
 }
 
+.fixed-summary,
+.fixed-summary.scroll {
+	position: relative;
+	float: left;
+	padding-top: 48px;
+	padding-top: 3rem;
+	top: 0;
+	text-align: center;
+}
+
+.fixed-summary form.cart button {
+	float: none;
+	padding: 32px 160px;
+	padding: 2rem 10rem;
+	min-width: 70%;
+}
+
+.fixed-summary form.cart button.alt.disabled {
+	background-color: #000000;
+	opacity: 0.8;
+}
+
+.fixed-summary__go-to-details {
+	text-align: center;
+	width: 100%;
+	border-top: 1px solid #979797;
+	border-bottom: 1px solid #979797;
+	margin-bottom: 16px;
+	margin-bottom: 1rem;
+	display: none;
+}
+
+.fixed-summary__go-to-details--link {
+	font-size: 25.6px;
+	font-size: 1.6rem;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.fixed-summary__shipping-info {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	        justify-content: center;
+}
+
+.fixed-summary li a {
+	text-decoration: none;
+}
+
+.single-product-additional-info {
+	width: 100%;
+	float: left;
+	position: relative;
+	margin: 32px 0;
+	margin: 2rem 0;
+	border-bottom: 1px solid #979797;
+	text-align: left;
+}
+
+.single-product-additional-info .option-heading {
+	border-top: 1px solid #979797;
+	display: block;
+	float: left;
+	width: 100%;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.single-product-additional-info h2 {
+	margin: 0;
+	line-height: 1;
+	font-size: 32px;
+	font-size: 2rem;
+	padding: 51.2px 0 51.2px 51.2px;
+	padding: 3.2rem 0 3.2rem 3.2rem;
+	margin-bottom: 0;
+	position: relative;
+	left: 0;
+	display: inline-block;
+	color: #000000;
+}
+
+.single-product-additional-info .option-content h2,
+.single-product-additional-info .option-content-first h2 {
+	display: none;
+}
+
+.single-product-additional-info .option-content,
+.single-product-additional-info .option-content-first {
+	font-size: 25.6px;
+	font-size: 1.6rem;
+	padding-left: 51.2px;
+	padding-left: 3.2rem;
+	padding-right: 51.2px;
+	padding-right: 3.2rem;
+	padding-bottom: 51.2px;
+	padding-bottom: 3.2rem;
+}
+
+.single-product-additional-info .arrow-down,
+.single-product-additional-info .arrow-up,
+.single-product-additional-info .arrow-up-nojquery {
+	float: right;
+	margin-right: 51.2px;
+	margin-right: 3.2rem;
+	line-height: 1;
+	font-size: 51.2px;
+	font-size: 3.2rem;
+	padding-top: 43.2px;
+	padding-top: 2.7rem;
+	color: #9b9b9b;
+}
+
+.single-product-additional-info li {
+	list-style-type: disc;
+	margin-left: 51.2px;
+	margin-left: 3.2rem;
+	margin-bottom: 16px;
+	margin-bottom: 1rem;
+	font-style: italic;
+}
+
 /* ### WooCommerce Checkout & Payment */
 .woocommerce-cart table.cart td.actions .coupon input[type='text'],
 .woocommerce-checkout table.cart td.actions .coupon input[type='text'],
@@ -1995,6 +2122,35 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 		width: 38rem;
 		max-width: 35%;
 	}
+	.fixed-summary,
+	.fixed-summary.scroll {
+		text-align: left;
+	}
+	.fixed-summary {
+		position: static;
+		padding-top: 0;
+		max-width: 63rem;
+		z-index: 6;
+		margin-top: 0;
+	}
+	.fixed-summary.scroll {
+		position: fixed;
+		top: 13rem;
+	}
+	.fixed-summary form.cart button {
+		float: left;
+		width: 100%;
+	}
+	.fixed-summary__go-to-details {
+		display: block;
+	}
+	.fixed-summary__shipping-info {
+		display: block;
+	}
+	.single-product-additional-info {
+		max-width: 48%;
+		padding: 0;
+	}
 	.woocommerce-cart form.checkout .col2-set,
 	.woocommerce-checkout form.checkout .col2-set,
 	#add_payment_method form.checkout .col2-set {
@@ -2030,6 +2186,9 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 		margin-right: 3%;
 		margin-left: 3%;
 	}
+	.single-product-additional-info {
+		margin-left: 5%;
+	}
 }
 @media (min-width: 100em) {
 	.woocommerce div.entry.product div.images,
@@ -2039,5 +2198,10 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 		max-width: 48%;
 		margin-right: 8%;
 		margin-left: 5%;
+	}
+}
+@media screen and (max-width: 56em) {
+	.fixed-summary.scroll {
+		margin-top: 0 !important;
 	}
 }

@@ -7,7 +7,7 @@
     }
 }
 
-.front-page-1,
+// .front-page-1,
 .front-page-2,
 .front-page-3,
 .front-page-4,
@@ -23,56 +23,56 @@
 
 /* ### Front Page 1 */
 
-.front-page-1 {
-    background-color: transparent;
-    background-size: cover !important;
-    background-position: center !important;
-    padding: 0;
-    height: 100vh;
-    position: relative;
-    color: $white;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    @include clearfix;
-    @include breakpoint(xl) {
-        height: 100vh;
-    }
-    .wrap {
-        position: relative;
-        z-index: 2;
-    }
-    .widget {
-        @include breakpoint(sm) {
-            max-width: map-get($breakpoints, sm);
-            margin-left: auto;
-            margin-right: auto;
-        }
-        &:first-of-type {
-            padding-top: 5vh;
-        }
-        .widget-wrap {
-            p {
-                color: $border;
-                margin-bottom: 1.618em;
-            }
-        }
-    }
-    h1 {
-        @include breakpoint(xs) {
-            font-size: 2.2em;
-        }
-        @include breakpoint(sm) {
-            font-size: 2.7em;
-        }
-        @include breakpoint(xl) {
-            font-size: 3.5em;
-        }
-    }
-}
+// .front-page-1 {
+//     background-color: transparent;
+//     background-size: cover !important;
+//     background-position: center !important;
+//     padding: 0;
+//     // height: 100vh;
+//     position: relative;
+//     color: $white;
+//     overflow: hidden;
+//     text-align: center;
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: center;
+//     align-content: center;
+//     @include clearfix;
+//     @include breakpoint(xl) {
+//         // height: 100vh;
+//     }
+//     .wrap {
+//         position: relative;
+//         z-index: 2;
+//     }
+//     .widget {
+//         @include breakpoint(sm) {
+//             max-width: map-get($breakpoints, sm);
+//             margin-left: auto;
+//             margin-right: auto;
+//         }
+//         &:first-of-type {
+//             padding-top: 5vh;
+//         }
+//         .widget-wrap {
+//             p {
+//                 color: $border;
+//                 margin-bottom: 1.618em;
+//             }
+//         }
+//     }
+//     h1 {
+//         @include breakpoint(xs) {
+//             font-size: 2.2em;
+//         }
+//         @include breakpoint(sm) {
+//             font-size: 2.7em;
+//         }
+//         @include breakpoint(xl) {
+//             font-size: 3.5em;
+//         }
+//     }
+// }
 
 
 /* ### Front Page 2 */

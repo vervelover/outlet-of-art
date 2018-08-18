@@ -73,22 +73,36 @@
 }
 
 .single-product-additional-info {
+
+    .product & {
+        margin: 2rem 0;
+        @include breakpoint(md) {
+            max-width: 48%;
+            padding: 0;
+        }
+        @include breakpoint(lg) {
+            margin-left: 5%;
+        }
+        & li {
+            list-style-type: disc;
+            margin-left: 3.2rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        & .option-content, .option-content-first {
+            font-size: 1.6rem;
+            padding-left: 3.2rem;
+            padding-right: 3.2rem;
+            padding-bottom: 3.2rem;
+        }
+    }
 	width: 100%;
 	float: left;
     position: relative;
-	margin: 2rem 0;
 	border-bottom: 1px solid $border;
 	text-align: left;
 
-    @include breakpoint(md) {
-		max-width: 48%;
-		padding: 0;
-    }
-    @include breakpoint(lg) {
-        margin-left: 5%;
-    }
-
-	& .option-heading {
+    & .option-heading {
         border-top: 1px solid $border;
 		display: block;
 		float: left;
@@ -112,12 +126,14 @@
 	& .option-content h2, .option-content-first h2 {
 		display: none;
 	}
-	& .option-content, .option-content-first {
-		font-size: 1.6rem;
-        padding-left: 3.2rem;
-        padding-right: 3.2rem;
-        padding-bottom: 3.2rem;
-	}
+
+    .single-artist & {
+        & .option-content, .option-content-first {
+            @include breakpoint(md){
+                display: block !important;
+            }
+        }
+    }
 
     & .arrow-down, .arrow-up, .arrow-up-nojquery {
         float: right;
@@ -129,9 +145,6 @@
     }
 
     & li {
-        list-style-type: disc;
-        margin-left: 3.2rem;
-        margin-bottom: 1rem;
         font-style: italic;
     }
 }

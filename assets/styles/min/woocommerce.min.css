@@ -1284,10 +1284,34 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	width: 100%;
 	float: left;
 	position: relative;
-	margin: 32px 0;
-	margin: 2rem 0;
 	border-bottom: 1px solid #979797;
 	text-align: left;
+}
+
+.product .single-product-additional-info {
+	margin: 32px 0;
+	margin: 2rem 0;
+}
+
+.product .single-product-additional-info li {
+	list-style-type: disc;
+	margin-left: 51.2px;
+	margin-left: 3.2rem;
+	margin-bottom: 16px;
+	margin-bottom: 1rem;
+	font-style: italic;
+}
+
+.product .single-product-additional-info .option-content,
+.product .single-product-additional-info .option-content-first {
+	font-size: 25.6px;
+	font-size: 1.6rem;
+	padding-left: 51.2px;
+	padding-left: 3.2rem;
+	padding-right: 51.2px;
+	padding-right: 3.2rem;
+	padding-bottom: 51.2px;
+	padding-bottom: 3.2rem;
 }
 
 .single-product-additional-info .option-heading {
@@ -1318,18 +1342,6 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	display: none;
 }
 
-.single-product-additional-info .option-content,
-.single-product-additional-info .option-content-first {
-	font-size: 25.6px;
-	font-size: 1.6rem;
-	padding-left: 51.2px;
-	padding-left: 3.2rem;
-	padding-right: 51.2px;
-	padding-right: 3.2rem;
-	padding-bottom: 51.2px;
-	padding-bottom: 3.2rem;
-}
-
 .single-product-additional-info .arrow-down,
 .single-product-additional-info .arrow-up,
 .single-product-additional-info .arrow-up-nojquery {
@@ -1345,11 +1357,6 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 }
 
 .single-product-additional-info li {
-	list-style-type: disc;
-	margin-left: 51.2px;
-	margin-left: 3.2rem;
-	margin-bottom: 16px;
-	margin-bottom: 1rem;
 	font-style: italic;
 }
 
@@ -2147,9 +2154,13 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 	.fixed-summary__shipping-info {
 		display: block;
 	}
-	.single-product-additional-info {
+	.product .single-product-additional-info {
 		max-width: 48%;
 		padding: 0;
+	}
+	.single-artist .single-product-additional-info .option-content,
+	.single-artist .single-product-additional-info .option-content-first {
+		display: block !important;
 	}
 	.woocommerce-cart form.checkout .col2-set,
 	.woocommerce-checkout form.checkout .col2-set,
@@ -2186,7 +2197,7 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 		margin-right: 3%;
 		margin-left: 3%;
 	}
-	.single-product-additional-info {
+	.product .single-product-additional-info {
 		margin-left: 5%;
 	}
 }

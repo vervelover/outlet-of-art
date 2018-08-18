@@ -2987,12 +2987,96 @@ p.entry-meta {
 }
 
 /* Artists single page styles */
+.archive.single-artist .content-sidebar-wrap {
+	padding-top: 0;
+}
 
-.archive.single-artist .artists-wrapper img {
+.archive.single-artist .artists-wrapper {
+	width: 100%;
+	background: #f2f2f2;
+}
+
+.archive.single-artist .artists-wrapper__artist {
+	width: 50%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	        align-items: center;
+}
+
+.archive.single-artist .artists-wrapper__artist--name {
+	font-size: 20.8px;
+	font-size: 2.6rem;
+}
+
+.archive.single-artist .artists-wrapper__artist--image {
+	-webkit-clip-path: circle(36% at 50% 50%);
+	        clip-path: circle(36% at 50% 50%);
+}
+
+.archive.single-artist .artists-wrapper__artist--region {
+	font-style: italic;
+}
+
+.archive.single-artist .artists-wrapper__featured-artwork--container {
+	width: 50%;
+}
+
+.archive.single-artist .artists-wrapper__featured-artwork--image {
 	margin-bottom: 0;
 }
 
-.archive.single-artist .artists-wrapper .entry {
+.archive.single-artist .artists-wrapper .entry-content {
+	color: #212121;
+}
+
+.archive.single-artist .overview__about {
+	font-size: 14.4px;
+	font-size: 1.8rem;
+	font-style: italic;
+	color: #212121;
+	margin-bottom: 16px;
+	margin-bottom: 2rem;
+}
+
+.archive.single-artist .overview__biography {
+	width: 100%;
+}
+
+.archive.single-artist .overview__biography--title {
+	font-size: 9.6px;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
+	color: #212121;
+	padding-top: 8px;
+	padding-top: 1rem;
+	padding-right: 120px;
+	padding-right: 15rem;
+}
+
+.archive.single-artist .overview__biography--content {
+	font-size: 12.8px;
+	font-size: 1.6rem;
+	margin-bottom: 24px;
+	margin-bottom: 3rem;
+}
+
+.archive.single-artist article.artist.entry {
 	width: 100%;
 	margin-bottom: 0;
 	background: none;
@@ -3000,12 +3084,8 @@ p.entry-meta {
 	line-height: 2;
 }
 
-.archive.single-artist .artists-wrapper .entry .entry-footer {
+.archive.single-artist article.artist.entry .entry-footer {
 	display: none;
-}
-
-.archive.single-artist .artists-wrapper .entry-content {
-	color: #212121;
 }
 
 .archive.single-artist .related-artworks {
@@ -3018,6 +3098,41 @@ p.entry-meta {
 .archive.single-artist .site-inner {
 	padding-bottom: 48px;
 	padding-bottom: 6rem;
+}
+
+.archive.single-artist .artist-menu {
+	display: none;
+	margin: 0 0 24px;
+	margin: 0 0 3rem;
+}
+
+.archive.single-artist .artist-menu__list-item {
+	position: relative;
+	list-style-type: none;
+	cursor: pointer;
+	padding: 0 17.6px;
+	padding: 0 2.2rem;
+	font-size: 17.6px;
+	font-size: 2.2rem;
+}
+
+.archive.single-artist .artist-menu__list-item:first-child {
+	padding-left: 0;
+}
+
+.archive.single-artist .artist-menu__list-item::after {
+	content: '';
+	height: 16px;
+	height: 2rem;
+	background: #212121;
+	width: 1px;
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
 }
 
 /* ## Widgets
@@ -5074,10 +5189,20 @@ ul.slides {
 		-ms-flex-align: center;
 		        align-items: center;
 	}
-	.archive.single-artist .artists-wrapper .entry {
-		width: 60%;
-		margin: 0;
-		margin-left: 15px;
+	.archive.single-artist .overview__biography {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display:         flex;
+	}
+	.archive.single-artist .option-heading {
+		display: none;
+	}
+	.archive.single-artist .artist-menu {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display:         flex;
 	}
 	.sidebar-primary {
 		-webkit-box-ordinal-group: 3;

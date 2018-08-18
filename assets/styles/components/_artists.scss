@@ -63,7 +63,14 @@
 
 .archive.single-artist {
 
+    .content-sidebar-wrap {
+        padding-top: 0;
+    }
+
     .artists-wrapper {
+
+        width: 100%;
+        background: $lighter;
 
         @include breakpoint(md) {
             display: flex;
@@ -71,31 +78,80 @@
             align-items: center;
         }
 
-        img {
-            margin-bottom: 0;
-        }
+        &__artist {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
-        .entry {
-            width: 100%;
-            margin-bottom: 0;
-
-            @include breakpoint(md) {
-                width: 60%;
-                margin: 0;
-                margin-left: $margin-left-blog;
+            &--name {
+                font-size: 2.6rem;
             }
 
-            background: none;
-            box-shadow: none;
-            line-height: 2;
+            &--image {
+                clip-path: circle(36% at 50% 50%);
+            }
 
-            .entry-footer {
-                display: none;
+            &--region {
+                font-style: italic;
+            }
+        }
+
+        &__featured-artwork {
+
+            &--container {
+                width: 50%;
+            }
+
+            &--image {
+                margin-bottom: 0;
             }
         }
 
         .entry-content {
             color: $dark;
+        }
+    }
+
+    .overview {
+        &__about {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: $dark;
+            margin-bottom: 2rem;
+        }
+        &__biography {
+            width: 100%;
+            @include breakpoint(md) {
+                display: flex;
+            }
+            &--title {
+                font-size: 1.2rem;
+                text-transform: uppercase;
+                font-weight: $bold;
+                font-family: $font-body;
+                color: $dark;
+                padding-top: 1rem;
+                padding-right: 15rem;
+            }
+            &--content {
+                font-size: 1.6rem;
+                margin-bottom: 3rem;
+            }
+        }
+    }
+
+    article.artist.entry {
+        width: 100%;
+        margin-bottom: 0;
+
+        background: none;
+        box-shadow: none;
+        line-height: 2;
+
+        .entry-footer {
+            display: none;
         }
     }
 
@@ -109,5 +165,41 @@
         padding-bottom: 6rem;
     }
 
+    .option-heading {
+        @include breakpoint(md) {
+            display: none;
+        }
+    }
+    .artist-menu {
+        display: none;
+        margin: 0 0 3rem;
+       
+        @include breakpoint(md) {
+            display: flex;
+        }
 
+        &__list-item {
+            position: relative;
+            list-style-type: none;
+            cursor: pointer;
+            padding: 0 2.2rem;
+            font-size: 2.2rem;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &::after {
+                content: "";
+                height: 2rem;
+                background: $dark;
+                width: 1px;
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
 }

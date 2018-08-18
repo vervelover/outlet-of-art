@@ -41,6 +41,7 @@ add_image_size('hero', 1920, 720, true);
 
 // Set artist image size to override plugin.
 add_image_size('artist-thumbnail', 300, 300, true);
+add_image_size('featured-artwork', 953, 9999, false);
 
 // Enable support for page excerpts.
 add_post_type_support('page', 'excerpt');

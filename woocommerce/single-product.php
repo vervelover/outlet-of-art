@@ -15,6 +15,16 @@
  *
  */
 
+/** Enqueue JS scripts */
+add_action( 'wp_enqueue_scripts', 'ap_fixed_summary' );
+function ap_fixed_summary() {
+    wp_enqueue_script( 'fixed-summary', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/fixed-summary.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
+    wp_enqueue_script( 'div-toggle', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/div-toggle.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
+}
+
+//* Force full-width-content layout setting
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+
 /** Remove default Genesis loop */
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 
@@ -28,41 +38,6 @@ remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 )
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 
-/** Custom FlexSlider Navigation **/
-
-add_theme_support( 'wc-product-gallery-lightbox' );
-add_theme_support( 'wc-product-gallery-slider' );
-
-// Update WooCommerce Flexslider options
-
-add_filter( 'woocommerce_single_product_carousel_options', 'ap_update_woo_flexslider_options' );
-function ap_update_woo_flexslider_options( $options ) {
-	/* properties here: https://github.com/woocommerce/FlexSlider/wiki/FlexSlider-Properties */
-    $options['directionNav'] = true;
-    $options['touch'] = true;
-    // $options['animation'] = "fade";
-    $options['controlNav'] = true;
-    $options['smoothHeight'] = true;
-    $options['animateHeight'] = true;
-    // $options['direction'] = 'vertical';
-
-    return $options;
-}
-
-// /* Share icons on product */
-//
-// add_action('woocommerce_share', 'ap_add_social_buttons' );
-// function ap_add_social_buttons() {
-//     genesis_share_icon_output( 'header', array(  'facebook', 'googlePlus', 'pinterest' ) );
-// }
-
-/** Enqueue JS scripts */
-add_action( 'wp_enqueue_scripts', 'ap_fixed_summary' );
-function ap_fixed_summary() {
-	wp_enqueue_script( 'fixed-summary', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/fixed-summary.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
-	wp_enqueue_script( 'div-toggle', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/div-toggle.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
-}
-
 // Fixed product summary tweaks
 
 add_action('woocommerce_single_product_summary', 'ap_fixed_summary_open_div', 4);
@@ -72,27 +47,83 @@ function ap_fixed_summary_open_div() {
 
 add_action('woocommerce_single_product_summary', 'ap_fixed_summary_close_div', 51);
 function ap_fixed_summary_close_div() {
-	echo '</div>';
+    echo '</div>';
 }
 
 remove_action( 'business_page_header', 'business_page_title', 10 );
+add_action( 'woocommerce_single_product_summary', 'ap_single_artwork_artist_name', 5 );
 add_action( 'woocommerce_single_product_summary', 'genesis_do_post_title', 5 );
+function ap_single_artwork_artist_name() {
+    echo '<span class="fixed-summary__artist-name">' . get_field('artista')[0]->post_title .'</span>';
+}
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
 
+// Move price
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25 );
+
+// Remove add to cart button, add contact button instead
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+add_action( 'woocommerce_single_product_summary', 'ap_single_product_contact_button', 30 );
+function ap_single_product_contact_button () {
+    ?>
+    <a class="button fixed-summary__button" href="#"><?php _e('Contact', 'business-pro') ?></a>
+    <?php
+}
+
 add_action('woocommerce_single_product_summary', 'ap_fixed_summary_shipping_info', 30);
 function ap_fixed_summary_shipping_info() {
-		?>
-        <div class="fixed-summary__go-to-details">
-            <a href="#product-details" class="fixed-summary__go-to-details--link" title="View Product Details"><?php _e('Product Details', 'business-pro'); ?> <i class="fa fa-angle-right"></i></a>
+        ?>
+        <div class="fixed-summary__services--title">
+            <span><?php _e('Our Services', 'business-pro') ?></span>
         </div>
-		<div class="fixed-summary__shipping-info">
+        <div class="fixed-summary__services--list">
             <ul>
-                <li><?php _e('Shipping Worldwide / 3-5 days Delivery', 'business-pro');?></li>
+                <li>Questions about this work?</li>
+                <li>Interested in other works by this artist? </li>
+                <li>Want to pay in installments?</li>
+                <li>Prova la tua opera installata . Guarda i nostri lavori</li>
             </ul>
         </div>
-		<?php
+         <a class="button button--white fixed-summary__button" href="#"><?php _e('Contact Us', 'business-pro') ?></a>
+        <?php
 }
+
+// Remove single meta (categories, tags ect.)
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+
+/** Custom FlexSlider Navigation **/
+
+add_theme_support( 'wc-product-gallery-lightbox' );
+add_theme_support( 'wc-product-gallery-slider' );
+
+// Remove quantity in all product types
+function ap_wc_remove_all_quantity_fields( $return, $product ) {
+    return true;
+}
+add_filter( 'woocommerce_is_sold_individually', 'ap_wc_remove_all_quantity_fields', 10, 2 );
+
+// Update WooCommerce Flexslider options
+
+add_filter( 'woocommerce_single_product_carousel_options', 'ap_update_woo_flexslider_options' );
+function ap_update_woo_flexslider_options( $options ) {
+	/* properties here: https://github.com/woocommerce/FlexSlider/wiki/FlexSlider-Properties */
+    $options['directionNav'] = true;
+    $options['touch'] = true;
+    $options['controlNav'] = true;
+    $options['smoothHeight'] = true;
+    $options['animateHeight'] = true;
+    
+    return $options;
+}
+
+// /* Share icons on product */
+//
+// add_action('woocommerce_share', 'ap_add_social_buttons' );
+// function ap_add_social_buttons() {
+//     genesis_share_icon_output( 'header', array(  'facebook', 'googlePlus', 'pinterest' ) );
+// }
 
 /**
  * Remove existing tabs from single product pages.

@@ -191,7 +191,7 @@
     }
 
     .option-heading {
-         border-top: 1px solid $light;
+        border-top: 1px solid $light;
         @include breakpoint(md) {
             display: none;
         }

@@ -3,8 +3,8 @@ jQuery(document).ready(function($){
 	var parentwidth = $(".summary").width();
 	$(".fixed-summary").width(parentwidth);
 
-	var headerHeight = $(".site-header").height();
-	$("#page-header").height(headerHeight);
+	// var headerHeight = $(".site-header").height();
+	// $("#page-header").height(headerHeight);
 
 	// var selectHeight = $("table.variations").height();
 	// $(".tc-extra-product-options").height(selectHeight);
@@ -25,8 +25,8 @@ jQuery(document).ready(function($){
 	});
 
 	$( window ).resize(function() {
-		var headerHeight = $(".site-header").height();
-	    $("#page-header").height(headerHeight);
+		// var headerHeight = $(".site-header").height();
+	 //    $("#page-header").height(headerHeight);
 
 	    var parentwidth = $(".summary").width();
   	    $(".fixed-summary").width(parentwidth);

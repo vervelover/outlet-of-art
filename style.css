@@ -779,10 +779,11 @@ input[type='submit'] {
 	border-radius: 2px;
 	color: #ffffff;
 	cursor: pointer;
-	font-family: 'PT Serif', serif;
-	font-size: 12px;
-	font-size: 1.5rem;
-	font-weight: 700;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 8px;
+	font-size: 1rem;
+	font-weight: 400;
+	text-transform: uppercase;
 	padding: 1.2em 2.2em;
 	text-decoration: none;
 	display: inline-block;
@@ -1019,6 +1020,13 @@ th {
 .blog .content-sidebar-wrap {
 	padding-top: 64px;
 	padding-top: 8rem;
+}
+
+.sidebar-content .content-sidebar-wrap {
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	-ms-flex-align: start;
+	        align-items: flex-start;
 }
 
 /* ## Content Widths and Positions
@@ -1445,6 +1453,10 @@ img.alignright,
 	background-color: rgba(0, 0, 0, 0.1);
 	z-index: 1;
 	pointer-events: none;
+}
+
+.single-product .page-header {
+	padding: 0;
 }
 
 .page-header .wrap {
@@ -3825,7 +3837,7 @@ a.flex-next::after {
 	visibility: visible;
 	content: '\f345';
 	font-family: dashicons;
-	color: #ffffff;
+	color: #212121;
 	margin-right: 4px;
 	margin-right: 0.5rem;
 	font-size: 32px;
@@ -3836,11 +3848,16 @@ a.flex-prev::before {
 	visibility: visible;
 	content: '\f341';
 	font-family: dashicons;
-	color: #ffffff;
+	color: #212121;
 	margin-left: 4px;
 	margin-left: 0.5rem;
 	font-size: 32px;
 	font-size: 4rem;
+}
+
+.home a.flex-next::after,
+.home a.flex-prev::before {
+	color: #ffffff;
 }
 
 .flex-control-paging {
@@ -3880,12 +3897,20 @@ a.flex-prev::before {
 }
 
 .flex-control-paging li a:hover {
+	background: rgba(210, 210, 210, 0.2);
+}
+
+.home .flex-control-paging li a:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
 
 .flex-control-paging li a.flex-active {
-	background: #ffffff;
+	background: #d2d2d2;
 	cursor: default;
+}
+
+.home .flex-control-paging li a.flex-active {
+	background: #ffffff;
 }
 
 ul.slides {

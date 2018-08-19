@@ -32,7 +32,7 @@ a.flex-next::after {
     visibility:visible;
     content: "\f345";
     font-family: dashicons;
-    color: $white;
+    color: $dark;
     margin-right: .5rem;
     font-size: 4rem;
     @include breakpoint(sm) {
@@ -43,14 +43,18 @@ a.flex-prev::before {
     visibility:visible;
     content: "\f341";
     font-family: dashicons;
-    color: $white;
+    color: $dark;
     margin-left: .5rem;
     font-size: 4rem;
     @include breakpoint(sm) {
         font-size: 7rem;
     }
 }
-
+.home {
+    a.flex-next::after,a.flex-prev::before {
+        color: $white;
+    }
+}
 .flex-control-paging {
     position: absolute;
     bottom: -3rem;
@@ -80,11 +84,17 @@ a.flex-prev::before {
     outline: none;
 }
 .flex-control-paging li a:hover {
-    background: rgba( $white, 0.2 );
+    background: rgba( $medium, 0.2 );
+    .home & {
+        background: rgba( $white, 0.2 );
+    }
 }
 .flex-control-paging li a.flex-active {
-    background: $white;
+    background: $medium;
     cursor: default;
+    .home & {
+        background: $white;
+    }
 }
 
 ul.slides {

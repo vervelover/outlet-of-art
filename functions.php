@@ -343,3 +343,14 @@ function ap_language_selector(){
 	$langs .= '</li>';
 	return $langs;
 }
+
+/**
+ * Change number of related products output
+ */ 
+
+add_filter( 'woocommerce_output_related_products_args', 'ap_related_products_args' );
+  function ap_related_products_args( $args ) {
+	$args['posts_per_page'] = 6; // 4 related products
+	$args['columns'] = 3; // arranged in 2 columns
+	return $args;
+}

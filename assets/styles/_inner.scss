@@ -141,7 +141,7 @@
 	&.sidebar-content {
 		.entry {
 			@include breakpoint(md) {
-				width: calc(50% - 1.5rem);
+				width: $one-third-blog;
 			}
 		}
 	}

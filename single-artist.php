@@ -41,7 +41,7 @@ function ap_artist_detail_wrapper() {
 	echo '<div class="artists-wrapper">';
 	echo '<div class="artists-wrapper__artist">';
 	echo the_post_thumbnail('artist-thumbnail', ['class' => 'artists-wrapper__artist--image aligncenter']);
-	echo '<h3 class="artists-wrapper__artist--name">'.get_the_title().'</h3>';
+	echo '<h1 class="artists-wrapper__artist--name">'.get_the_title().'</h1>';
 	echo '<p class="artists-wrapper__artist--region">'.get_field('regione').'</p>';
 	echo '</div>';
 	echo '<div class="artists-wrapper__featured-artwork--container">';
@@ -63,15 +63,15 @@ function artist_navigation() {
 		</ul>
 
         <div class="option-heading option-heading--first">
-            <h2><?php _e('Overview', 'business-pro');?></h2>
-            <div class="arrow-up">+</div>
-            <div class="arrow-down">-</div>
+            <h2 class="option-heading--title"><?php _e('Overview', 'business-pro');?></h2>
+            <!--<div class="arrow-up"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
+            <div class="arrow-down"><span class="dashicons dashicons-arrow-up-alt2"></span></div>-->
         </div>
         <div class="option-content-first">
 		    <div class="option-content__content" id="overview">
-		    	<h3 class="overview__about"><?php echo get_the_title(); ?></h3>
+		    	<h2 class="overview__about"><?php echo get_the_title(); ?></h2>
 		    	<div class="overview__biography">
-		    		<h4 class="overview__biography--title"><?php _e('Biography') ?></h4>
+		    		<h3 class="overview__biography--title"><?php _e('Biography') ?></h3>
 		    		<div class="overview__biography--content">
 						<?php genesis_do_post_content();?>
 					</div>
@@ -80,20 +80,21 @@ function artist_navigation() {
 		</div>
 
 		<div class="option-heading">
-            <h2><?php _e('Artworks', 'business-pro');?></h2>
-            <div class="arrow-up">-</div>
-            <div class="arrow-down">+</div>
+			<h2 class="option-heading--title"><?php _e('Artworks', 'business-pro');?></h2>
+            <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+            <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
         </div>
         <div class="option-content">
             <div class="option-content__content" id="artworks">
+            	<h2 class="related-artworks__title"><?php _e('Artworks', 'business-pro');?></h2>
                 <?php show_single_artist_artworks(); ?>
             </div>
         </div>
 
         <div class="option-heading">
-            <h2><?php _e('Shows', 'business-pro');?></h2>
-            <div class="arrow-up">-</div>
-            <div class="arrow-down">+</div>
+            <h2 class="option-heading--title"><?php _e('Shows', 'business-pro');?></h2>
+            <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+            <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
         </div>
         <div class="option-content">
             <div class="option-content__content" id="shows" style="display: none">
@@ -102,9 +103,9 @@ function artist_navigation() {
         </div>
 
         <div class="option-heading">
-            <h2><?php _e('Articles', 'business-pro');?></h2>
-            <div class="arrow-up">-</div>
-            <div class="arrow-down">+</div>
+            <h2 class="option-heading--title"><?php _e('Articles', 'business-pro');?></h2>
+            <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+            <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
         </div>
         <div class="option-content">
             <div class="option-content__content" id="articles" style="display: none">
@@ -117,7 +118,6 @@ function artist_navigation() {
 	<?php
 }
 
-//add_action('genesis_after_content', 'show_artworks', 20);
 function show_single_artist_artworks() {
 	$createdProducts = new WP_Query(array(
 			'posts_per_page' => -1,
@@ -142,7 +142,6 @@ function show_single_artist_artworks() {
 			return $classes;
 
 		}
-		echo '<h2 class="related-artworks">'.get_the_title().' Artworks</h2>';
 		echo '<ul class="products columns-4">';
 		while ($createdProducts->have_posts()) {
 			$createdProducts->the_post();

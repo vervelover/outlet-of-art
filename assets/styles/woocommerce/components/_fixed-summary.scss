@@ -95,11 +95,16 @@
             padding-right: 3.2rem;
             padding-bottom: 3.2rem;
         }
+        & .option-content h2:first-child, .option-content-first h2:first-child {
+            display: none;
+        }
+        
+        border-bottom: 1px solid $border;
     }
 	width: 100%;
 	float: left;
     position: relative;
-	border-bottom: 1px solid $border;
+	border-bottom: 1px solid $light;
 	text-align: left;
 
     & .option-heading {
@@ -109,22 +114,17 @@
 		width: 100%;
         text-transform: uppercase;
 		cursor: pointer;
-	}
-
-	& h2 {
-		margin: 0;
-		line-height: 1;
-		font-size: 2rem;
-		padding: 3.2rem 0 3.2rem 3.2rem;
-		margin-bottom: 0;
-		position: relative;
-		left: 0;
-		display: inline-block;
-		color: $black;
-	}
-
-	& .option-content h2, .option-content-first h2 {
-		display: none;
+        &--title {
+            margin: 0;
+            line-height: 1;
+            font-size: 2rem;
+            padding: 3.2rem 0 3.2rem 3.2rem;
+            margin-bottom: 0;
+            position: relative;
+            left: 0;
+            display: inline-block;
+            color: $black;
+        }
 	}
 
     .single-artist & {
@@ -142,6 +142,10 @@
     	font-size: 3.2rem;
     	padding-top: 2.7rem;
     	color: $gray;
+
+        .dashicons-arrow-right-alt2::before {
+            font-size: 3rem;
+        }
     }
 
     & li {

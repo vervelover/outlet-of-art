@@ -16,7 +16,7 @@ jQuery(document).ready(function($){
     $(".option-heading").click(function(){
         $(this).next(".option-content").find('.option-content__content').css('display', 'block');
         $(this).next(".option-content").slideToggle(650);
-        $(this).next(".option-content-first").slideToggle(650);
+        $(this).next(".option-content-first").show();
         $(this).find(".arrow-up, .arrow-down").toggle();
     });
     $(".option-close").click(function(){

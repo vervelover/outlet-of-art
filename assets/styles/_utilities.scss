@@ -53,7 +53,7 @@ $box-shadow: 	  0 0.5rem 1.5rem rgba($dark,0.05);
 /* ### Column widths */
 
 // DO NOT USE REM for margin-left
-$margin-left:   10px;
+$margin-left:   15px;
 
 $one-half :     calc((100% - #{$margin-left}) / 2);
 $one-third:     calc((100% - 2 * #{$margin-left}) / 3);
@@ -67,7 +67,7 @@ $three-fifths:  calc(3 * ((100% - 4 * #{$margin-left}) / 5) + 2 * #{$margin-left
 $four-fifths:   calc(4 * ((100% - 4 * #{$margin-left}) / 5) + 3 * #{$margin-left});
 $five-sixths:   calc(5 * ((100% - 5 * #{$margin-left}) / 6) + 4 * #{$margin-left});
 
-$woocommerce-columns: $one-fourth;
+$woocommerce-columns: $one-third;
 
 /* ### Column widths for non-woocommerce archives */
 

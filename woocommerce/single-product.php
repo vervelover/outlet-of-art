@@ -116,7 +116,7 @@ function ap_custom_woocommerce_product_description_tab() {
         <div id="product-details" style="position:absolute;top:-10rem;"></div>
 
             <div class="option-heading">
-                <h2><?php _e('Product Description', 'business-pro'); ?></h2>
+                <h2 class="option-heading--title"><?php _e('Product Description', 'business-pro'); ?></h2>
                 <div class="arrow-up">+</div>
                 <div class="arrow-down">-</div>
             </div>
@@ -138,7 +138,7 @@ function ap_custom_woocommerce_product_description_tab() {
             ?>
 
             <div class="option-heading">
-                <h2><?php _e('Shipping', 'business-pro'); ?></h2>
+                <h2 class="option-heading--title"><?php _e('Shipping', 'business-pro'); ?></h2>
                 <div class="arrow-up">-</div>
                 <div class="arrow-down">+</div>
             </div>
@@ -152,7 +152,7 @@ function ap_custom_woocommerce_product_description_tab() {
             </div>
 
         <div id="#spedizioni-resi" class="option-heading">
-            <h2><?php _e('Returns and Exchanges', 'business-pro'); ?></h2>
+            <h2 class="option-heading--title"><?php _e('Returns and Exchanges', 'business-pro'); ?></h2>
             <div class="arrow-up">-</div>
             <div class="arrow-down">+</div>
         </div>
@@ -165,7 +165,7 @@ function ap_custom_woocommerce_product_description_tab() {
         </div>
 
         <div class="option-heading">
-            <h2><?php _e('Payment Options', 'business-pro'); ?></h2>
+            <h2 class="option-heading--title"><?php _e('Payment Options', 'business-pro'); ?></h2>
             <div class="arrow-up">-</div>
             <div class="arrow-down">+</div>
         </div>

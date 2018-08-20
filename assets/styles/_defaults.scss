@@ -6,12 +6,12 @@
 }
 
 html {
-    font-size: 50%;
+    font-size: 53%;
     @include breakpoint(xs) {
-        font-size: 54%;
+        font-size: 55.5%;
     }
     @include breakpoint(md) {
-        font-size: 55.5%;
+        font-size: 57.5%;
     }
     @include breakpoint(lg) {
         font-size: 62.5%;

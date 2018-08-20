@@ -53,17 +53,18 @@
 			width: 100%;
 			float: left;
 			@include breakpoint(md) {
-				max-width: 60%;
+				max-width: 57%;
 				padding-right: 6%;
 				padding-left: 6%;
+				margin-right: 3%;
 			}
 			@include breakpoint(lg) {
-				max-width: 65%;
+				max-width: 62%;
 				padding-right: 6%;
 				padding-left: 6%;
 			}
 			@include breakpoint(xl) {
-				max-width: 70%;
+				max-width: 67%;
 				padding-right: 5%;
 				padding-left: 5%;
 			}

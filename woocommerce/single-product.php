@@ -146,72 +146,131 @@ function ap_custom_woocommerce_product_description_tab() {
     <div class="single-product-additional-info">
         <div id="product-details" style="position:absolute;top:-10rem;"></div>
 
-            <div class="option-heading">
-                <h2 class="option-heading--title"><?php _e('Product Description', 'business-pro'); ?></h2>
-                <div class="arrow-up">+</div>
-                <div class="arrow-down">-</div>
+            <h2 class="about-the-work"><?php _e('About The Work', 'business-pro'); ?></h2>
+            <div class="single-product-additional-info__artwork-content">
+                <?php genesis_do_post_content(); ?>
             </div>
-            <div class="option-content-first">
-			    <div id="single-product-description">
-				    <?php woocommerce_product_description_tab(); ?>
-			   </div>
-		    </div>
-
-            <?php
-            // global $product;
-    	    // if( $product->has_attributes() || $product->has_dimensions() || $product->has_weight() ) {
-        	// 	echo '<div class="option-heading"><h2>'; _e('Additional Info', 'business-pro'); echo'</h2><div class="arrow-up">-</div><div class="arrow-down">+</div></div><div class="option-content">';
-        	// 		echo '<div id="single-product-description">';
-        	// 			woocommerce_product_additional_information_tab();
-        	// 		echo '</div>';
-        	// 	echo '</div>';
-            // }
-            ?>
-
             <div class="option-heading">
-                <h2 class="option-heading--title"><?php _e('Shipping', 'business-pro'); ?></h2>
+                <h2 class="option-heading--title"><?php _e('About', 'business-pro'); get_field('artista')[0]->post_title; ?></h2>
                 <div class="arrow-up">-</div>
                 <div class="arrow-down">+</div>
             </div>
             <div class="option-content">
-                <div id="single-product-description">
-                    <p>We charge 15€ to US, UK, EU and Canada. No extra rates will be added. We offer Express shipping with all orders. From the moment the order leaves our warehouse, we deliver in 3-4 business days.</p>
-                    <p>All orders are processed Monday through Saturday, excluding Sunday and holidays. US & Canadian customers will not pay any duties.</p>
-                    <p>From March 10, 2016 a new commercial agreement was made with the EU: orders under 800$ value will be delivered directly to you duty free.</p>
-                    <p>For the rest of the world we charge 25€, duties and local taxes will be charged by the appropriate authority at the destination country. Please determine these charges locally.</p>
-                </div>
-            </div>
-
-        <div id="#spedizioni-resi" class="option-heading">
-            <h2 class="option-heading--title"><?php _e('Returns and Exchanges', 'business-pro'); ?></h2>
-            <div class="arrow-up">-</div>
-            <div class="arrow-down">+</div>
-        </div>
-        <div class="option-content">
-            <div id="single-product-description">
-                <p>For online purchases, <?php bloginfo( 'name' ); ?> will refund the purchase price of merchandise that is returned in its original condition and accompanied by the original invoice, original <?php bloginfo( 'name' ); ?> packaging and security return/exchange label intact and attached to the item. Customized products can be returned with a 20€ penalty.</p>
-                <p>You must inform <?php bloginfo( 'name' ); ?> of your intention to return the merchandise within 14 days of the date of delivery by (i) directly returning the merchandise to <?php bloginfo( 'name' ); ?>; or (ii) writing your intention to info@maxlemari.com
-                We are a startup and work with almost no margins on Kickstarter. If the need for an exchange arises, we will need to charge for the shipping both ways. Choose your size carefully and read our sizing guidelines.</p>
-            </div>
-        </div>
-
-        <div class="option-heading">
-            <h2 class="option-heading--title"><?php _e('Payment Options', 'business-pro'); ?></h2>
-            <div class="arrow-up">-</div>
-            <div class="arrow-down">+</div>
-        </div>
-        <div class="option-content">
-            <div id="single-product-description">
-                <p><?php bloginfo( 'name' ); ?> accepts the following forms of payment for online purchases: Visa, Mastercard, American Express and PAYPAL.</p>
-                <p>For credit card payments, please note that your billing address must match the address on your credit card statement.</p>
-                <p>The authorized amount will be released by your credit card’s issuing bank according to its policy.</p>
-                <p>The purchase transaction will only be charged to your credit card after we have verified your card details, received credit authorization for an amount equal to the purchase price of the ordered products, confirmed product availability and prepared your order for shipping.</p>
-            </div>
-        </div>
-
+			    <div id="single-product-description">
+				    <h2 class="option-content__title">
+                        <?php 
+                        $artistName = get_field('artista')[0]->post_title;
+                        printf( __('About %s', 'business-pro'), $artistName );
+                        ?>
+                        
+                    </h2>
+                    <?php
+                    $artist_page_ID = get_field('artista')[0]->ID;
+                    $artist_post_content = apply_filters('the_content', get_post_field('post_content', $artist_page_ID ));
+                    echo $artist_post_content;
+                    ?>
+                    <a class="option-content__artist-link" href="<?php echo get_permalink($artist_page_ID); ?>"><?php printf( __('Go to %s artist page >', 'business-pro'), $artistName ); ?></a>
+                    <div class="option-content__space"></div>
+			   </div>
+		    </div>
+            
+            <?php ap_output_artist_other_works(); ?>
+            
     </div>
     <div id="stop-summary" style="width:100%;float:left;"></div>
     <?php
+}
+
+/**
+ * Remove related products output
+ */
+// remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+add_action( 'woocommerce_after_single_product_summary', 'ap_artwork_custom_related', 20 );
+function ap_artwork_custom_related() {
+    ap_output_artist_related_works_slider();
+    ap_output_artist_related_articles();
+    ap_output_artist_recentely_viewed();
+}
+
+function ap_output_artist_other_works() {
+    $productID = get_the_ID();
+    $artistName = get_field('artista')[0]->post_title;
+    $artistID = get_field('artista')[0]->ID;
+
+    $relatedWorks = new WP_Query(array(
+        'posts_per_page' => 6,
+        'post_type' => 'product',
+        'orderby' => 'rand',
+        'order' => 'ASC',
+        'meta_query' => array(
+            array(
+                'key' => 'artista',
+                'compare' => 'LIKE',
+                'value' => '"' . $artistID . '"'
+            )
+        )
+    ));
+
+    if ($relatedWorks->have_posts()) {
+        ?>
+        <div class="option-heading">
+            <h2 class="option-heading--title"><?php printf( __('Other Works by %s', 'business-pro'), $artistName ); ?></h2>
+            <div class="arrow-up">-</div>
+            <div class="arrow-down">+</div>
+        </div>
+        <div class="option-content">
+            <div id="single-product-description">
+                <h2 class="option-content__title option-content__title--bigger"><?php printf( __('Other Works by %s', 'business-pro'), $artistName ); ?>
+                    
+                </h2>
+        <?php 
+        echo '<ul class="products columns-3">';
+        $counter = 1;
+        while( $relatedWorks->have_posts()) {
+            $relatedWorks->the_post();
+            $colClass = '';
+            if ( $counter % 3 == 0) {
+                $colClass = 'last';
+            } 
+            if ( (($counter % 3) + 1) == 2) {
+                $colClass = 'first';
+            } 
+            if (get_the_ID() !== $productID) {
+                ?>
+                <li class="product <?php echo $colClass; ?> type-product status-publish has-post-thumbnail entry instock purchasable">
+                    <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="<?php the_permalink(); ?>">
+                    <?php 
+                    the_post_thumbnail('woocommerce_thumbnail');
+                    echo '<span class="fixed-summary__artist-name">' . get_field('artista')[0]->post_title .'</span><br/>';
+                    the_title();
+                    the_excerpt(); 
+                    ?>
+                    </a>
+                </li>
+                <?php
+                $counter++;
+            }
+        }
+        echo '</ul>';
+        echo '</div></div>';
+    }
+
+    wp_reset_postdata();
+
+}
+function ap_output_artist_related_works_slider() {
+    $artistID = get_field('artista')[0]->ID;
+    print_r(get_field('artista')[0]);
+    echo '<div style="display:block;width:100%;float:left;position:relative;">';
+    echo do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="Italia" artist_ID='.$artistID.']');
+    echo '</div>';
+}
+function ap_output_artist_related_articles() {
+    
+}
+function ap_output_artist_recentely_viewed() {
+    
 }
 
 add_action( 'genesis_loop', 'gencwooc_single_product_loop' );

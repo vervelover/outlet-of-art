@@ -14,12 +14,12 @@
 // This is commented out because Woocommerce already has flexslider registered.
 // Use the following code only if you are not already using Woocommerce
 
-/*
-add_action('init', 'register_my_scripts');
-function register_my_scripts() {
-wp_register_script( 'flexslider', get_stylesheet_directory_uri() . '/flexslider/jquery.flexslider-min.js', array('jquery'), '1.0.0', true );
-}
- */
+
+// add_action('init', 'register_my_scripts');
+// function register_my_scripts() {
+// wp_register_script( 'flexslider', get_stylesheet_directory_uri() . '/includes/jquery.flexslider-min.js', array('jquery'), true );
+// }
+ 
 
 add_action('wp_footer', 'ap_add_flexslider_script', 99);
 function ap_add_flexslider_script() {
@@ -27,7 +27,21 @@ function ap_add_flexslider_script() {
 	if ($add_fs_script) {
 		$speed = $fs_atts['slideshowspeed']*1000;
 		echo "<script type=\"text/javascript\">
-            jQuery(document).ready(function($) {
+            jQuery(document).ready(function($) {";
+
+            	if( $fs_atts['location'] == 'carousel' ) {
+
+					echo "$('.flexslider-".$fs_atts['ulid']."').flexslider({
+		            		animation: '".$fs_atts['animation']."',
+		            		slideshow: false,
+		            		controlNav: false,
+		                    touch: true,
+		                    itemWidth: 300,
+		                    move: 1,
+		                    directionNav: true
+		            	});";
+
+				} else echo "
 
                 fixFlexsliderHeight();
 
@@ -38,7 +52,7 @@ function ap_add_flexslider_script() {
                 $(window).on('resize orientationchange', function(){
                     fixFlexsliderHeight();
                 });
-
+								
             	$('.flexslider-".$fs_atts['ulid']."').flexslider({
             		animation: '".$fs_atts['animation']."',
             		slideshowSpeed: ".$speed.",
@@ -46,20 +60,22 @@ function ap_add_flexslider_script() {
                     touch: true,
                     directionNav: true
             	});
+            	function fixFlexsliderHeight() {
+	                // Set fixed height based on the tallest slide
+	                $('.flexslider-".$fs_atts['ulid']."').each(function(){
+	                    var sliderHeight = 0;
+	                    $(this).find('.slides > li img').each(function(){
+	                        slideHeight = $(this).height();
+	                        if (sliderHeight < slideHeight) {
+	                            sliderHeight = slideHeight;
+	                        }
+	                    });
+	                    $(this).find('.flex-viewport').css({'height' : sliderHeight});
+	                });
+	            }";
+        echo "            
+	            
             });
-            function fixFlexsliderHeight() {
-                // Set fixed height based on the tallest slide
-                $('.flexslider-".$fs_atts['ulid']."').each(function(){
-                    var sliderHeight = 0;
-                    $(this).find('.slides > li img').each(function(){
-                        slideHeight = $(this).height();
-                        if (sliderHeight < slideHeight) {
-                            sliderHeight = slideHeight;
-                        }
-                    });
-                    $(this).find('.flex-viewport').css({'height' : sliderHeight});
-                });
-            }
 
         </script>";
 		wp_print_scripts('flexslider');
@@ -108,43 +124,86 @@ function ap_flexslider_shortcode($atts = null) {
 			'ulid'           => 'flexid',
 			'animation'      => 'slide',
 			'slideshowspeed' => 5,
+			'regione'		 => '',
+			'artist_ID'		 => ''
 		), $atts, 'shortcode-flexslider'
 	);
-	$args = array(
-		'post_type'      => 'slider',
-		'posts_per_page' => $fs_atts['limit'],
-		'orderby'        => 'menu_order',
-		'order'          => 'ASC',
-	);
-	if ($fs_atts['location'] != '') {
-		$args['meta_query'] = array(
-			'relation'  => 'AND',
-			array('key' => 'posizione_slider', 'value' => $fs_atts['location'])
+
+	if ($fs_atts['location'] == 'carousel') {
+
+		$args = array(
+			'post_type'      => 'product',
+			'posts_per_page' => $fs_atts['limit'],
+			'orderby'        => 'rand',
 		);
+		$carousel = true;
+
 	} else {
-		$args['meta_query'] = array(
-			'relation'  => 'AND',
-			array('key' => 'posizione_slider', 'value' => 'homepage')
+
+		$args = array(
+			'post_type'      => 'slider',
+			'posts_per_page' => $fs_atts['limit'],
+			'orderby'        => 'menu_order',
+			'order'          => 'ASC',
 		);
+		if ($fs_atts['location'] != '') {
+			$args['meta_query'] = array(
+				'relation'  => 'AND',
+				array('key' => 'posizione_slider', 'value' => $fs_atts['location'])
+			);
+		} else {
+			$args['meta_query'] = array(
+				'relation'  => 'AND',
+				array('key' => 'posizione_slider', 'value' => 'homepage')
+			);
+		}
 	}
+	
+	$currentArtistID = get_field('artista')[0]->ID;
 	$the_query = new WP_Query($args);
 	$slides    = array();
 	if ($the_query->have_posts()) {
 		while ($the_query->have_posts()) {
 			$the_query->the_post();
-			$imghtml = '<img src="'.get_field('immagine_slider')['url'].'" title="'.get_field('immagine_slider')['title'].'" alt="'.get_field('immagine_slider')['alt'].'" width="'.get_field('immagine_slider')['sizes']['fullsize-width'].'" height="'.get_field('immagine_slider')['sizes']['full-height'].'">';
-			$url     = get_field('link_slider');
-			if ($url != '' && $url != 'http://') {
-				$imghtml = '<a href="'.$url.'">'.$imghtml.'</a>';
-			}
-			$slides[] = '
-				<li>
-					<div class="slide-media">'.$imghtml.'</div>
-					<div class="slide-content">
-						<h3 class="slide-title">'.get_field('titolo_slider').'</h3>
-						<div class="slide-text">'.get_field('contenuto_slider').'</div>
-					</div>
-				</li>';
+
+			if (!$carousel) {
+
+				$imghtml = '<img src="'.get_field('immagine_slider')['url'].'" title="'.get_field('immagine_slider')['title'].'" alt="'.get_field('immagine_slider')['alt'].'" width="'.get_field('immagine_slider')['sizes']['fullsize-width'].'" height="'.get_field('immagine_slider')['sizes']['full-height'].'">';
+				$url     = get_field('link_slider');
+				if ($url != '' && $url != 'http://') {
+					$imghtml = '<a href="'.$url.'">'.$imghtml.'</a>';
+				}
+				$slides[] = '
+					<li>
+						<div class="slide-media">'.$imghtml.'</div>
+						<div class="slide-content">
+							<h3 class="slide-title">'.get_field('titolo_slider').'</h3>
+							<div class="slide-text">'.get_field('contenuto_slider').'</div>
+						</div>
+					</li>';
+
+			} else {
+
+				$loopArtistID = get_field('artista')[0]->ID;
+                $artist_regione = get_field('regione', $loopArtistID );
+
+				if ( $fs_atts['regione'] == $artist_regione && $currentArtistID !== $loopArtistID) {
+					$slideTitle = get_the_title();
+		            $slideImg = get_the_post_thumbnail($the_query->ID,'wooommerce_thumbnail');
+		            $artistName = get_field('artista')[0]->post_title;
+
+	                $slides[] = '
+	                <li>
+	                	<div class="slide-media">'.sprintf($slideImg).'</div>
+	                	<div class="slide-content">
+	                		<span class="fixed-summary__artist-name">'.$artistName.'</span>
+	                		<div class="">'.$slideTitle.'</div>
+	                    </div>
+	                </li>';
+				}
+     
+		    }
+			
 		}
 	}
 	wp_reset_query();

@@ -354,3 +354,6 @@ add_filter( 'woocommerce_output_related_products_args', 'ap_related_products_arg
 	$args['columns'] = 3; // arranged in 2 columns
 	return $args;
 }
+
+// Remove add to cart button, add contact button instead
+remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );

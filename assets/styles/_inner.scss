@@ -136,6 +136,7 @@
 	.content {
 		display: flex;
 		flex-wrap: wrap;
+		width: 56em;
 	}
 	&.content-sidebar,
 	&.sidebar-content {
@@ -147,32 +148,33 @@
 	}
 	.entry {
 		width: 100%;
-		padding: 3rem;
+		padding: 3rem 1rem;
 		margin-bottom: $margin-bottom-blog;
-		box-shadow: 0 1rem 2rem -1rem rgba($dark,0.1);
 		background-color: $white;
 		border-radius: $site-radius;
+		
         @include transition;
 		@include breakpoint(xs) {
-			width: $one-half-blog;
+			width: $blog-columns;
 			&:nth-of-type(even) {
-				margin-left: $margin-left-blog;
+				margin-left: 0;
 			}
 		}
 		@include breakpoint(md) {
 			width: $blog-columns;
-			margin-left: $margin-left-blog;
+			margin-left: 0;
+			flex-wrap: nowrap;
 			&:first-of-type {
 				margin-left: 0;
 			}
 			@include first-of-row();
 		}
         &:hover {
-            box-shadow: 0 2rem 1rem -1rem rgba($dark,0.1);
+            // box-shadow: 0 0 3rem .5rem rgba($gray,0.3);
         }
 	}
 	.entry-title {
-		font-size: 1.6rem;
+		font-size: 4.2rem;
 	}
 	.entry-content {
 		font-size: 1.8rem;
@@ -186,17 +188,203 @@
 	}
 	.entry-image-link {
 		display: block;
-		margin: -3rem -3rem 3rem;
+		margin: 0;
 		.single & {
 			@include breakpoint(sm) {
-				margin: -6rem -6rem 6rem;
+				margin: 0;
 			}
 		}
 		img {
 			border-radius: $site-radius $site-radius 0 0;
 		}
 	}
+	.entry-categories {
+		
+		a {
+			text-decoration: none;
+			font-family: $font-body;
+			font-weight: $bold;
+			font-size: 1.6rem;
+		}
+	}
+	p.entry-meta {
+		margin-bottom: .5rem;
+	}
 }
+
+.blog {
+
+	.entry {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	.entry-title {
+		@include breakpoint(md) {
+			max-width: 45rem
+		}
+	}
+
+	.entry-image-link {
+		@include breakpoint(md) {
+			margin-left: 2rem;
+			max-width: 50%;
+		}
+	}
+
+	.content-sidebar-wrap {
+		padding-top: 6rem;
+
+		@include breakpoint(lg) {
+			max-width: 72em;
+		}
+	}
+
+	.page-header {
+		display: none;
+	}
+
+	.sidebar-primary {
+	    width: auto;
+	}
+
+} 
+
+.featured-section {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	@include breakpoint(md) {
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+	}
+
+	.entry-categories {
+		margin-top: 2rem;
+	}
+
+	&__featured-post {
+		.entry {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+
+			.entry-image-link {
+				max-width: 100%;
+				margin-left: 0;
+			}
+		}
+		&__content {
+			width: auto;
+			margin-right: auto;
+			.featured-section__featured-post & {
+				.entry-title {
+					max-width: 100%;
+				}
+			}
+		}
+	}
+	.widget-wrap {
+		text-align: center;
+		width: 30rem;
+		margin-left: 0;
+		flex: 1;
+
+		@include breakpoint(md) {
+			margin-left: 3rem;
+		}
+
+		h3 {
+			font-size: 4.2rem;
+		}
+		p {
+			font-family: $font-body;
+			font-size: 1.6rem;
+			font-weight: $bold;
+
+			&:last-of-type {
+				margin-bottom: 2rem;
+			}
+			
+		}
+		input {
+			background: #f2f2f2;
+			text-align: center;
+			font-size: 1.4rem;
+
+			&[type='submit'] {
+				background: $dark;
+				width: 100%;
+			}
+		}
+	}
+}
+
+.post-type-archive-the-latest {
+
+	.page-header {
+		display: none;
+	}
+
+	main.content {
+		display: flex;
+	}
+
+	.content-sidebar-wrap {
+		padding-top: 6rem;
+
+		@include breakpoint(lg) {
+			max-width: 72em;
+		}
+	}
+
+	.entry {
+		
+        @include transition;
+		// @include breakpoint(xs) {
+		// 	width: $blog-columns;
+		// 	&:nth-of-type(even) {
+		// 		margin-left: $margin-left-blog;
+		// 	}
+		// }
+		@include breakpoint(md) {
+			width: $one-third-blog;
+			margin-left: 0;
+			flex-wrap: nowrap;
+			&:first-of-type {
+				margin-left: 0;
+			}
+			@include first-of-row-with-featured();
+		}
+	}
+
+	.entry-title {
+		font-size: 2.4rem;
+		font-family: $font-body;
+	}
+
+	.featured-section__featured-post {
+		.entry {
+			width: 100%;
+		}
+		.entry-title {
+			font-family: $font-heading;
+			font-size: 4.2rem;
+		}
+	}
+
+	.sidebar-primary {
+	    width: auto;
+	}
+				
+}
+
+
 
 /* ### Column Examples */
 

@@ -196,20 +196,20 @@ function business_custom_header() {
 
  	}
 
- 	if ( ! $url && !is_front_page() ) {
+ 	if ( !$url && !is_front_page() ) {
 
  		add_filter( 'body_class', 'ap_no_header_image_body_class' );
  		return;
 
  	}
 
- 	if ( ! $url && is_front_page() ) {
+ 	if ( !$url && is_front_page() ) {
 
  		$url = get_header_image();
 
  	}
 
- 	return has_header_image() ? printf( '<style type="text/css">.page-header{background-image: url(%s);}</style>' . "\n", esc_url( $url ) ) : '';
+ 	return $url ? printf( '<style type="text/css">.page-header{background-image: url(%s);}</style>' . "\n", esc_url( $url ) ) : '';
 
 }
 

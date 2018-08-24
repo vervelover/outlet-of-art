@@ -37,6 +37,7 @@ function ap_add_flexslider_script() {
 		            		controlNav: false,
 		                    touch: true,
 		                    itemWidth: 300,
+		                    itemMargin: 10,
 		                    move: 1,
 		                    directionNav: true
 		            	});";
@@ -57,6 +58,7 @@ function ap_add_flexslider_script() {
             		animation: '".$fs_atts['animation']."',
             		slideshowSpeed: ".$speed.",
             		controlNav: true,
+            		pauseOnHover: true,
                     touch: true,
                     directionNav: true
             	});
@@ -137,6 +139,7 @@ function ap_flexslider_shortcode($atts = null) {
 			'orderby'        => 'rand',
 		);
 		$carousel = true;
+		$currentArtistID = get_field('artista')[0]->ID;
 
 	} else {
 
@@ -159,7 +162,6 @@ function ap_flexslider_shortcode($atts = null) {
 		}
 	}
 	
-	$currentArtistID = get_field('artista')[0]->ID;
 	$the_query = new WP_Query($args);
 	$slides    = array();
 	if ($the_query->have_posts()) {
@@ -191,6 +193,7 @@ function ap_flexslider_shortcode($atts = null) {
 					$slideTitle = get_the_title();
 		            $slideImg = get_the_post_thumbnail($the_query->ID,'wooommerce_thumbnail');
 		            $artistName = get_field('artista')[0]->post_title;
+		            $description = apply_filters('the_excerpt', get_post_field('post_excerpt', $artist_page_ID ));
 
 	                $slides[] = '
 	                <li>
@@ -198,13 +201,20 @@ function ap_flexslider_shortcode($atts = null) {
 	                	<div class="slide-content">
 	                		<span class="fixed-summary__artist-name">'.$artistName.'</span>
 	                		<div class="">'.$slideTitle.'</div>
+	                		<div class="">'.$description.'</div>
 	                    </div>
 	                </li>';
+	                $hasPosts = true;
 				}
      
 		    }
 			
 		}
+		if (!$hasPosts && $carousel) {
+			return false;
+		}
+	} else {
+		return false;
 	}
 	wp_reset_query();
 	return '

@@ -189,11 +189,11 @@ function business_post_meta_filter( $post_meta ) {
 
 	if ( is_archive() || is_home() || is_search() || ! is_post_type_archive() ) {
 
-		$cat_img = '<img width=\'20\' height=\'20\' src=\'' . get_stylesheet_directory_uri() . '/assets/images/cats.svg\'>';
+		// $cat_img = '<img width=\'20\' height=\'20\' src=\'' . get_stylesheet_directory_uri() . '/assets/images/cats.svg\'>';
 
-		$tag_img = '<img width=\'20\' height=\'20\' src=\'' . get_stylesheet_directory_uri() . '/assets/images/tags.svg\'>';
+		// $tag_img = '<img width=\'20\' height=\'20\' src=\'' . get_stylesheet_directory_uri() . '/assets/images/tags.svg\'>';
 
-		$post_meta = '[post_categories before="' . $cat_img . '" sep=",&nbsp;"] [post_tags before="' . $tag_img . '" sep=",&nbsp;"]';
+		$post_meta = '[post_categories before="" sep=",&nbsp;"]';
 
 	}
 	return $post_meta;

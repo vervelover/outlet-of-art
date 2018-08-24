@@ -1377,6 +1377,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	font-size: 19.2px;
 	font-size: 1.2rem;
 	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
 	text-decoration: none;
 	text-transform: uppercase;
 	margin-bottom: 48px;

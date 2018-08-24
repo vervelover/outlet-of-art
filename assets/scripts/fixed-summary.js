@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
 	// Add reveal class to sticky message after 129px
 	$(document).on("scroll", function(){
 
-		if($(document).scrollTop() > 35){
+		if($(document).scrollTop() > 67){
 
 			$(".fixed-summary").addClass("scroll");
 

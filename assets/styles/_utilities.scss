@@ -73,10 +73,11 @@ $woocommerce-columns: $one-third;
 /* ### Column widths for non-woocommerce archives */
 
 $margin-left-blog:   15px;
-$margin-bottom-blog: $margin-left-blog;
+$margin-bottom-blog: 15px;
 
+$single-column-blog: 100%;
 $one-half-blog:      calc((100% - #{$margin-left-blog}) / 2);
-$one-third-blog:     calc((100% - 2 * #{$margin-left-blog}) / 3);
+$one-third-blog:     calc((100% / 3);
 $one-fourth-blog:    calc((100% - 3 * #{$margin-left-blog}) / 4);
 $one-fifth-blog:     calc((100% - 4 * #{$margin-left-blog}) / 5);
 $one-sixth-blog:     calc((100% - 5 * #{$margin-left-blog}) / 6);
@@ -87,10 +88,15 @@ $three-fifths-blog:  calc(3 * ((100% - 4 * #{$margin-left-blog}) / 5) + 2 * #{$m
 $four-fifths-blog:   calc(4 * ((100% - 4 * #{$margin-left-blog}) / 5) + 3 * #{$margin-left-blog});
 $five-sixths-blog:   calc(5 * ((100% - 5 * #{$margin-left-blog}) / 6) + 4 * #{$margin-left-blog});
 
-$blog-columns: $one-third-blog;
+$blog-columns: $single-column-blog;
 
 @mixin first-of-row {
 	&:nth-of-type(3n+1) {
+		margin-left: 0;
+	}
+}
+@mixin first-of-row-with-featured {
+	&:nth-of-type(3n+2) {
 		margin-left: 0;
 	}
 }

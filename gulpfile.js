@@ -358,7 +358,8 @@ gulp.task('watch', function () {
 	 * certificate on your local development environment.
 	 */
 	 browsersync( {
-	     proxy: 'localhost/outlet-of-art'
+	     proxy: 'localhost/outlet-of-art',
+	     browser: 'google-chrome'
 	 } );
 
 	// Run tasks when files change.

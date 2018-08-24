@@ -184,7 +184,7 @@ function ap_custom_woocommerce_product_description_tab() {
 /**
  * Remove related products output
  */
-// remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
 add_action( 'woocommerce_after_single_product_summary', 'ap_artwork_custom_related', 20 );
 function ap_artwork_custom_related() {
@@ -213,6 +213,18 @@ function ap_output_artist_other_works() {
     ));
 
     if ($relatedWorks->have_posts()) {
+        // Check if there are other works by the artist other than the one we are currently processing
+        // If there are no works, return false and exit before outputting the related works section
+        while( $relatedWorks->have_posts()) {
+            $relatedWorks->the_post();
+            if (get_the_ID() !== $productID) {
+                $hasPosts = true;
+            }
+            if (!$hasPosts) {
+                wp_reset_postdata();
+                return false;
+            }
+        }
         ?>
         <div class="option-heading">
             <h2 class="option-heading--title"><?php printf( __('Other Works by %s', 'business-pro'), $artistName ); ?></h2>
@@ -261,10 +273,14 @@ function ap_output_artist_other_works() {
 }
 function ap_output_artist_related_works_slider() {
     $artistID = get_field('artista')[0]->ID;
-    print_r(get_field('artista')[0]);
-    echo '<div style="display:block;width:100%;float:left;position:relative;">';
-    echo do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="Italia" artist_ID='.$artistID.']');
-    echo '</div>';
+    // Check if there are related posts
+    $regioneArtista = get_field('regione', $artistID);
+    $hasPosts = do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="'.$regioneArtista.'" artist_ID='.$artistID.']');
+    if ($hasPosts) {
+        echo '<div style="display:block;width:100%;float:left;position:relative;">';
+        echo do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="Italia" artist_ID='.$artistID.']');
+        echo '</div>';
+    }
 }
 function ap_output_artist_related_articles() {
     

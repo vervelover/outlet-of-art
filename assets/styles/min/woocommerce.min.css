@@ -741,6 +741,11 @@ http://paletton.com/#uid=10+0u0k8jax00pSjdmWlZ2Zk11g */
 body .woocommerce ul.products[class*='columns-'] li.product,
 .woocommerce-page ul.products[class*='columns-'] li.product {
 	width: 100%;
+	position: relative;
+}
+
+.woocommerce-page ul.products.columns-4 li.product {
+	width: 100%;
 }
 
 /**
@@ -974,13 +979,8 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	box-shadow: none;
 	text-align: center;
 	background-color: #ffffff;
-	box-shadow: 0 1rem 2rem -1rem rgba(33, 33, 33, 0.1);
 	padding-bottom: 40px;
 	padding-bottom: 2.5rem;
-}
-
-.woocommerce ul.products li.product:hover {
-	box-shadow: 0 2rem 2rem -1rem rgba(33, 33, 33, 0.1);
 }
 
 .woocommerce ul.products li.product:before,
@@ -2172,6 +2172,10 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 		width: -webkit-calc((100% - 15px) / 2);
 		width:         calc((100% - 15px) / 2);
 	}
+	.woocommerce-page ul.products.columns-4 li.product {
+		width: -webkit-calc((100% - 15px) / 2);
+		width:         calc((100% - 15px) / 2);
+	}
 	.woocommerce .woocommerce-ordering {
 		float: right;
 		clear: none;
@@ -2185,6 +2189,10 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 	.woocommerce-page ul.products[class*='columns-'] li.product {
 		width: -webkit-calc((100% - 2 * 15px) / 3);
 		width:         calc((100% - 2 * 15px) / 3);
+	}
+	.woocommerce-page ul.products.columns-4 li.product {
+		width: -webkit-calc((100% - 3 * 15px) / 4);
+		width:         calc((100% - 3 * 15px) / 4);
 	}
 	.site-header .fa-shopping-cart {
 		margin-right: 2em;
@@ -2252,7 +2260,7 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 	}
 	.fixed-summary.scroll {
 		position: fixed;
-		top: 13rem;
+		top: 18rem;
 	}
 	.fixed-summary form.cart button {
 		float: left;

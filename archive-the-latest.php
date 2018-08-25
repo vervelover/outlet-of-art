@@ -45,6 +45,15 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 //* Remove post
 remove_action( 'genesis_entry_header', 'business_reposition_post_meta', 0 );
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+add_action( 'genesis_entry_footer', 'genesis_post_info', 12 );
+remove_filter( 'genesis_post_info', 'business_post_info_date' );
+
+//* Customize the entry meta in the entry footer (requires HTML5 theme support)
+add_filter( 'genesis_post_info', 'ap_the_latest_post_meta_filter' );
+function ap_the_latest_post_meta_filter($post_meta) {
+	$post_info = get_field('luogo') . '<br/>' . get_field('data_evento');
+	return $post_info;
+}
 
 //* Run the Genesis loop
 genesis();

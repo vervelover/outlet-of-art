@@ -30,7 +30,7 @@ function ap_artists_featured_image_archive () {
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 add_action( 'genesis_entry_content', 'ap_additional_artists_fields');
 function ap_additional_artists_fields() {
-	echo get_field('regione');
+	the_field('regione');
 }
 
 //* Run the Genesis loop

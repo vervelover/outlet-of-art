@@ -36,6 +36,16 @@ remove_action('genesis_before_content_sidebar_wrap', 'business_page_header');
 //* Remove the post content (requires HTML5 theme support)
 remove_action('genesis_entry_content', 'genesis_do_post_content');
 
+/**
+ * Change number or products per row to 3
+ */
+add_filter('loop_shop_columns', 'loop_columns');
+if (!function_exists('loop_columns')) {
+	function loop_columns() {
+		return 4; // 3 products per row
+	}
+}
+
 add_action('genesis_before_content_sidebar_wrap', 'ap_artist_detail_wrapper');
 function ap_artist_detail_wrapper() {
 	echo '<div class="artists-wrapper">';
@@ -154,11 +164,164 @@ function show_single_artist_artworks() {
 }
 
 function show_single_artist_shows() {
-	echo 'shows';
+	$relatedShows = new WP_Query(array(
+			'posts_per_page' => 4,
+			'post_type'      => 'the-latest',
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'meta_query'     => array(
+				array(
+					'key'     => 'artista_correlato',
+					'compare' => 'LIKE',
+					'value'   => '"'.get_the_ID().'"',
+				)
+			)
+		));
+
+	?>
+	<h2 class="related-artworks__title"><?php _e('Shows', 'business-pro');?></h2>
+	<?php
+
+
+	if ($relatedShows->have_posts()) {
+
+		echo '<div class="custom-related-content">';
+		while ($relatedShows->have_posts()) {
+			$relatedShows->the_post();
+			// Get image attachment as array containing URL, Width and Heigth
+			$image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "large" );
+			?>
+			<article class="has-post-thumbnail entry" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+				<a class="entry-image-link" href="<?php the_permalink(); ?>" aria-hidden="true">
+					<img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
+				</a>
+				<h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+				<footer class="entry-footer">
+					<p class="entry-meta"><?php the_field('luogo'); ?><br><?php the_field('data_evento'); ?></p>
+				</footer>
+			</article>
+			<?php            
+		}
+		echo '</div>';
+	} else {
+		echo '<p>';
+		_e('There are no upcoming shows at this time', 'business-pro');
+		echo '</p>';
+	}
+
+	wp_reset_postdata();
 }
 
 function show_single_artist_articles() {
-	echo 'articles';
+	$artistName = get_the_title();
+                        
+	$relatedExternalArticles = new WP_Query(array(
+			'posts_per_page' => -1,
+			'post_type'      => 'articoli-esterni',
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'meta_query'     => array(
+				array(
+					'key'     => 'artista_correlato',
+					'compare' => 'LIKE',
+					'value'   => '"'.get_the_ID().'"',
+				)
+			)
+		));
+
+	if ($relatedExternalArticles->have_posts()) {
+
+		?>
+		<h2 class="related-artworks__title"><?php printf( __('Articles About %s', 'business-pro'), $artistName ); ?></h2>
+		<?php
+
+		echo '<div class="custom-related-content">';
+		while ($relatedExternalArticles->have_posts()) {
+			$relatedExternalArticles->the_post();
+			// Get image attachment as array containing URL, Width and Heigth
+			$image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "large" );
+			?>
+			<article class="has-post-thumbnail entry" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+				<a class="entry-image-link" href="<?php the_field('link_articolo'); ?>" aria-hidden="true">
+					<img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
+				</a>
+				<h2 class="entry-title" itemprop="headline">
+					<a class="entry-title-link" rel="bookmark" href="<?php the_field('link_articolo'); ?>"><?php the_title(); ?></a>
+				</h2>
+				<footer class="entry-footer">
+					<p class="entry-meta">
+					<?php
+
+					$fileOne = get_field('file_scaricabile');
+					$fileTwo = get_field('file_scaricabile_due');
+
+					if ( $fileOne )
+						echo '<a href="'.$fileOne['url'].'"><i class="fa fa-download"></i>'.$fileOne['title'].'</a><br/>';  
+					if ( $fileTwo )
+						echo '<a href="'.$fileTwo['url'].'"><i class="fa fa-download"></i>'.$fileTwo['title'].'</a><br/>';  
+					if ( !$fileOne && !$fileTwo )
+						echo '<a href="'.get_field('link_articolo').'">' . __('View Site', 'business-pro') . '</a>';
+					the_field('data_evento'); 
+
+					?>
+					</p>
+				</footer>
+			</article>
+			<?php            
+		}
+		echo '</div>';
+	} else {
+		$noExternalArticles = true;
+	}
+
+	wp_reset_postdata();
+
+	$relatedArticles = new WP_Query(array(
+			'posts_per_page' => 4,
+			'post_type'      => 'post',
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'meta_query'     => array(
+				array(
+					'key'     => 'artista_correlato',
+					'compare' => 'LIKE',
+					'value'   => '"'.get_the_ID().'"',
+				)
+			)
+		));
+
+	if ($relatedArticles->have_posts()) {
+
+		?>
+		<h2 class="related-artworks__title" <?php if (!$noExternalArticles) echo 'style="border-top:0;"'; ?>><?php _e('Magazine on Outlet of Art', 'business-pro');?></h2>
+		<?php
+
+		echo '<div class="custom-related-content">';
+		while ($relatedArticles->have_posts()) {
+			$relatedArticles->the_post();
+			// Get image attachment as array containing URL, Width and Heigth
+			$image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "large" );
+			?>
+			<article class="has-post-thumbnail entry" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+				<a class="entry-image-link" href="<?php the_permalink(); ?>" aria-hidden="true">
+					<img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
+				</a>
+				<h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="<?php the_permalink(); ?>"><p><span>Outlet Of Art</span></p><?php the_title(); ?></a></h2>
+			</article>
+			<?php            
+		}
+		echo '</div>';
+	} else {
+		$noArticles = true;
+	}
+
+	wp_reset_postdata();
+
+	if ($noArticles && $noExternalArticles) {
+		echo '<p>';
+		_e('There are no related articles', 'business-pro');
+		echo '</p>';
+	}
 }
 
 //* Run the Genesis loop

@@ -430,11 +430,22 @@
 
 body .woocommerce ul.products[class*="columns-"] li.product, .woocommerce-page ul.products[class*="columns-"] li.product {
 	width: 100%;
+	position: relative;
 	@include breakpoint(xs) {
 		width: $one-half;
 	}
 	@include breakpoint(sm) {
 		width: $woocommerce-columns;
+	}
+}
+
+.woocommerce-page ul.products.columns-4 li.product {
+	width: 100%;
+	@include breakpoint(xs) {
+		width: $one-half;
+	}
+	@include breakpoint(sm) {
+		width: $one-fourth;
 	}
 }
 

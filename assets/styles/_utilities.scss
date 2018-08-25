@@ -95,6 +95,11 @@ $blog-columns: $single-column-blog;
 		margin-left: 0;
 	}
 }
+@mixin first-of-row-related {
+	&:nth-of-type(4n+1) {
+		margin-left: 0;
+	}
+}
 @mixin first-of-row-with-featured {
 	&:nth-of-type(3n+2) {
 		margin-left: 0;

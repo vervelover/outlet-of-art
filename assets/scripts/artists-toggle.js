@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-    // if menu is visible use this, else use div-toggle.js
+    // if menu is visible use this, else use div-toggle.jsù
     $('.artist-menu__list-item--link').click(function () {
         var clicked = $(this);
         $('.artist-menu__list-item--link').each(function(){

@@ -129,14 +129,17 @@
 
 .blog,
 .archive,
-.page-template-page_blog {
+.page-template-page_blog,
+.custom-related-content {
 	.site-inner {
 		background-color: $white;
 	}
 	.content {
 		display: flex;
 		flex-wrap: wrap;
-		width: 56em;
+		@include breakpoint(md) {
+			width: 56em;
+		}
 	}
 	&.content-sidebar,
 	&.sidebar-content {
@@ -155,15 +158,16 @@
 		
         @include transition;
 		@include breakpoint(xs) {
-			width: $blog-columns;
+			width: $one-half-blog;
 			&:nth-of-type(even) {
-				margin-left: 0;
+				margin-left: $margin-left-blog;
 			}
 		}
 		@include breakpoint(md) {
 			width: $blog-columns;
 			margin-left: 0;
 			flex-wrap: nowrap;
+
 			&:first-of-type {
 				margin-left: 0;
 			}
@@ -184,6 +188,8 @@
 		margin-top: 1rem;
 		p {
 			margin: 0;
+			font-family: $font-body;
+			font-weight: $normal;
 		}
 	}
 	.entry-image-link {
@@ -268,11 +274,21 @@
 		margin-top: 2rem;
 	}
 
+	.entry-footer {
+		.entry-meta {
+			font-family: $font-heading;
+			font-size: 1.8rem;
+		}
+	}
+
 	&__featured-post {
 		.entry {
 			display: flex;
 			flex-direction: column;
 			align-items: flex-start;
+			@include breakpoint(xs) {
+				width: 100%;
+			}
 
 			.entry-image-link {
 				max-width: 100%;
@@ -325,7 +341,7 @@
 	}
 }
 
-.post-type-archive-the-latest {
+.post-type-archive-the-latest, .custom-related-content {
 
 	.page-header {
 		display: none;
@@ -356,10 +372,13 @@
 			width: $one-third-blog;
 			margin-left: 0;
 			flex-wrap: nowrap;
+			&:nth-of-type(even) {
+				margin-left: 0;
+			}
 			&:first-of-type {
 				margin-left: 0;
 			}
-			@include first-of-row-with-featured();
+			// @include first-of-row-with-featured();
 		}
 	}
 
@@ -384,6 +403,49 @@
 				
 }
 
+.custom-related-content {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	@include breakpoint(md) {
+		align-items: flex-end;
+	}
+
+	.entry {
+
+		@include breakpoint(md) {
+			margin-left: $margin-left-blog;
+			padding: 0;
+			width: $one-fourth-blog;
+			&:nth-of-type(even) {
+				margin-left: $margin-left-blog;
+			}
+			@include first-of-row-related();
+		}
+	}
+
+	.entry-title {
+		font-size: 1.8rem;
+	}
+
+	span {
+		text-transform: uppercase;
+		font-size: 1.4rem;
+	}
+
+	.entry-footer {
+		margin-top: 0;
+		padding-top: 0;
+		a {
+			text-decoration: none;
+			font-size: 1.4rem;
+		}
+	}
+	&:last-of-type {
+		margin-bottom: 5rem;
+	}
+
+}
 
 
 /* ### Column Examples */

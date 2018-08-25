@@ -357,3 +357,25 @@ add_filter( 'woocommerce_output_related_products_args', 'ap_related_products_arg
 
 // Remove add to cart button, add contact button instead
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+
+// Remove prices from category pages, add artwork info instead
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+add_action( 'woocommerce_after_shop_loop_item_title', 'ap_loop_artwork_info', 10 );
+function ap_loop_artwork_info() {
+	?>
+	<footer class="entry-footer">
+		<p class="entry-meta">
+			<?php the_field('tecnica');
+			if (get_field('larghezza')) {
+				echo ', ';
+				the_field('larghezza');
+				echo 'cm x ';
+				the_field('altezza');
+				echo 'cm';
+			}
+			?>
+			<br><?php the_field('anno'); ?>
+		</p>
+	</footer>
+	<?php
+}

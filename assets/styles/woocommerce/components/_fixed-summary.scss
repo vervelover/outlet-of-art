@@ -48,12 +48,18 @@
         }
     }
     &__artist-name {
-        font-size: 1.6rem;
+        font-size: 1rem;
         font-family: $font-body;
         text-transform: uppercase;
-        margin-bottom: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 0;
         font-weight: $bold;
         line-height: 1;
+        .fixed-summary & {
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
     }
 
     &__services {

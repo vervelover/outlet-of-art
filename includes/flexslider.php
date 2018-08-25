@@ -34,6 +34,7 @@ function ap_add_flexslider_script() {
 					echo "$('.flexslider-".$fs_atts['ulid']."').flexslider({
 		            		animation: '".$fs_atts['animation']."',
 		            		slideshow: false,
+		            		animationLoop: true,
 		            		controlNav: false,
 		                    touch: true,
 		                    itemWidth: 300,

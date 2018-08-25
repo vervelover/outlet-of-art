@@ -4544,8 +4544,7 @@ ul.slides {
 .archive .entry-footer,
 .page-template-page_blog .entry-footer,
 .custom-related-content .entry-footer {
-	margin-top: 8.48px;
-	margin-top: 1rem;
+	margin-top: 0;
 }
 
 .blog .entry-footer p,

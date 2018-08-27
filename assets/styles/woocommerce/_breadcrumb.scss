@@ -1,14 +1,15 @@
 /* ### WooCommerce Breadcrumb */
 
 .woocommerce .woocommerce-breadcrumb {
-    font-size: 1.8rem;
-    margin-bottom: 40px;
-    color: $accent;
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    color: $gray;
     a {
-        color: $accent;
+        color: $gray;
         text-decoration: none;
         &:hover {
-            color: $accent;
+            color: $gray;
+            text-decoration: underline;
         }
     }
 }

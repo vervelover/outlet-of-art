@@ -15,6 +15,8 @@
  *
  */
 
+//* Force sidebar-content layout setting
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_sidebar_content' );
 
 /** Remove default Genesis loop */
 remove_action( 'genesis_loop', 'genesis_do_loop' );
@@ -26,12 +28,20 @@ remove_action( 'genesis_before_loop', 'genesis_do_taxonomy_title_description', 1
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
 /** Uncomment the below line of code to add back WooCommerce breadcrumbs */
-//add_action( 'genesis_before_loop', 'woocommerce_breadcrumb', 10, 0 );
+add_action( 'business_page_header', 'woocommerce_breadcrumb', 1 );
 
 /** Remove Woo #container and #content divs */
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 
+// Artist Before Title
+add_action( 'woocommerce_before_shop_loop_item_title', 'ap_artist_before_title' );
+function ap_artist_before_title() {
+	global $post;
+	?>
+	<p class="fixed-summary__artist-name"><?php echo get_field('artista', $post->ID)[0]->post_title; ?></p>
+	<?php
+}
 
 add_action( 'genesis_loop', 'genesiswooc_product_taxonomy_loop' );
 /**

@@ -7,6 +7,14 @@
  * 
  */
 
+add_filter( 'body_class', 'ap_artist_archive_additional_body_class' );
+function ap_artist_archive_additional_body_class( $classes ) {
+	
+	$classes[] = 'woocommerce';
+	return $classes;
+	
+}
+
 /** Order Posts Alphabetically **/
 add_action('genesis_before_loop', 'child_before_loop');
 function child_before_loop () {
@@ -30,7 +38,7 @@ function ap_artists_featured_image_archive () {
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 add_action( 'genesis_entry_content', 'ap_additional_artists_fields');
 function ap_additional_artists_fields() {
-	the_field('regione');
+	echo '<span class="artist-archive-regione">'.get_field('regione').'</span>';
 }
 
 //* Run the Genesis loop

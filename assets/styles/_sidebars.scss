@@ -6,6 +6,47 @@
     @include breakpoint(md) {
         order: 2;
     }
+    .woocommerce.archive & {
+        border-top: 1px solid $light;
+        padding-top: 3rem;
+
+        .widget_product_categories .widget-title {
+            display: none;
+        }
+
+        .widget-title {
+            font-family: $font-body;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .widget_price_filter .ui-slider .ui-slider-range {
+            height: 3px;
+        }
+
+        .widget_price_filter .price_slider_wrapper .ui-widget-content {
+            background-color: transparent;
+        }
+
+        .widget_price_filter .ui-slider .ui-slider-handle,
+         .woocommerce.widget_price_filter .ui-slider .ui-slider-handle {
+            top: -.4em;
+            background-color: $white;
+            border: 2px solid $accent;
+        }
+
+        .widget_price_filter .ui-slider .ui-slider-range {
+            background-color: $accent;
+        }
+
+        li {
+            margin-bottom: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    }
 }
 
 .widget {

@@ -8,6 +8,11 @@
                 font-size: 1.4rem;
             }
         }
+        &.sidebar-content {
+            .entry {
+                width: $one-third;
+            }
+        }
     }
 
     .content {
@@ -28,6 +33,10 @@
         flex-direction: column;
         justify-content: flex-start;
 
+        img {
+            clip-path: circle(40% at 50% 50%);
+        }
+
         .entry-image-link {
             margin-bottom: 1rem;
             img {
@@ -38,8 +47,16 @@
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-family: $font-body;
+            text-transform: uppercase;
+        }
+
+        .artist-archive-regione {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: $black;
         }
 
         p {

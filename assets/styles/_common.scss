@@ -16,11 +16,16 @@
 
 .breadcrumb {
     padding: 0;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    color: $gray;
     width: 100%;
     margin-bottom: 3rem;
     a {
-        text-decoration: underline;
+        color: $gray;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 

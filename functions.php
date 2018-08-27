@@ -275,6 +275,9 @@ include_once (get_stylesheet_directory().'/includes/plugins.php');
 // Load Flexslider
 include_once (get_stylesheet_directory().'/includes/flexslider.php');
 
+//* Remove the header right widget area
+unregister_sidebar( 'header-right' );
+
 // Modify woocommerce smallscreen breakpoint
 function ap_filter_woocommerce_style_smallscreen_breakpoint($breakpoint) {
 	$breakpoint = '48em';

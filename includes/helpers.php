@@ -214,8 +214,8 @@ function business_custom_header() {
 }
 
 function ap_no_header_image_body_class( $classes ) {
- 	remove_action( 'genesis_before_content_sidebar_wrap', 'business_page_header' );
- 	add_action( 'genesis_before_loop', 'business_page_header', 5 );
+ 	// remove_action( 'genesis_before_content_sidebar_wrap', 'business_page_header' );
+ 	// add_action( 'genesis_before_loop', 'business_page_header', 5 );
  	$classes[] = 'no-header-image';
  	return $classes;
 }

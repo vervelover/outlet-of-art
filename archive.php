@@ -7,6 +7,14 @@
  * 
  */
 
+add_filter( 'body_class', 'ap_category_archive_additional_body_class' );
+function ap_category_archive_additional_body_class( $classes ) {
+	
+	$classes[] = 'blog';
+	return $classes;
+	
+}
+
 //* Remove the post content
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 //* Remove post

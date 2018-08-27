@@ -1958,19 +1958,21 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 
 /* ### WooCommerce Breadcrumb */
 .woocommerce .woocommerce-breadcrumb {
-	font-size: 28.8px;
-	font-size: 1.8rem;
-	margin-bottom: 40px;
-	color: #000000;
+	font-size: 20.8px;
+	font-size: 1.3rem;
+	margin-bottom: 48px;
+	margin-bottom: 3rem;
+	color: #9b9b9b;
 }
 
 .woocommerce .woocommerce-breadcrumb a {
-	color: #000000;
+	color: #9b9b9b;
 	text-decoration: none;
 }
 
 .woocommerce .woocommerce-breadcrumb a:hover {
-	color: #000000;
+	color: #9b9b9b;
+	text-decoration: underline;
 }
 
 /* ### WooCommerce Reviews */

@@ -68,7 +68,7 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 add_action( 'woocommerce_single_product_summary', 'ap_single_product_contact_button', 30 );
 function ap_single_product_contact_button () {
     ?>
-    <a class="button fixed-summary__button" href="#"><?php _e('Contact', 'business-pro') ?></a>
+    <a href="#popup" class="button fixed-summary__button"><?php _e('Contact', 'business-pro') ?></a>
     <?php
 }
 
@@ -86,7 +86,7 @@ function ap_fixed_summary_shipping_info() {
                 <li>Prova la tua opera installata . Guarda i nostri lavori</li>
             </ul>
         </div>
-         <a class="button button--white fixed-summary__button" href="#"><?php _e('Contact Us', 'business-pro') ?></a>
+         <a href="#popup" class="button button--white fixed-summary__button"><?php _e('Contact Us', 'business-pro') ?></a>
         <?php
 }
 
@@ -287,6 +287,26 @@ function ap_output_artist_related_articles() {
 }
 function ap_output_artist_recentely_viewed() {
     
+}
+
+add_action('wp_footer', 'ap_output_css_only_popup_contact_form', 90);
+function ap_output_css_only_popup_contact_form() {
+    ?>
+    <div class="popup" id="popup">
+            <div class="popup__content">
+                <div class="popup__right">
+                    <a href="#section-tours" class="popup__close">&times;</a>
+                    <div class="popup__content__form-container">
+                        <div class="popup__content__heading">
+                            <?php echo '<span class="fixed-summary__artist-name popup__artist-name">' . get_field('artista')[0]->post_title .'</span><br/>'; ?>
+                            <?php echo '<p class="popup__artwork-name">'.get_the_title().'</p>'; ?>
+                        </div>
+                        <?php echo do_shortcode('[contact-form-7 id="1509" title="Modulo di contatto 1"]'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
 }
 
 add_action( 'genesis_loop', 'gencwooc_single_product_loop' );

@@ -4122,6 +4122,18 @@ ul.slides {
 	max-width: 58rem;
 }
 
+.flexslider-artwork-detail-slider {
+	position: relative;
+	padding: 0 76.32px;
+	padding: 0 9rem;
+}
+
+.flexslider-artwork-detail-slider a.flex-next::after,
+.flexslider-artwork-detail-slider a.flex-prev::before {
+	font-size: 25.44px;
+	font-size: 3rem;
+}
+
 /* ## Front Page
 --------------------------------------------- */
 .home .site-inner {

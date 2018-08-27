@@ -120,6 +120,13 @@ ul.slides {
     }
 }
 
+.flexslider-artwork-detail-slider {
+    position: relative;
+    padding: 0 9rem;
+    a.flex-next::after, a.flex-prev::before {
+        font-size: 3rem;
+    }
+}
 // .flex-control-thumbs {
 //     margin: 5px 0 0;
 //     position: static;

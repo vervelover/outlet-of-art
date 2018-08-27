@@ -272,13 +272,22 @@ function ap_output_artist_other_works() {
 
 }
 function ap_output_artist_related_works_slider() {
+    wp_reset_postdata();
     $artistID = get_field('artista')[0]->ID;
     // Check if there are related posts
     $regioneArtista = get_field('regione', $artistID);
     $hasPosts = do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="'.$regioneArtista.'" artist_ID='.$artistID.']');
     if ($hasPosts) {
+
+        ?>
+        <div class="related-artworks" style="display:block;position:relative;float:left;width:100%">
+        <h2 class="option-content__title option-content__title--bigger"><?php _e('Related Artworks', 'business-pro'); ?>
+                </h2>
+        <?php
+
         echo '<div style="display:block;width:100%;float:left;position:relative;">';
         echo do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="Italia" artist_ID='.$artistID.']');
+        echo '</div>';
         echo '</div>';
     }
 }

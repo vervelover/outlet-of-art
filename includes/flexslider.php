@@ -184,6 +184,7 @@ function ap_flexslider_shortcode($atts = null) {
 							<div class="slide-text">'.get_field('contenuto_slider').'</div>
 						</div>
 					</li>';
+				$ulSlides = '<ul class="slides">';
 
 			} else {
 
@@ -195,17 +196,35 @@ function ap_flexslider_shortcode($atts = null) {
 		            $slideImg = get_the_post_thumbnail($the_query->ID,'wooommerce_thumbnail');
 		            $artistName = get_field('artista')[0]->post_title;
 		            $description = apply_filters('the_excerpt', get_post_field('post_excerpt', $artist_page_ID ));
+		            $tecnica = get_field('tecnica');
+		            $larghezza = get_field('larghezza');
+		            $altezza = get_field('altezza');
+		            $anno = get_field('anno');
+
+		            if ($larghezza) {
+		            	$footer = '
+		            		<footer class="entry-footer">
+								<p class="entry-meta">
+								'.$tecnica.', '.$larghezza.'cm x '.$altezza.'cm <br/>'.$anno.'
+								</p>
+							</footer>';
+		            } else {
+		            	$footer = '';
+		            }
 
 	                $slides[] = '
-	                <li>
-	                	<div class="slide-media">'.sprintf($slideImg).'</div>
-	                	<div class="slide-content">
-	                		<span class="fixed-summary__artist-name">'.$artistName.'</span>
-	                		<div class="">'.$slideTitle.'</div>
-	                		<div class="">'.$description.'</div>
-	                    </div>
+	                <li class="product">
+	                	<a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="'.get_post_permalink($the_query->ID).'">
+		                	<div class="slide-media">'.sprintf($slideImg).'</div>
+		                	<div class="slide-content">
+		                		<span class="fixed-summary__artist-name">'.$artistName.'</span>
+		                		<h2 class="woocommerce-loop-product__title">'.$slideTitle.'</h2>
+		                		'.$footer.'
+		                    </div>
+		                </a>
 	                </li>';
 	                $hasPosts = true;
+	                $ulSlides = '<ul class="products slides">';
 				}
      
 		    }
@@ -220,7 +239,7 @@ function ap_flexslider_shortcode($atts = null) {
 	wp_reset_query();
 	return '
 	<div class="flexslider-'.$fs_atts['ulid'].'" id="'.$fs_atts['ulid'].'">
-		<ul class="slides">
+		'.$ulSlides.'
 			'.implode('', $slides).'
 		</ul>
 	</div>';

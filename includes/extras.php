@@ -357,20 +357,12 @@ function business_prev_next_post_nav_cpt() {
 		return;
 	}
 
-	genesis_markup( array(
-		'html5'   => '<div %s><div class="wrap">',
-		'xhtml'   => '<div class="navigation">',
-		'context' => 'adjacent-entry-pagination',
-	) );
-
-		echo '<div class="pagination-previous alignleft">';
-			previous_post_link();
-		echo '</div>';
-		echo '<div class="pagination-next alignright">';
-			next_post_link();
-		echo '</div>';
-
-	echo '</div></div>';
+	echo '<div class="pagination-previous">';
+		previous_post_link('%link', '<span class="dashicons dashicons-arrow-left-alt2"></span>');
+	echo '</div>';
+	echo '<div class="pagination-next">';
+		next_post_link('%link', '<span class="dashicons dashicons-arrow-right-alt2"></span>');
+	echo '</div>';
 
 }
 

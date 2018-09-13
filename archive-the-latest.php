@@ -49,9 +49,13 @@ add_action( 'genesis_entry_footer', 'genesis_post_info', 12 );
 remove_filter( 'genesis_post_info', 'business_post_info_date' );
 
 //* Customize the entry meta in the entry footer (requires HTML5 theme support)
+// Add sharing icons after post meta
 add_filter( 'genesis_post_info', 'ap_the_latest_post_meta_filter' );
 function ap_the_latest_post_meta_filter($post_meta) {
-	$post_info = get_field('luogo') . '<br/>' . get_field('data_evento');
+	global $Genesis_Simple_Share;
+
+	$share =  genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
+	$post_info = get_field('luogo') . '<br/>' . get_field('data_evento'). '<br/>' . $share;
 	return $post_info;
 }
 

@@ -34,10 +34,9 @@ function ap_add_flexslider_script() {
 					echo "$('.flexslider-".$fs_atts['ulid']."').flexslider({
 		            		animation: '".$fs_atts['animation']."',
 		            		slideshow: false,
-		            		animationLoop: true,
 		            		controlNav: false,
 		                    touch: true,
-		                    itemWidth: 300,
+		                    itemWidth: 300,		                 
 		                    itemMargin: 10,
 		                    move: 1,
 		                    directionNav: true
@@ -45,37 +44,38 @@ function ap_add_flexslider_script() {
 
 				} else echo "
 
-                fixFlexsliderHeight();
+	                fixFlexsliderHeight();
 
-                $(window).on('load', function() {
-                    fixFlexsliderHeight();
-                });
-
-                $(window).on('resize orientationchange', function(){
-                    fixFlexsliderHeight();
-                });
-								
-            	$('.flexslider-".$fs_atts['ulid']."').flexslider({
-            		animation: '".$fs_atts['animation']."',
-            		slideshowSpeed: ".$speed.",
-            		controlNav: true,
-            		pauseOnHover: true,
-                    touch: true,
-                    directionNav: true
-            	});
-            	function fixFlexsliderHeight() {
-	                // Set fixed height based on the tallest slide
-	                $('.flexslider-".$fs_atts['ulid']."').each(function(){
-	                    var sliderHeight = 0;
-	                    $(this).find('.slides > li img').each(function(){
-	                        slideHeight = $(this).height();
-	                        if (sliderHeight < slideHeight) {
-	                            sliderHeight = slideHeight;
-	                        }
-	                    });
-	                    $(this).find('.flex-viewport').css({'height' : sliderHeight});
+	                $(window).on('load', function() {
+	                    fixFlexsliderHeight();
 	                });
-	            }";
+
+	                $(window).on('resize orientationchange', function(){
+	                    fixFlexsliderHeight();
+	                });
+									
+	            	$('.flexslider-".$fs_atts['ulid']."').flexslider({
+	            		animation: '".$fs_atts['animation']."',
+	            		slideshowSpeed: ".$speed.",
+	            		controlNav: true,
+	            		pauseOnHover: true,
+	                    touch: true,
+	                    directionNav: true
+	            	});
+	            	function fixFlexsliderHeight() {
+		                // Set fixed height based on the tallest slide
+		                $('.flexslider-".$fs_atts['ulid']."').each(function(){
+		                    var sliderHeight = 0;
+		                    $(this).find('.slides > li img').each(function(){
+		                        slideHeight = $(this).height();
+		                        if (sliderHeight < slideHeight) {
+		                            sliderHeight = slideHeight;
+		                        }
+		                    });
+		                    $(this).find('.flex-viewport').css({'height' : sliderHeight});
+		                });
+		            }";
+
         echo "            
 	            
             });

@@ -1,3 +1,4 @@
+@charset 'UTF-8';
 /*!
  * Theme Name: Business Pro Theme
  * Theme URI: https://www.seothemes.com/themes/business-pro/
@@ -2753,6 +2754,699 @@ img.alignright,
 	opacity: 1;
 }
 
+.sharrre {
+	display: inline-block;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	margin-right: 5px;
+	overflow: hidden;
+	position: relative;
+	width: 40px;
+	-webkit-clip-path: circle(40% at 50% 50%);
+	        clip-path: circle(40% at 50% 50%);
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+
+.share-before {
+	margin-bottom: 25px;
+}
+
+.share-after {
+	margin: 25px 0;
+}
+
+.share-before:after,
+.share-after:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: ' ';
+	clear: both;
+	height: 0;
+}
+
+/* Buttons */
+.sharrre .hidden {
+	display: none;
+}
+
+.sharrre .share,
+.sharrre .count {
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	border: none;
+	display: inline-block;
+	padding: 0;
+	text-decoration: none !important;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+
+.sharrre .share {
+	background-color: #ffffff;
+	color: #ffffff;
+	float: left;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.sharrre:hover .share {
+	border: none;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.sharrre .count {
+	background-color: #ffffff;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	position: relative;
+	text-align: center;
+}
+
+.sharrre .no-count .count span {
+	display: none;
+}
+
+/* Small */
+.share-small .share,
+.share-small .count {
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.share-small .share {
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	padding: 0 0 0 24px;
+	width: 20px;
+}
+
+.share-small .sharrre:hover .share,
+.share-small .facebook:hover .share {
+	width: 60px;
+}
+
+.share-small .pinterest:hover .share {
+	width: 45px;
+}
+
+.share-small .sharrre:hover .no-count .share {
+	width: 65px;
+}
+
+.share-small .count {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	float: right;
+	min-width: 42px;
+	padding: 0 5px;
+}
+
+.share-small .no-count .share {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	width: 65px;
+}
+
+.share-small .no-count .count {
+	display: none;
+}
+
+/* Medium */
+.share-medium .share,
+.share-medium .count {
+	font-size: 13px;
+	height: 25px;
+	line-height: 25px;
+}
+
+.share-medium .share {
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	padding: 0 0 0 28px;
+	width: 28px;
+}
+
+.share-medium .count {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	float: right;
+	width: 42px;
+}
+
+.share-medium .sharrre:hover .share,
+.share-medium .facebook:hover .share {
+	width: 65px;
+}
+
+.share-medium .pinterest:hover .share {
+	width: 50px;
+}
+
+.share-medium .sharrre:hover .no-count .share {
+	width: 75px;
+}
+
+.share-medium .no-count .share {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	width: 75px;
+}
+
+.share-medium .no-count .count {
+	display: none;
+}
+
+/* Tall */
+.share-tall .share {
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	font-size: 13px;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 20px;
+	text-align: center;
+	width: 100%;
+}
+
+.share-tall .googlePlus .share {
+	padding-left: 16px;
+}
+
+.share-tall .facebook .share {
+	padding-left: 18px;
+}
+
+.share-tall .no-count .share {
+	padding-left: 0;
+}
+
+.share-tall .count {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	display: block;
+	float: none;
+	font-size: 16px;
+	height: 50px;
+	line-height: 50px;
+	width: 40px;
+}
+
+.share-tall .no-count .share {
+	width: 75px;
+}
+
+/* Icons */
+.share-small .share:before,
+.share-medium .share:before,
+.share-tall .share:before {
+	line-height: 1;
+	display: block;
+	font-family: 'Genericons';
+	font-size: 13px;
+	height: 20px;
+	top: 4px;
+	left: 6px;
+	text-indent: 0;
+	-webkit-font-smoothing: antialiased;
+	position: absolute;
+	width: 20px;
+}
+
+.share-medium .share:before {
+	font-size: 14px;
+	top: 5px;
+	left: 7px;
+}
+
+.share-tall .share:before {
+	bottom: 0;
+	top: auto;
+}
+
+.twitter .share:before {
+	content: '';
+}
+
+.facebook .share:before {
+	content: '';
+}
+
+.googlePlus .share:before {
+	content: '';
+}
+
+.youtube .share:before {
+	content: '\f213';
+}
+
+.digg .share:before {
+	content: '\f221';
+}
+
+.delicious .share:before {
+	content: '';
+}
+
+.pinterest .share:before {
+	content: '';
+}
+
+.linkedin .share:before {
+	content: '';
+}
+
+.stumbleupon .share:before {
+	content: '';
+}
+
+.share-small .pinterest .share:before {
+	font-size: 12px;
+}
+
+.share-small .linkedin .share:before {
+	font-size: 16px;
+	top: 1px;
+}
+
+.share-small .stumbleupon .share:before {
+	font-size: 16px;
+	top: 3px;
+}
+
+.share-medium .pinterest .share:before {
+	font-size: 13px;
+	top: 6px;
+}
+
+.share-medium .linkedin .share:before {
+	font-size: 17px;
+	top: 3px;
+}
+
+.share-medium .stumbleupon .share:before {
+	font-size: 16px;
+	top: 5px;
+}
+
+.share-tall .pinterest .share:before {
+	font-size: 13px;
+	bottom: -1px;
+}
+
+.share-tall .linkedin .share:before {
+	font-size: 17px;
+	bottom: 2px;
+}
+
+.share-tall .stumbleupon .share:before {
+	font-size: 16px;
+}
+
+.share-tall .no-count .share:before {
+	display: none;
+}
+
+.share-tall .no-count .count:before {
+	display: block;
+	line-height: 44px;
+	font-family: 'Genericons';
+	font-size: 15px;
+	position: relative;
+	top: 4px;
+	-webkit-font-smoothing: antialiased;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+
+.share-tall .no-count:hover .count:before {
+	color: #212121;
+	background: #d2d2d2;
+}
+
+.share-tall .twitter .count:before {
+	content: '';
+}
+
+.share-tall .googlePlus .count:before {
+	content: '';
+}
+
+.share-tall .facebook .no-count .count:before {
+	content: '';
+}
+
+.share-tall .linkedin .no-count .count:before {
+	content: '';
+}
+
+.share-tall .pinterest .no-count .count:before {
+	content: '';
+}
+
+.share-tall .stumbleupon .no-count .count:before {
+	content: '';
+}
+
+/* Appearance - filled */
+.share-filled {
+	border-radius: 100%;
+}
+
+.share-filled .twitter .share {
+	display: none;
+}
+
+.share-filled .twitter .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .twitter .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .facebook .share {
+	display: none;
+}
+
+.share-filled .facebook .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .facebook .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .googlePlus .share {
+	display: none;
+}
+
+.share-filled .googlePlus .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .googlePlus .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .linkedin .share {
+	display: none;
+}
+
+.share-filled .linkedin .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .linkedin .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .youtube .share {
+	display: none;
+}
+
+.share-filled .youtube .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .youtube .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .pinterest .share {
+	display: none;
+}
+
+.share-filled .pinterest .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .pinterest .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .stumbleupon .share {
+	display: none;
+}
+
+.share-filled .stumbleupon .count {
+	background: #212121;
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .stumbleupon .count:hover {
+	color: #ffffff;
+	border: 1px solid #212121;
+}
+
+.share-filled .twitter:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .facebook:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .googlePlus:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .linkedin:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .youtube:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .pinterest:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .stumbleupon:hover .count {
+	background: #ffffff !important;
+}
+
+.share-filled .sharrre:hover .count {
+	color: #212121;
+}
+
+/* Appearance - outlined */
+.share-outlined .twitter .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .twitter .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .twitter .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .facebook .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .facebook .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .facebook .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .googlePlus .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .googlePlus .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .googlePlus .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .linkedin .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .linkedin .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .linkedin .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .youtube .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .youtube .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .youtube .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .pinterest .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .pinterest .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .pinterest .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .stumbleupon .share {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .stumbleupon .count {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined .stumbleupon .count:hover {
+	border: 1px solid #212121;
+	color: #212121;
+}
+
+.share-outlined.share-small .share,
+.share-outlined.share-medium .share {
+	border-right: none;
+}
+
+.share-outlined.share-small .twitter .no-count .share,
+.share-outlined.share-medium .twitter .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-small .facebook .no-count .share,
+.share-outlined.share-medium .facebook .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-small .googlePlus .no-count .share,
+.share-outlined.share-medium .googlePlus .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-small .pinterest .no-count .share,
+.share-outlined.share-medium .pinterest .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-small .linkedin .no-count .share,
+.share-outlined.share-medium .linkedin .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-small .stumbleupon .no-count .share,
+.share-outlined.share-medium .stumbleupon .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-small .youtube .no-count .share,
+.share-outlined.share-medium .youtube .no-count .share {
+	border-right: 1px solid #212121;
+}
+
+.share-outlined.share-tall .share {
+	border-top: none;
+}
+
+.share-outlined .twitter:hover .share,
+.share-outlined .twitter:hover .count {
+	background: #212121;
+}
+
+.share-outlined .facebook:hover .share,
+.share-outlined .facebook:hover .count {
+	background: #212121;
+}
+
+.share-outlined .googlePlus:hover .share,
+.share-outlined .googlePlus:hover .count {
+	background: #212121;
+}
+
+.share-outlined .linkedin:hover .share,
+.share-outlined .linkedin:hover .count {
+	background: #212121;
+}
+
+.share-outlined .youtube:hover .share,
+.share-outlined .youtube:hover .count {
+	background: #212121;
+}
+
+.share-outlined .pinterest:hover .share,
+.share-outlined .pinterest:hover .count {
+	background: #212121;
+}
+
+.share-outlined .stumbleupon:hover .share,
+.share-outlined .stumbleupon:hover .count {
+	background: #212121;
+}
+
+.share-outlined .sharrre:hover .count,
+.share-outlined .sharrre:hover .share {
+	color: #ffffff;
+}
+
 /* ## Entries
 --------------------------------------------- */
 .entry {
@@ -2950,6 +3644,7 @@ p.entry-meta {
 	color: #212121;
 	font-size: 13.568px;
 	font-size: 1.6rem;
+	font-family: 'Roboto', sans-serif;
 	padding: 14.84px 21.2px;
 	padding: 1.75rem 2.5rem;
 	border-radius: 2px;
@@ -4023,6 +4718,11 @@ a.flex-next::after {
 	font-size: 4rem;
 }
 
+div.images a.flex-next::after {
+	font-size: 16.96px;
+	font-size: 2rem;
+}
+
 a.flex-prev::before {
 	visibility: visible;
 	content: '\f341';
@@ -4032,6 +4732,11 @@ a.flex-prev::before {
 	margin-left: 0.5rem;
 	font-size: 33.92px;
 	font-size: 4rem;
+}
+
+div.images a.flex-prev::before {
+	font-size: 16.96px;
+	font-size: 2rem;
 }
 
 .home a.flex-next::after,
@@ -5725,6 +6430,12 @@ ul.slides {
 	}
 	.footer-widgets {
 		padding: 10rem 0;
+	}
+	div.images a.flex-next::after {
+		font-size: 3rem;
+	}
+	div.images a.flex-prev::before {
+		font-size: 3rem;
 	}
 	.flex-control-paging li a {
 		width: 1.4rem;

@@ -38,6 +38,12 @@ a.flex-next::after {
     @include breakpoint(sm) {
         font-size: 7rem;
     }
+    div.images & {
+        font-size: 2rem;
+        @include breakpoint(md) {
+            font-size: 3rem;
+        }
+    }
 }
 a.flex-prev::before {
     visibility:visible;
@@ -48,6 +54,12 @@ a.flex-prev::before {
     font-size: 4rem;
     @include breakpoint(sm) {
         font-size: 7rem;
+    }
+    div.images & {
+        font-size: 2rem;
+        @include breakpoint(md) {
+            font-size: 3rem;
+        }
     }
 }
 .home {

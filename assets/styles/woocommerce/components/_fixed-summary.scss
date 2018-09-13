@@ -236,11 +236,26 @@
     }
 }
 
-.related-artworks {
+%title--bigger {
+    font-size: 2.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 5rem;
+    font-style: italic;
+}
+
+.single-product-section {
+    display:block;
+    position:relative;
+    float:left;
+    width:100%;
+    margin-bottom: 3rem;
+
+    &__related-artworks {
+        border-bottom: 1px solid $light;
+    }
+
     .option-content__title--bigger {
-        font-size: 2.2rem;
-        margin-top: 1.5rem;
-        margin-bottom: 5rem;
-        font-style: italic;
+        @extend %title--bigger
     }  
+
 }

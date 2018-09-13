@@ -203,6 +203,7 @@ function business_scripts_styles() {
 	// Remove Simple Social Icons CSS (included with theme).
 	wp_dequeue_style('simple-social-icons-font');
 	wp_dequeue_style('woocommerce-layout');
+	wp_dequeue_style('genesis-simple-share-plugin-css');
 
 	// Enqueue Google fonts.
 	wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,500,700|PT+Serif:400,400i,700|Montserrat', array(), CHILD_THEME_VERSION);
@@ -364,21 +365,40 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
 // Remove prices from category pages, add artwork info instead
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 add_action( 'woocommerce_after_shop_loop_item_title', 'ap_loop_artwork_info', 10 );
-function ap_loop_artwork_info() {
-	?>
-	<footer class="entry-footer">
-		<p class="entry-meta">
-			<?php the_field('tecnica');
-			if (get_field('larghezza')) {
-				echo ', ';
-				the_field('larghezza');
-				echo 'cm x ';
-				the_field('altezza');
-				echo 'cm';
-			}
-			?>
-			<br><?php the_field('anno'); ?>
-		</p>
-	</footer>
-	<?php
+function ap_loop_artwork_info($location = null) {
+	// if a parameter is passed, doesn't output footer meta html
+	if ($location) {
+		?>
+			<p>
+				<?php the_field('tecnica');
+				if (get_field('larghezza')) {
+					echo ', ';
+					the_field('larghezza');
+					echo 'cm x ';
+					the_field('altezza');
+					echo 'cm';
+				}
+				?>
+				<br><?php the_field('anno'); ?>
+			</p>
+		<?php
+	} else {
+		?>
+		<footer class="entry-footer">
+			<p class="entry-meta">
+				<?php the_field('tecnica');
+				if (get_field('larghezza')) {
+					echo ', ';
+					the_field('larghezza');
+					echo 'cm x ';
+					the_field('altezza');
+					echo 'cm';
+				}
+				?>
+				<br><?php the_field('anno'); ?>
+			</p>
+		</footer>
+		<?php
+	}
+	
 }

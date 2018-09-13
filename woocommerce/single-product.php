@@ -59,35 +59,64 @@ function ap_single_artwork_artist_name() {
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
 
-// Move price
+// Move price, remove short description and replace it with year and material
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+add_action( 'woocommerce_single_product_summary', 'ap_materials_and_year', 20);
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25 );
+
+function ap_materials_and_year() {
+    ap_loop_artwork_info(true);
+}
+
+add_filter( 'woocommerce_get_price_html', function( $price ) {
+
+    if ( get_field('prezzo_visibile') ) return $price;
+
+    return '';
+
+} );
 
 // Remove add to cart button, add contact button instead
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 add_action( 'woocommerce_single_product_summary', 'ap_single_product_contact_button', 30 );
 function ap_single_product_contact_button () {
     ?>
-    <a href="#popup" class="button fixed-summary__button"><?php _e('Contact', 'business-pro') ?></a>
+    <a href="#popup" class="button fixed-summary__button">
+        <?php 
+
+         if ( !get_field('prezzo_visibile') ) {
+            _e('Vedi Prezzo', 'business-pro'); 
+         } else {
+            _e('Contattaci', 'business-pro'); 
+         }
+
+        ?>
+            
+    </a>
     <?php
 }
 
 add_action('woocommerce_single_product_summary', 'ap_fixed_summary_shipping_info', 30);
 function ap_fixed_summary_shipping_info() {
-        ?>
-        <div class="fixed-summary__services--title">
-            <span><?php _e('Our Services', 'business-pro') ?></span>
-        </div>
-        <div class="fixed-summary__services--list">
-            <ul>
-                <li>Questions about this work?</li>
-                <li>Interested in other works by this artist? </li>
-                <li>Want to pay in installments?</li>
-                <li>Prova la tua opera installata . Guarda i nostri lavori</li>
-            </ul>
-        </div>
-         <a href="#popup" class="button button--white fixed-summary__button"><?php _e('Contact Us', 'business-pro') ?></a>
-        <?php
+    global $Genesis_Simple_Share;
+    ?>
+    <div class="fixed-summary__services--title">
+        <span><?php _e('I Nostri Servizi', 'business-pro') ?></span>
+    </div>
+    <div class="fixed-summary__services--list">
+        <ul>
+            <li>Questions about this work?</li>
+            <li>Interested in other works by this artist? </li>
+            <li>Want to pay in installments?</li>
+            <li>Prova la tua opera installata . Guarda i nostri lavori</li>
+        </ul>
+    </div>
+     <a href="#popup" class="button button--white fixed-summary__button"><?php _e('Contattaci', 'business-pro') ?></a>
+     <div class="fixed-summary__sharing">
+    <?php
+        echo genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
+    echo "</div>";
 }
 
 // Remove single meta (categories, tags ect.)
@@ -182,7 +211,7 @@ function ap_custom_woocommerce_product_description_tab() {
 }
 
 /**
- * Remove related products output
+ * Remove woocommerce default related products output
  */
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
@@ -280,7 +309,7 @@ function ap_output_artist_related_works_slider() {
     if ($hasPosts) {
 
         ?>
-        <div class="related-artworks" style="display:block;position:relative;float:left;width:100%">
+        <div class="single-product-section single-product-section__related-artworks">
         <h2 class="option-content__title option-content__title--bigger"><?php _e('Related Artworks', 'business-pro'); ?>
                 </h2>
         <?php
@@ -292,7 +321,52 @@ function ap_output_artist_related_works_slider() {
     }
 }
 function ap_output_artist_related_articles() {
+
+    $artistID = get_field('artista')[0]->ID;
     
+    $relatedArticles = new WP_Query(array(
+            'posts_per_page' => 4,
+            'post_type'      => 'post',
+            'orderby'        => 'date',
+            'order'          => 'ASC',
+            'meta_query'     => array(
+                array(
+                    'key'     => 'artista_correlato',
+                    'compare' => 'LIKE',
+                    'value'   => '"'.$artistID.'"',
+                )
+            )
+        ));
+
+    if ($relatedArticles->have_posts()) {
+
+        ?>
+        <div class="single-product-section single-product-section__related-articles">
+            <h2 class="option-content__title option-content__title--bigger"><?php _e('Articoli su Outlet of Art', 'business-pro');?></h2>
+        <?php
+
+        echo '<div class="custom-related-content">';
+        while ($relatedArticles->have_posts()) {
+            $relatedArticles->the_post();
+            // Get image attachment as array containing URL, Width and Heigth
+            $image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "large" );
+            ?>
+            <article class="has-post-thumbnail entry" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+                <a class="entry-image-link" href="<?php the_permalink(); ?>" aria-hidden="true">
+                    <img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
+                </a>
+                <h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            </article>
+            <?php            
+        }
+        echo '</div>
+        </div>';
+    } else {
+        $noArticles = true;
+    }
+
+    wp_reset_postdata();
+
 }
 function ap_output_artist_recentely_viewed() {
     

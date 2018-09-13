@@ -1242,6 +1242,47 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	color: #9b9b9b;
 }
 
+.single-product .pagination-previous a {
+	left: 0;
+}
+
+.single-product .pagination-next a {
+	right: 0;
+}
+
+.single-product .pagination-previous a,
+.single-product .pagination-next a {
+	text-decoration: none;
+	position: fixed;
+	top: 50vh;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	padding: 83.2px 28.8px;
+	padding: 5.2rem 1.8rem;
+	border-radius: 4px;
+	width: 48px;
+	width: 3rem;
+	height: 48px;
+	height: 3rem;
+	background: #212121;
+	color: #ffffff;
+}
+
+.single-product .pagination-previous a .dashicons-arrow-left-alt2:before,
+.single-product .pagination-previous a .dashicons-arrow-right-alt2:before,
+.single-product .pagination-next a .dashicons-arrow-left-alt2:before,
+.single-product .pagination-next a .dashicons-arrow-right-alt2:before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
+	font-size: 40px;
+	font-size: 2.5rem;
+}
+
 .fixed-summary,
 .fixed-summary.scroll {
 	position: relative;
@@ -1472,7 +1513,7 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	padding-bottom: 1.5rem;
 }
 
-.related-artworks .option-content__title--bigger {
+.single-product-section .option-content__title--bigger {
 	font-size: 35.2px;
 	font-size: 2.2rem;
 	margin-top: 24px;
@@ -1480,6 +1521,19 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	margin-bottom: 80px;
 	margin-bottom: 5rem;
 	font-style: italic;
+}
+
+.single-product-section {
+	display: block;
+	position: relative;
+	float: left;
+	width: 100%;
+	margin-bottom: 48px;
+	margin-bottom: 3rem;
+}
+
+.single-product-section__related-artworks {
+	border-bottom: 1px solid #e5e5e5;
 }
 
 /* ### WooCommerce Checkout & Payment */

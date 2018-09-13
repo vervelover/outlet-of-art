@@ -97,3 +97,32 @@
     }
 
 }
+
+.single-product {
+    .pagination-previous a {
+        left: 0;
+    }.pagination-next a {
+        right: 0;
+    }
+    .pagination-previous a,
+    .pagination-next a {
+        text-decoration: none;
+        position: fixed;
+        top: 50vh;
+        transform: translateY(-50%);
+        padding: 5.2rem 1.8rem;
+        border-radius: 4px;
+        width: 3rem;
+        height: 3rem;
+        background: $dark;
+        color: $white;
+        .dashicons-arrow-left-alt2:before,
+        .dashicons-arrow-right-alt2:before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+        }
+    }
+}

@@ -187,6 +187,13 @@
             text-decoration: none;
             text-transform: uppercase;
             margin-bottom: 3rem;
+            &--about {
+                cursor: pointer;
+                font-size: 1rem;
+                margin-top: 2rem;
+                margin-bottom: 0;
+                position: relative;
+            }
         }
         &__space {
             display: block;
@@ -217,6 +224,10 @@
         font-weight: bold;
         text-transform: uppercase;
         margin-bottom: 1.6rem;
+
+        &--invest-in-art {
+            margin-top: .9rem;
+        }
     }
     h2.option-content__title {
         font-size: 1.8rem;
@@ -232,8 +243,25 @@
     }
 
     &__artwork-content {
-        padding-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 3.5rem;
+
+        &--invest-in-art {
+            padding-bottom: 0;
+        }
     }
+    &__artwork-excerpt {
+        position: relative;
+        padding-bottom: 3.5rem;
+
+        &--invest-in-art {
+            padding-bottom: 0;
+        }
+    }
+}
+
+.product .single-product-additional-info.single-product-additional-info--invest-in-art {
+    width: 100%;
 }
 
 %title--bigger {

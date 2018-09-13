@@ -1,0 +1,28 @@
+.invest-in-art-section {
+
+	margin-bottom: 3.5rem;
+
+	@include breakpoint(md) {
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+	}
+
+	&__left {
+		@include breakpoint(md) {
+			width: 180px;
+		}
+	}
+
+	&__right {
+		@include breakpoint(md) {
+			width: calc(100% - 200px);
+			margin-left: 5%;
+		}
+	}
+
+	&__download {
+		text-decoration: none;
+		font-weight: $bold;
+	}
+}

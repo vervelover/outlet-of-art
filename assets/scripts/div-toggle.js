@@ -14,4 +14,12 @@ jQuery(document).ready(function($){
         $(".option-content").hide();
         $(".option-heading").find(".arrow-up, .arrow-down").toggle();
     });
+    $("#artist-about-more").click(function(){
+        $(this).parent().hide();
+        $('.single-product-additional-info__artwork-content').fadeToggle(800);
+    });
+    $("#artist-about-less").click(function(){
+        $(this).parent().hide();
+        $('.single-product-additional-info__artwork-excerpt').fadeToggle(800);
+    });
 });

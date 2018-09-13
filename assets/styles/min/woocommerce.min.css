@@ -1447,6 +1447,17 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	margin-bottom: 3rem;
 }
 
+.single-product-additional-info .option-content__artist-link--about,
+.single-product-additional-info .option-content-first__artist-link--about {
+	cursor: pointer;
+	font-size: 16px;
+	font-size: 1rem;
+	margin-top: 32px;
+	margin-top: 2rem;
+	margin-bottom: 0;
+	position: relative;
+}
+
 .single-product-additional-info .option-content__space,
 .single-product-additional-info .option-content-first__space {
 	display: block;
@@ -1489,6 +1500,11 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	margin-bottom: 1.6rem;
 }
 
+.single-product-additional-info h2.about-the-work--invest-in-art {
+	margin-top: 14.4px;
+	margin-top: 0.9rem;
+}
+
 .single-product-additional-info h2.option-content__title {
 	font-size: 28.8px;
 	font-size: 1.8rem;
@@ -1509,8 +1525,27 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 }
 
 .single-product-additional-info__artwork-content {
-	padding-bottom: 24px;
-	padding-bottom: 1.5rem;
+	position: relative;
+	padding-bottom: 56px;
+	padding-bottom: 3.5rem;
+}
+
+.single-product-additional-info__artwork-content--invest-in-art {
+	padding-bottom: 0;
+}
+
+.single-product-additional-info__artwork-excerpt {
+	position: relative;
+	padding-bottom: 56px;
+	padding-bottom: 3.5rem;
+}
+
+.single-product-additional-info__artwork-excerpt--invest-in-art {
+	padding-bottom: 0;
+}
+
+.product .single-product-additional-info.single-product-additional-info--invest-in-art {
+	width: 100%;
 }
 
 .single-product-section .option-content__title--bigger {
@@ -1534,6 +1569,16 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 
 .single-product-section__related-artworks {
 	border-bottom: 1px solid #e5e5e5;
+}
+
+.invest-in-art-section {
+	margin-bottom: 56px;
+	margin-bottom: 3.5rem;
+}
+
+.invest-in-art-section__download {
+	text-decoration: none;
+	font-weight: 700;
 }
 
 /* ### WooCommerce Checkout & Payment */
@@ -2378,6 +2423,28 @@ div.woocommerce-info.wc-memberships-restriction-message.wc-memberships-restricte
 	.product .single-product-additional-info .option-content-first {
 		border-top: 1px solid #e5e5e5;
 		padding-top: 3rem;
+	}
+	.invest-in-art-section {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display:         flex;
+		-webkit-box-align: start;
+		-webkit-align-items: flex-start;
+		-ms-flex-align: start;
+		        align-items: flex-start;
+		-webkit-box-pack: start;
+		-webkit-justify-content: flex-start;
+		-ms-flex-pack: start;
+		        justify-content: flex-start;
+	}
+	.invest-in-art-section__left {
+		width: 180px;
+	}
+	.invest-in-art-section__right {
+		width: -webkit-calc(100% - 200px);
+		width:         calc(100% - 200px);
+		margin-left: 5%;
 	}
 	.woocommerce-cart form.checkout .col2-set,
 	.woocommerce-checkout form.checkout .col2-set,

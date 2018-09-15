@@ -122,8 +122,8 @@ function ap_output_artist_related_articles() {
 
 }
 
-function ap_output_artist_recentely_viewed() {
-    
+function ap_output_artist_recently_viewed() {
+    do_action('ap_recently_viewed_products');
 }
 
 /**

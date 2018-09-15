@@ -55,7 +55,12 @@ function ap_the_latest_post_meta_filter($post_meta) {
 	global $Genesis_Simple_Share;
 
 	$share =  genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
-	$post_info = get_field('luogo') . '<br/>' . get_field('data_evento'). '<br/>' . $share;
+	$dateformatstring = "d F, Y";
+	$unixtimestampInizio = strtotime(get_field('data_inizio_evento'));
+	$unixtimestampFine = strtotime(get_field('data_fine_evento'));
+	$dataInizio = date_i18n($dateformatstring, $unixtimestampInizio);
+	$dataFine = date_i18n($dateformatstring, $unixtimestampFine);
+	$post_info = get_field('luogo') . '<br/>' . $dataInizio . ' - ' . $dataFine . '<br/>' . $share;
 	return $post_info;
 }
 

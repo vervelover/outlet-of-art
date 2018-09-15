@@ -38,7 +38,9 @@ function ap_single_product_contact_button () {
 		echo '<br/>';
 		_e('Auction closes:', 'business-pro');
 		echo ' ';
-		the_field('auction_close');
+		$dateformatstring = "d F, Y";
+		$unixtimestamp = strtotime(get_field('auction_close'));
+		echo date_i18n($dateformatstring, $unixtimestamp);
 		echo '</p>';
 	} else {
 		echo '</p>';
@@ -100,7 +102,7 @@ add_action( 'woocommerce_after_single_product_summary', 'ap_invest_in_art_additi
 function ap_invest_in_art_additional_fields() {
     ap_invest_in_art_about();
     ap_output_artist_related_articles();
-    ap_output_artist_recentely_viewed();
+    ap_output_artist_recently_viewed();
 }
 
 function ap_invest_in_art_about() {
@@ -183,7 +185,9 @@ function ap_invest_in_art_about() {
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Other Image', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
-			            <?php var_dump(get_field('other_image')); ?>
+			            <?php 
+			            echo '<img class="alignleft" src="'.get_field('other_image')['url'].'" title="'.get_field('other_image')['title'].'" alt="'.get_field('other_image')['alt'].'" width="'.get_field('other_image')['width'].'" height="'.get_field('other_image')['height'].'">';
+			            ?>
 			        </div>
 		        </div>
 		    <?php endif; ?>
@@ -195,25 +199,25 @@ function ap_invest_in_art_about() {
 					</div>
 		            <div class="invest-in-art-section__right">
 			            <?php 
-			            $fileUno = get_field('download');
-						$fileDue = get_field('download_due');
-						$fileTre = get_field('download_tre');
-						$fileQuattro = get_field('download_quattro');
-						$fileCinque = get_field('download_cinque');
-						$fileSei = get_field('download_sei');
+			            $downloadUno = get_field('download');
+						$downloadDue = get_field('download_due');
+						$downloadTre = get_field('download_tre');
+						$downloadQuattro = get_field('download_quattro');
+						$downloadCinque = get_field('download_cinque');
+						$downloadSei = get_field('download_sei');
 
-						if ( $fileUno )
-						echo '<a class="invest-in-art-section__download" href="'.$fileUno['url'].'"><i class="fa fa-download"></i> '.$fileUno['title'].'</a><br/>';  
-						if ( $fileDue )
-						echo '<a class="invest-in-art-section__download" href="'.$fileDue['url'].'"><i class="fa fa-download"></i> '.$fileDue['title'].'</a><br/>'; 
-						if ( $fileTre )
-						echo '<a class="invest-in-art-section__download" href="'.$fileTre['url'].'"><i class="fa fa-download"></i> '.$fileTre['title'].'</a><br/>';  
-						if ( $fileQuattro )
-						echo '<a class="invest-in-art-section__download" href="'.$fileQuattro['url'].'"><i class="fa fa-download"></i> '.$fileQuattro['title'].'</a><br/>';  
-						if ( $fileCinque )
-						echo '<a class="invest-in-art-section__download" href="'.$fileCinque['url'].'"><i class="fa fa-download"></i> '.$fileCinque['title'].'</a><br/>';  
-						if ( $fileSei )
-						echo '<a class="invest-in-art-section__download" href="'.$fileSei['url'].'"><i class="fa fa-download"></i> '.$fileSei['title'].'</a><br/>';  
+						if ( $downloadUno )
+						echo '<a class="invest-in-art-section__download" href="'.$downloadUno['url'].'"><i class="fa fa-download"></i> '.$downloadUno['title'].'</a><br/>';  
+						if ( $downloadDue )
+						echo '<a class="invest-in-art-section__download" href="'.$downloadDue['url'].'"><i class="fa fa-download"></i> '.$downloadDue['title'].'</a><br/>'; 
+						if ( $downloadTre )
+						echo '<a class="invest-in-art-section__download" href="'.$downloadTre['url'].'"><i class="fa fa-download"></i> '.$downloadTre['title'].'</a><br/>';  
+						if ( $downloadQuattro )
+						echo '<a class="invest-in-art-section__download" href="'.$downloadQuattro['url'].'"><i class="fa fa-download"></i> '.$downloadQuattro['title'].'</a><br/>';  
+						if ( $downloadCinque )
+						echo '<a class="invest-in-art-section__download" href="'.$downloadCinque['url'].'"><i class="fa fa-download"></i> '.$downloadCinque['title'].'</a><br/>';  
+						if ( $downloadSei )
+						echo '<a class="invest-in-art-section__download" href="'.$downloadSei['url'].'"><i class="fa fa-download"></i> '.$downloadSei['title'].'</a><br/>';  
 			            ?>
 			        </div>
 		        </div>
@@ -249,5 +253,72 @@ function ap_invest_in_art_about() {
 }
 
 function ap_invest_in_art_external_articles() {
+	$artistID = get_field('artista')[0]->ID;
+                        
+	$relatedExternalArticles = new WP_Query(array(
+			'posts_per_page' => 4,
+			'post_type'      => 'articoli-esterni',
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'meta_query'     => array(
+				array(
+					'key'     => 'artista_correlato',
+					'compare' => 'LIKE',
+					'value' => '"' . $artistID . '"',
+				)
+			)
+		));
 
+	if ($relatedExternalArticles->have_posts()) {
+
+		?>
+		<div class="invest-in-art-section">
+			<div class="invest-in-art-section__left">
+				<h2 class="about-the-work about-the-work--invest-in-art"><?php printf( __('Articles', 'business-pro') ); ?></h2>
+			</div>
+			<?php
+
+			echo '<div class="invest-in-art-section__right invest-in-art-section__right--flex">';
+			echo '<div class="custom-related-content">';
+			while ($relatedExternalArticles->have_posts()) {
+				$relatedExternalArticles->the_post();
+				// Get image attachment as array containing URL, Width and Heigth
+				$image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "large" );
+				?>
+				<article class="has-post-thumbnail entry" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+					<a class="entry-image-link" href="<?php the_field('link_articolo'); ?>" aria-hidden="true">
+						<img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
+					</a>
+					<h2 class="entry-title" itemprop="headline">
+						<a class="entry-title-link" rel="bookmark" href="<?php the_field('link_articolo'); ?>"><?php the_title(); ?></a>
+					</h2>
+					<footer class="entry-footer">
+						<p class="entry-meta">
+						<?php
+
+						$fileOne = get_field('file_scaricabile');
+						$fileTwo = get_field('file_scaricabile_due');
+
+						if ( $fileOne )
+							echo '<a href="'.$fileOne['url'].'"><i class="fa fa-download"></i>'.$fileOne['title'].'</a><br/>';  
+						if ( $fileTwo )
+							echo '<a href="'.$fileTwo['url'].'"><i class="fa fa-download"></i>'.$fileTwo['title'].'</a><br/>';  
+						if ( !$fileOne && !$fileTwo )
+							echo '<a href="'.get_field('link_articolo').'">' . __('View Site', 'business-pro') . '</a>';
+						the_field('data_evento'); 
+
+						?>
+						</p>
+					</footer>
+				</article>
+				<?php            
+			}
+			echo '</div>';
+			echo '</div>';
+		echo '</div>';
+	} else {
+		$noExternalArticles = true;
+	}
+
+	wp_reset_postdata();
 }

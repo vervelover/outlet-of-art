@@ -232,3 +232,74 @@
         margin: 0 auto;
     }
 }
+
+/* ## Product Search
+--------------------------------------------- */
+
+.menu-header-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.product-search {
+
+    display: flex;
+    justify-content: center;
+
+    &__input {
+
+        color: $medium;
+        background-color: transparent;
+        border: none;
+        border-radius: none;
+        padding: 0;
+        width: 8rem;
+        padding-left: 1rem;
+        transition: all .5s;
+        font-size: 1.8rem;
+
+        &::placeholder {
+            color: $medium;
+            font-size: 1.4rem;
+        }
+
+        @include breakpoint(md) {
+            font-size: 1.4rem;
+        }
+
+        &:focus {
+            color: $black;
+            padding: 0 1rem;
+            border-radius: 100px;
+            width:18rem;
+            background-color: $light;
+            &::placeholder {
+                color: $gray;
+            }
+        }
+
+    }
+
+    &__input:focus + &__button {
+        margin-left: 0;
+    }
+
+    &__button {
+        padding: 0;
+        background-color: transparent;
+        color: $black;
+        margin-left: -1rem;
+        margin-top: .1rem;
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    &__icon {
+        font-size: 1.8rem;
+    }
+
+}

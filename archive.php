@@ -29,7 +29,19 @@ function ap_archive_content_wrap_open() {
 	echo '<div class="featured-section__featured-post__content">';
 }
 function ap_archive_content_wrap_close() {
+	genesis_post_info();
 	echo '</div>';
+}
+
+//* Customize the entry meta in the entry footer (requires HTML5 theme support)
+// Add sharing icons after post meta
+add_filter( 'genesis_post_info', 'ap_the_latest_post_meta_filter' );
+function ap_the_latest_post_meta_filter($post_meta) {
+	global $Genesis_Simple_Share;
+
+	$share =  genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
+	$post_info = $share;
+	return $post_info;
 }
 
 //* Run the Genesis loop

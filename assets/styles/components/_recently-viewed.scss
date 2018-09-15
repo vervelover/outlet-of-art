@@ -1,0 +1,27 @@
+.recently-viewed {
+	width: 100%;
+	float: left;
+	border-top: 1px solid $light;
+	padding-top: 4rem;
+
+	&__title {
+		font-family: $font-body;
+		text-transform: uppercase;
+		font-size: 1.3rem;
+		margin-bottom: 2rem;
+	}
+
+	&__items {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		.one-fifth {
+			margin: 1rem 0;
+			width: $one-half;
+			@include breakpoint(xs) {
+				width: $one-fifth;
+			}	
+		}
+	}
+}

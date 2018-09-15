@@ -19,10 +19,15 @@
 			width: calc(100% - 200px);
 			margin-left: 5%;
 		}
+		&--flex {
+			display: flex;
+			align-items: flex-end;
+		}
 	}
 
 	&__download {
 		text-decoration: none;
 		font-weight: $bold;
+		font-family: $font-body;
 	}
 }

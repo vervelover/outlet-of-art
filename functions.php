@@ -81,6 +81,10 @@ function opening_header_divs() {
 }
 add_action( 'genesis_header', 'closing_header_divs' );
 function closing_header_divs() {
+	$woosearchform = get_product_search_form(false);
+	echo '<div class="menu-header-search">';
+	echo $woosearchform;
+	echo '</div>';
 	echo '</div>';
 }
 
@@ -348,10 +352,41 @@ function ap_language_selector(){
 	return $langs;
 }
 
+// Change top menu after login
+add_filter( 'wp_nav_menu_args', 'ap_wp_nav_menu_args' );
+function ap_wp_nav_menu_args( $args = '' ) {
+ 
+	if( is_user_logged_in() ) { 
+	    $args['menu'] = 'top-menu-logged-in';
+	} else { 
+	    $args['menu'] = 'top-menu-logged-out';
+	} 
+	    return $args;
+}
+
+// CUSTOMIZE WOOCOMMERCE PRODUCT SEARCH
+
+add_filter('get_product_search_form', 'ap_custom_product_searchform');
+/**
+ * Filter WooCommerce  Search Field
+ *
+ */
+function ap_custom_product_searchform($form) {
+
+	$form = '<form class="product-search" role="search" method="get" id="searchform" action="'.esc_url(home_url('/')).'">
+                    <label class="screen-reader-text" for="s">'.__('Search for:', 'woocommerce').'</label>
+	                    <input class="product-search__input" type="text" value="'.get_search_query().'" name="s" id="s" placeholder="'.__('Cerca', 'business-pro').'" />
+						<button class="product-search__button" for="s" class="search__button" type="submit" value="'.esc_attr__('Search', 'woocommerce').'" name="button">
+					       	<i class="product-search__icon fa fa-search"></i>
+					    </button>
+	                    <input type="hidden" name="post_type" value="product" />
+                </form>';
+	return $form;
+}
+
 /**
  * Change number of related products output
  */ 
-
 add_filter( 'woocommerce_output_related_products_args', 'ap_related_products_args' );
   function ap_related_products_args( $args ) {
 	$args['posts_per_page'] = 6; // 4 related products
@@ -401,4 +436,77 @@ function ap_loop_artwork_info($location = null) {
 		<?php
 	}
 	
+}
+
+/*
+ *  Recently Viewed Products
+ */
+add_action('wp_footer', 'ap_recently_viewed_products');
+function ap_recently_viewed_products(){
+
+    if( !is_product()) return;
+
+    global $post;
+
+    // Get the current post id.
+    $current_post_id = get_the_ID();
+
+    if(is_user_logged_in()){
+
+        // Store recently viewed post ids in user meta.
+        $recenty_viewed = get_user_meta(get_current_user_id(), 'recently_viewed', true);
+        if( '' == $recenty_viewed ){
+            $recenty_viewed = array();            
+        }
+
+        // Prepend id to the beginning of recently viewed id array.(http://php.net/manual/en/function.array-unshift.php)
+        array_unshift($recenty_viewed, $current_post_id);
+
+        // Keep the recently viewed items at 5. (http://www.php.net/manual/en/function.array-slice.php)
+        $recenty_viewed = array_slice(array_unique($recenty_viewed), 0, 5); // Extract a slice of the array
+
+        // Update the user meta with new value.
+        update_user_meta(get_current_user_id(), 'recently_viewed', $recenty_viewed);
+
+    } else {
+
+    /**
+     * For non-logged in users you can use the same procedure as above
+     * using get_option() and update_option()
+     */
+
+    }
+}
+
+add_action('ap_recently_viewed_products', 'ap_show_recently_viewed_products');
+function ap_show_recently_viewed_products(){
+    $recenty_viewed = get_user_meta(get_current_user_id(), 'recently_viewed', true);
+    echo '<div class="single-product-section single-product-section__related-articles recently-viewed">';
+    echo '<h2 class="recently-viewed__title">';
+    _e('Visti di recente', 'business-pro');
+    echo '</h2>';
+    echo '<div class="recently-viewed__items">';
+    $recentlyViewdProducts = new WP_Query(array(
+    		'post_type'		 => 'product',
+    		'post__in'		 => $recenty_viewed,
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+		));
+
+	if ($recentlyViewdProducts->have_posts()) {
+		while ($recentlyViewdProducts->have_posts()) {
+			$recentlyViewdProducts->the_post();
+			?>
+			<div class="one-fifth">
+				<a href="<?php echo get_the_permalink(); ?>">
+					<?php the_post_thumbnail(); ?>
+				</a>
+			</div>
+			<?php
+		}
+	}
+	wp_reset_postdata();
+    // echo '<pre>'; print_r($recenty_viewed); echo '</pre>';
+    echo '</div>';
+    echo '</div>';
 }

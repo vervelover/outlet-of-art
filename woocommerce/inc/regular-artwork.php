@@ -172,7 +172,7 @@ add_action( 'woocommerce_after_single_product_summary', 'ap_artwork_custom_relat
 function ap_artwork_custom_related() {
     ap_output_artist_related_works_slider();
     ap_output_artist_related_articles();
-    ap_output_artist_recentely_viewed();
+    ap_output_artist_recently_viewed();
 }
 
 function ap_output_artist_other_works() {

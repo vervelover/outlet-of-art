@@ -359,7 +359,7 @@ gulp.task('watch', function () {
 	 */
 	 browsersync( {
 	     proxy: 'localhost/outlet-of-art',
-	     browser: 'google-chrome'
+	     browser: 'firefox'
 	 } );
 
 	// Run tasks when files change.

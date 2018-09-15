@@ -1484,6 +1484,124 @@ img.alignright,
 	margin: 0 auto;
 }
 
+/* ## Product Search
+--------------------------------------------- */
+.menu-header-search {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	        justify-content: center;
+	margin-left: auto;
+}
+
+.product-search {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	        justify-content: center;
+}
+
+.product-search__input {
+	color: #d2d2d2;
+	background-color: transparent;
+	border: none;
+	border-radius: none;
+	padding: 0;
+	width: 67.84px;
+	width: 8rem;
+	padding-left: 8.48px;
+	padding-left: 1rem;
+	-webkit-transition: all 0.5s;
+	        transition: all 0.5s;
+	font-size: 15.264px;
+	font-size: 1.8rem;
+}
+
+.product-search__input::-webkit-input-placeholder {
+	color: #d2d2d2;
+	font-size: 11.872px;
+	font-size: 1.4rem;
+}
+
+.product-search__input::-moz-placeholder {
+	color: #d2d2d2;
+	font-size: 11.872px;
+	font-size: 1.4rem;
+}
+
+.product-search__input:-ms-input-placeholder {
+	color: #d2d2d2;
+	font-size: 11.872px;
+	font-size: 1.4rem;
+}
+
+.product-search__input::placeholder {
+	color: #d2d2d2;
+	font-size: 11.872px;
+	font-size: 1.4rem;
+}
+
+.product-search__input:focus {
+	color: #000000;
+	padding: 0 8.48px;
+	padding: 0 1rem;
+	border-radius: 100px;
+	width: 152.64px;
+	width: 18rem;
+	background-color: #e5e5e5;
+}
+
+.product-search__input:focus::-webkit-input-placeholder {
+	color: #9b9b9b;
+}
+
+.product-search__input:focus::-moz-placeholder {
+	color: #9b9b9b;
+}
+
+.product-search__input:focus:-ms-input-placeholder {
+	color: #9b9b9b;
+}
+
+.product-search__input:focus::placeholder {
+	color: #9b9b9b;
+}
+
+.product-search__input:focus + .product-search__button {
+	margin-left: 0;
+}
+
+.product-search__button {
+	padding: 0;
+	background-color: transparent;
+	color: #000000;
+	margin-left: -8.48px;
+	margin-left: -1rem;
+	margin-top: 0.848px;
+	margin-top: 0.1rem;
+}
+
+.product-search__button:hover {
+	box-shadow: none;
+}
+
+.product-search__icon {
+	font-size: 15.264px;
+	font-size: 1.8rem;
+}
+
 .no-header-image .page-header {
 	padding: 25.44px 0 25.44px;
 	padding: 3rem 0 3rem;
@@ -3445,6 +3563,48 @@ img.alignright,
 .share-outlined .sharrre:hover .count,
 .share-outlined .sharrre:hover .share {
 	color: #ffffff;
+}
+
+.recently-viewed {
+	width: 100%;
+	float: left;
+	border-top: 1px solid #e5e5e5;
+	padding-top: 33.92px;
+	padding-top: 4rem;
+}
+
+.recently-viewed__title {
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	font-size: 11.024px;
+	font-size: 1.3rem;
+	margin-bottom: 16.96px;
+	margin-bottom: 2rem;
+}
+
+.recently-viewed__items {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	        justify-content: space-between;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+}
+
+.recently-viewed__items .one-fifth {
+	margin: 8.48px 0;
+	margin: 1rem 0;
+	width: -webkit-calc((100% - 15px) / 2);
+	width:         calc((100% - 15px) / 2);
 }
 
 /* ## Entries
@@ -5748,6 +5908,10 @@ ul.slides {
 		width:         calc((100% - 15px) / 2);
 		margin-bottom: 15px;
 	}
+	.recently-viewed__items .one-fifth {
+		width: -webkit-calc((100% - 4 * 15px) / 5);
+		width:         calc((100% - 4 * 15px) / 5);
+	}
 	.post-type-archive-artist .content {
 		max-width: 80rem;
 	}
@@ -6119,6 +6283,9 @@ ul.slides {
 		        order: 3;
 		margin-left: 1em;
 		margin-right: 0;
+	}
+	.product-search__input {
+		font-size: 1.4rem;
 	}
 	.menu {
 		text-align: left;

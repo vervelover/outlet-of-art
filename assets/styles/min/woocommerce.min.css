@@ -1576,9 +1576,21 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	margin-bottom: 3.5rem;
 }
 
+.invest-in-art-section__right--flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	-webkit-box-align: end;
+	-webkit-align-items: flex-end;
+	-ms-flex-align: end;
+	        align-items: flex-end;
+}
+
 .invest-in-art-section__download {
 	text-decoration: none;
 	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
 }
 
 /* ### WooCommerce Checkout & Payment */

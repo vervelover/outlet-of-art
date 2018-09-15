@@ -401,16 +401,17 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 add_action( 'woocommerce_after_shop_loop_item_title', 'ap_loop_artwork_info', 10 );
 function ap_loop_artwork_info($location = null) {
+	global $product;
 	// if a parameter is passed, doesn't output footer meta html
 	if ($location) {
 		?>
 			<p>
 				<?php the_field('tecnica');
-				if (get_field('larghezza')) {
+				if ($product->get_length()) {
 					echo ', ';
-					the_field('larghezza');
+					echo $product->get_length();
 					echo 'cm x ';
-					the_field('altezza');
+					echo $product->get_height();
 					echo 'cm';
 				}
 				?>
@@ -422,11 +423,11 @@ function ap_loop_artwork_info($location = null) {
 		<footer class="entry-footer">
 			<p class="entry-meta">
 				<?php the_field('tecnica');
-				if (get_field('larghezza')) {
+				if ($product->get_length()) {
 					echo ', ';
-					the_field('larghezza');
+					echo $product->get_length();
 					echo 'cm x ';
-					the_field('altezza');
+					echo $product->get_height();
 					echo 'cm';
 				}
 				?>
@@ -441,6 +442,30 @@ function ap_loop_artwork_info($location = null) {
 /*
  *  Recently Viewed Products
  */
+
+// Set recently viewed products cookie
+add_action('init', 'ap_rv_cookie');
+function ap_rv_cookie() {
+    
+        $post_id = url_to_postid( "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] );
+        
+        if(isset($_COOKIE['rv_artworks']) && $_COOKIE['rv_artworks']!=''){ 
+            $rv_artworks =  unserialize($_COOKIE['rv_artworks']);
+            if (! is_array($rv_artworks)) {
+                $rv_artworks = array($post_id);
+            }else{
+                array_unshift($rv_artworks,$post_id);
+                $rv_artworks = array_unique($rv_artworks);
+            }   
+        }else{
+            $rv_artworks = array($post_id);
+        }
+        setcookie( 'rv_artworks', serialize($rv_artworks) ,time() + ( DAY_IN_SECONDS * 31 ),'/');
+        
+        return;
+    
+}
+
 add_action('wp_footer', 'ap_recently_viewed_products');
 function ap_recently_viewed_products(){
 
@@ -468,45 +493,48 @@ function ap_recently_viewed_products(){
         // Update the user meta with new value.
         update_user_meta(get_current_user_id(), 'recently_viewed', $recenty_viewed);
 
-    } else {
-
-    /**
-     * For non-logged in users you can use the same procedure as above
-     * using get_option() and update_option()
-     */
-
     }
 }
 
 add_action('ap_recently_viewed_products', 'ap_show_recently_viewed_products');
 function ap_show_recently_viewed_products(){
-    $recenty_viewed = get_user_meta(get_current_user_id(), 'recently_viewed', true);
-    echo '<div class="single-product-section single-product-section__related-articles recently-viewed">';
-    echo '<h2 class="recently-viewed__title">';
-    _e('Visti di recente', 'business-pro');
-    echo '</h2>';
-    echo '<div class="recently-viewed__items">';
-    $recentlyViewdProducts = new WP_Query(array(
-    		'post_type'		 => 'product',
-    		'post__in'		 => $recenty_viewed,
-			'orderby'        => 'date',
-			'order'          => 'ASC',
-		));
 
-	if ($recentlyViewdProducts->have_posts()) {
-		while ($recentlyViewdProducts->have_posts()) {
-			$recentlyViewdProducts->the_post();
-			?>
-			<div class="one-fifth">
-				<a href="<?php echo get_the_permalink(); ?>">
-					<?php the_post_thumbnail(); ?>
-				</a>
-			</div>
-			<?php
+	if(is_user_logged_in()){
+    	$recenty_viewed = get_user_meta(get_current_user_id(), 'recently_viewed', true);
+    } else {
+    	$recenty_viewed = unserialize($_COOKIE['rv_artworks']);
+    }
+    
+    if ($recenty_viewed) {
+    	echo '<div class="single-product-section single-product-section__related-articles recently-viewed">';
+	    echo '<h2 class="recently-viewed__title">';
+	    _e('Visti di recente', 'business-pro');
+	    echo '</h2>';
+	    echo '<div class="recently-viewed__items">';
+	    $recentlyViewdProducts = new WP_Query(array(
+	    		'post_type'		 => 'product',
+	    		'posts_per_page' => 5,
+	    		'post__in'		 => $recenty_viewed,
+				'orderby'        => 'date',
+				'order'          => 'ASC',
+			));
+
+		if ($recentlyViewdProducts->have_posts()) {
+			while ($recentlyViewdProducts->have_posts()) {
+				$recentlyViewdProducts->the_post();
+				?>
+				<div class="one-fifth">
+					<a href="<?php echo get_the_permalink(); ?>">
+						<?php the_post_thumbnail(); ?>
+					</a>
+				</div>
+				<?php
+			}
 		}
-	}
-	wp_reset_postdata();
-    // echo '<pre>'; print_r($recenty_viewed); echo '</pre>';
-    echo '</div>';
-    echo '</div>';
+		wp_reset_postdata();
+	    // echo '<pre>'; print_r($recenty_viewed); echo '</pre>';
+	    echo '</div>';
+	    echo '</div>';
+    }
+    
 }

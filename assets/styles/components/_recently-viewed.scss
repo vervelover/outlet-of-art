@@ -1,8 +1,7 @@
 .recently-viewed {
 	width: 100%;
 	float: left;
-	border-top: 1px solid $light;
-	padding-top: 4rem;
+	padding-top: 0;
 
 	&__title {
 		font-family: $font-body;
@@ -14,13 +13,24 @@
 	&__items {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-start;
 		flex-wrap: wrap;
 		.one-fifth {
 			margin: 1rem 0;
+			margin-right: $margin-left;
 			width: $one-half;
+			&:nth-of-type(even),
+			&:last-of-type {
+				margin-right: 0;
+			}
 			@include breakpoint(xs) {
 				width: $one-fifth;
+				&:nth-of-type(even) {
+					margin-right: $margin-left;
+				}
+				&:last-of-type {
+					margin-right: 0;
+				}
 			}	
 		}
 	}

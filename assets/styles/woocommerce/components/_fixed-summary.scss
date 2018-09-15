@@ -277,6 +277,10 @@
     float:left;
     width:100%;
     margin-bottom: 3rem;
+    border-bottom: 1px solid $light;
+    &:last-of-type {
+        border-bottom: 0;
+    }
 
     &__related-artworks {
         border-bottom: 1px solid $light;
@@ -286,4 +290,17 @@
         @extend %title--bigger
     }  
 
+}
+
+.sconto-percentuale {
+    text-transform: uppercase;
+    color: $gray;
+    &__prefisso {
+        display: none;
+    }
+    &__valore {
+        font-size: 2rem;
+        text-decoration: underline;
+        padding-left: 1rem;
+    }
 }

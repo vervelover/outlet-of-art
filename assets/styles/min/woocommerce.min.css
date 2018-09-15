@@ -1037,6 +1037,10 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 
 .woocommerce ul.products li.product span.onsale {
 	top: 2em;
+	height: 48px;
+	height: 3rem;
+	width: 128px;
+	width: 8rem;
 }
 
 .woocommerce ul.products li.product span.onsale:after {
@@ -1155,6 +1159,13 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	line-height: 1.5;
 	float: left;
 	width: 100%;
+}
+
+.woocommerce div.product span.onsale {
+	height: 48px;
+	height: 3rem;
+	width: 160px;
+	width: 10rem;
 }
 
 .woocommerce div.product .product_meta {
@@ -1565,10 +1576,32 @@ body .woocommerce ul.products[class*='columns-'] li.product,
 	width: 100%;
 	margin-bottom: 48px;
 	margin-bottom: 3rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.single-product-section:last-of-type {
+	border-bottom: 0;
 }
 
 .single-product-section__related-artworks {
 	border-bottom: 1px solid #e5e5e5;
+}
+
+.sconto-percentuale {
+	text-transform: uppercase;
+	color: #9b9b9b;
+}
+
+.sconto-percentuale__prefisso {
+	display: none;
+}
+
+.sconto-percentuale__valore {
+	font-size: 32px;
+	font-size: 2rem;
+	text-decoration: underline;
+	padding-left: 16px;
+	padding-left: 1rem;
 }
 
 .invest-in-art-section {

@@ -118,7 +118,7 @@ function ap_set_default_slidermeta($post_ID) {
 add_shortcode('shortcode-flexslider', 'ap_flexslider_shortcode');
 
 function ap_flexslider_shortcode($atts = null) {
-	global $add_fs_script, $fs_atts;
+	global $add_fs_script, $fs_atts, $woocommerce;
 	$add_fs_script = true;
 	$fs_atts       = shortcode_atts(
 		array(
@@ -197,8 +197,16 @@ function ap_flexslider_shortcode($atts = null) {
 		            $artistName = get_field('artista')[0]->post_title;
 		            $description = apply_filters('the_excerpt', get_post_field('post_excerpt', $artist_page_ID ));
 		            $tecnica = get_field('tecnica');
-		            $larghezza = get_field('larghezza');
-		            $altezza = get_field('altezza');
+		            $product = wc_get_product(get_the_ID());
+		            if ($product->get_length()) {
+		            	// $tecnica = $product->get_height();
+		            	$larghezza = $product->get_length();
+		            	$altezza = $product->get_height();
+		            } else {
+		            	$larghezza = '';
+		            	$altezza = '';
+		            }
+		            
 		            $anno = get_field('anno');
 
 		            if ($larghezza) {

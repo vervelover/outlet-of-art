@@ -12,6 +12,10 @@
  *  Common scripts and functions
  */
 
+/*
+ *  Recently Viewed Products
+ */
+
 /** Enqueue JS scripts */
 add_action( 'wp_enqueue_scripts', 'ap_fixed_summary' );
 function ap_fixed_summary() {

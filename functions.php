@@ -280,6 +280,9 @@ include_once (get_stylesheet_directory().'/includes/plugins.php');
 // Load Flexslider
 include_once (get_stylesheet_directory().'/includes/flexslider.php');
 
+// Outlet of Art discount prices
+include_once (get_stylesheet_directory().'/includes/outlet-of-art-discount-prices.php');
+
 //* Remove the header right widget area
 unregister_sidebar( 'header-right' );
 

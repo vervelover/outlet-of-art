@@ -88,7 +88,7 @@ gulp.task('woo', function () {
 
 		// Process sass
 		.pipe(sass({
-			outputStyle: 'expanded'
+			outputStyle: 'compressed'
 		}))
 
 		// Pixel fallbacks for rem units.
@@ -106,6 +106,23 @@ gulp.task('woo', function () {
 
 		// Format CSS.
 		.pipe(csscomb())
+
+		// Combine similar rules.
+		.pipe(cleancss({
+			level: {
+				2: {
+					all: true
+				}
+			}
+		}))
+
+		// Minify and optimize style.css again.
+		.pipe(cssnano({
+			safe: false,
+			discardComments: {
+				removeAll: true,
+			},
+		}))
 
 		// Add .min suffix.
 		.pipe(rename({
@@ -150,7 +167,7 @@ gulp.task('styles', function () {
 
 		// Process sass
 		.pipe(sass({
-			outputStyle: 'expanded'
+			outputStyle: 'compressed'
 		}))
 
 		// Pixel fallbacks for rem units.
@@ -168,6 +185,23 @@ gulp.task('styles', function () {
 
 		// Format non-minified CSS.
 		.pipe(csscomb())
+
+		// Combine similar rules.
+		.pipe(cleancss({
+			level: {
+				2: {
+					all: true
+				}
+			}
+		}))
+
+		// Minify and optimize style.css again.
+		.pipe(cssnano({
+			safe: false,
+			discardComments: {
+				removeAll: true,
+			},
+		}))
 
 		// Output non minified css to theme directory.
 		.pipe(gulp.dest('./'))

@@ -2,6 +2,7 @@
 /*
 Description: Output custom discount prices
 Author: Alessio Pangos
+Note: can be moved to an external plugin
 */
 
 if( function_exists('acf_add_options_page') ) {

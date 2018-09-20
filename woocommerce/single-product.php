@@ -79,7 +79,7 @@ if ( has_term( 'investi-in-arte', 'product_cat' ) ) {
  */
 function ap_output_artist_related_articles() {
 
-    $artistID = get_field('artista')[0]->ID;
+    $artistID = strval(get_field('artista')[0]->ID);
     
     $relatedArticles = new WP_Query(array(
             'posts_per_page' => 4,
@@ -90,13 +90,12 @@ function ap_output_artist_related_articles() {
                 array(
                     'key'     => 'artista_correlato',
                     'compare' => 'LIKE',
-                    'value'   => '"'.$artistID.'"',
+                    'value'   => ''.$artistID.'',
                 )
             )
         ));
 
     if ($relatedArticles->have_posts()) {
-
         ?>
         <div class="single-product-section single-product-section__related-articles">
             <h2 class="option-content__title option-content__title--bigger"><?php _e('Articoli su Outlet of Art', 'business-pro');?></h2>

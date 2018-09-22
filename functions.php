@@ -260,6 +260,10 @@ function business_scripts_styles() {
 	        'root_url' => get_site_url(),
 	        'nonce' => wp_create_nonce('wp_rest')
 	    ));
+	wp_localize_script('follow', 'followedArtistsData', array(
+	        'root_url' => get_site_url(),
+	        'nonce' => wp_create_nonce('wp_rest')
+	    ));
 }
 
 // Load theme helper functions.
@@ -294,6 +298,9 @@ include_once (get_stylesheet_directory().'/includes/outlet-of-art-discount-price
 
 // Outlet of Art like artworks rest route
 include_once (get_stylesheet_directory().'/includes/like-route.php');
+
+// Outlet of Art follow artists rest route
+include_once (get_stylesheet_directory().'/includes/follow-route.php');
 
 //* Remove the header right widget area
 unregister_sidebar( 'header-right' );
@@ -342,7 +349,7 @@ function ap_top_menu_items ( $items, $args ) {
 
 	if(is_user_logged_in()) {
 		if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/opere-salvate') . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
 	    }
 	    return $items;
 	} else {

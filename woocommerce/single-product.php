@@ -22,6 +22,7 @@ function ap_fixed_summary() {
     wp_enqueue_script( 'fixed-summary', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/fixed-summary.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
     wp_enqueue_script( 'div-toggle', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/div-toggle.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
     wp_enqueue_script( 'like', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/like.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
+    wp_enqueue_script( 'follow', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/follow.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
 }
 
 //* Force full-width-content layout setting
@@ -57,6 +58,45 @@ add_action( 'woocommerce_single_product_summary', 'ap_single_artwork_artist_name
 add_action( 'woocommerce_single_product_summary', 'genesis_do_post_title', 5 );
 function ap_single_artwork_artist_name() {
     echo '<span class="fixed-summary__artist-name">' . get_field('artista')[0]->post_title .'</span>';
+    
+    $followCount = new WP_Query(array(
+        'post_type' => 'follow',
+        'meta_query' => array(
+            array(
+                'key' => 'followed_artist_id',
+                'compare' => '=',
+                'value' => get_field('artista')[0]->ID
+            )
+        )
+    ));
+
+    $existStatus = 'no';
+
+    if(is_user_logged_in()) {
+
+        $existQuery = new WP_Query(array(
+            'author' => get_current_user_id(),
+            'post_type' => 'follow',
+            'meta_query' => array(
+                array(
+                    'key' => 'followed_artist_id',
+                    'compare' => '=',
+                    'value' => get_field('artista')[0]->ID
+                )
+            )
+        ));
+
+        if ($existQuery->found_posts) {
+            $existStatus = 'yes';
+        }
+    }
+    ?>
+    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <span class="follow-count"><?php echo $followCount->found_posts; ?></span>
+    </span>
+    <?php
 }
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );

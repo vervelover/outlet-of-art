@@ -19,12 +19,6 @@ function ap_fixed_summary() {
     wp_enqueue_script( 'like', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/like-page.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
 }
 
-/** Enqueue styles */
-add_action('wp_enqueue_scripts', 'ap_saved_artworks_styles', 50);
-function ap_saved_artworks_styles() {
-	wp_enqueue_style('woocommerce-smallscreen');
-}
-
 //* Force full-width-content layout setting
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 

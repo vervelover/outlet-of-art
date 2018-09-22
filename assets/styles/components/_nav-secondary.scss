@@ -52,6 +52,11 @@
             padding: 1.5rem 2rem;
         }
     }
+    .less-padding.menu-item a {
+            padding: .5rem 2rem;
+            padding-left: 0;
+            font-size: 2rem;
+    }
     .menu-item-has-children {
         >a {
             >span {

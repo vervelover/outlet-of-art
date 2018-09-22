@@ -23,7 +23,7 @@
     top: 1rem;
     right: 5rem;
   }
-  .fa-heart-o, .fa-close {
+  .like-box .fa-heart-o, .like-box .fa-close {
     background-color: rgba($black, .7);
 
     &.hidden {
@@ -31,7 +31,7 @@
     }
   }
  
-  .like-box[data-exists="yes"] .fa-heart-o, .fa-close {
+  .like-box[data-exists="yes"] .fa-heart-o, .like-box .fa-close {
     visibility: visible;
     opacity: 1;
     color: $white;

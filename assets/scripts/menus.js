@@ -231,6 +231,7 @@
 		_toggleAria( $this, 'aria-expanded' );
 		$this.toggleClass( 'activated' );
 		$this.next( 'nav' ).fadeToggle( 'fast' );
+		$('.menu-header-search').toggleClass( 'hidden' );
 	}
 
 	/**

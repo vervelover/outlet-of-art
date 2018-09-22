@@ -1,14 +1,11 @@
 <?php
 
 /**
- * This file controls the Artists Archive Template
+ * This file controls the Artists Category Archive Template
  *
  * @author Alessio Pangos
  * 
  */
-
-//* Force sidebar-content layout setting
-add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_sidebar_content' );
 
 add_filter( 'body_class', 'ap_artist_archive_additional_body_class' );
 function ap_artist_archive_additional_body_class( $classes ) {
@@ -18,6 +15,7 @@ function ap_artist_archive_additional_body_class( $classes ) {
 	
 }
 
+//* Force sidebar-content layout setting
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_sidebar_content' );
 
 /** Order Posts Alphabetically **/

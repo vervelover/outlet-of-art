@@ -63,17 +63,19 @@ function ap_add_flexslider_script() {
 	                    directionNav: true
 	            	});
 	            	function fixFlexsliderHeight() {
-		                // Set fixed height based on the tallest slide
-		                $('.flexslider-".$fs_atts['ulid']."').each(function(){
-		                    var sliderHeight = 0;
-		                    $(this).find('.slides > li img').each(function(){
-		                        slideHeight = $(this).height();
-		                        if (sliderHeight < slideHeight) {
-		                            sliderHeight = slideHeight;
-		                        }
-		                    });
-		                    $(this).find('.flex-viewport').css({'height' : sliderHeight});
-		                });
+	            		setTimeout(function(){
+			                // Set fixed height based on the tallest slide
+			                $('.flexslider-".$fs_atts['ulid']."').each(function(){
+			                    var sliderHeight = 0;
+			                    $(this).find('.slides > li img').each(function(){
+			                        slideHeight = $(this).height();
+			                        if (sliderHeight < slideHeight) {
+			                            sliderHeight = slideHeight;
+			                        }
+			                    });
+			                    $(this).find('.flex-viewport').css({'height' : sliderHeight});
+			                });
+			            }, 300);
 		            }";
 
         echo "            

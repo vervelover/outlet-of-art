@@ -76,7 +76,7 @@
     }
     .sub-menu {
         @include breakpoint(md) {
-            width: 100%;
+            width: 8rem;
         }
     }
 

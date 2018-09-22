@@ -61,10 +61,18 @@
         display: block;
         position: absolute;
         font-family: 'Fontawesome';
-        right: 1.2rem;
-        top: 1.2rem;
-        font-size: 2rem;
+        font-size: 3rem;
+        right: 3rem;
+        top: -1rem;
+        @include breakpoint(md) {
+            right: .5rem;
+            top: -.5rem;
+            font-size: 2rem;
+        }
         pointer-events: none;
+        padding: 0;
+        background-color: transparent;
+        color: $black;
     }
     input[type="search"] {
         width: 100%;

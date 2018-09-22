@@ -102,6 +102,16 @@
         }
     }
 
+    &__sharing {
+        width: 38rem;
+        margin: 0 auto;
+        @include breakpoint(md) {
+            width: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+    }
+
 }
 
 @media screen and (max-width: 56em) {
@@ -125,23 +135,7 @@
         @include breakpoint(xl) {
             width: 67%;
         }
-        // li {
-        //     list-style-type: disc;
-        //     margin-left: 3.2rem;
-        //     margin-bottom: 1rem;
-        //     font-style: italic;
-        // }
-        // & .option-content, .option-content-first {
-        //     font-size: 1.6rem;
-        //     padding-left: 3.2rem;
-        //     padding-right: 3.2rem;
-        //     padding-bottom: 3.2rem;
-        // }
-        // & .option-content h2:first-child, .option-content-first h2:first-child {
-        //     display: none;
-        // }
         
-        // border-bottom: 1px solid $border;
     }
 	width: 100%;
 	float: left;
@@ -152,6 +146,7 @@
     & .option-heading {
         /* border-top: 1px solid $border; */
 		display: block;
+        border-top: 1px solid $light;
         @include breakpoint(md) {
             display: none;
         }
@@ -159,16 +154,22 @@
 		width: 100%;
         text-transform: uppercase;
 		cursor: pointer;
+        &--first {
+            border-top: none;
+        }
         &--title {
             margin: 0;
             line-height: 1;
-            font-size: 2rem;
             padding: 3.2rem 0 3.2rem 3.2rem;
             margin-bottom: 0;
             position: relative;
             left: 0;
             display: inline-block;
             color: $black;
+            text-transform: capitalize;
+            font-style: italic;
+            padding-left: 0;
+            font-size: 2.2rem;
         }
 	}
 
@@ -199,6 +200,13 @@
             display: block;
             margin-bottom: 4rem;
         }
+        &__title, .related-artworks__title {
+            display: none;
+            @include breakpoint(md) {
+                display: block;
+            }
+        }
+
     }
 
     & .arrow-down, .arrow-up, .arrow-up-nojquery {

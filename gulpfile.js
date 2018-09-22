@@ -35,10 +35,14 @@ var	args         = require('yargs').argv,
 	sass         = require('gulp-sass'),
 	sort         = require('gulp-sort'),
 	sourcemaps   = require('gulp-sourcemaps'),
-	uglify       = require('gulp-uglify'),
+	uglify       = require('gulp-uglify-es'),
 	wpPot        = require('gulp-wp-pot'),
 	zip          = require('gulp-zip'),
 	focus        = require('postcss-focus');
+	composer 	 = require('gulp-uglify/composer');
+	pump 		 = require('pump');
+	uglifyjs     = require('uglify-es');
+	minify 		 = composer(uglifyjs, console);
 
 // Set assets paths.
 var paths = {
@@ -257,33 +261,19 @@ gulp.task('styles', function () {
  *
  * https://www.npmjs.com/package/gulp-uglify
  */
-gulp.task('scripts', function () {
+gulp.task('scripts', function (cb) {
 
-	gulp.src(paths.scripts)
-
-		// Notify on error.
-		.pipe(plumber({
-			errorHandler: notify.onError("Error: <%= error.message %>")
-		}))
-
-		// Cache files to avoid processing files that haven't changed.
-		.pipe(cache('scripts'))
-
-		// Add .min suffix.
-		.pipe(rename({
+	var options = {};
+	pump([gulp.src(paths.scripts),
+		rename({
 			suffix: '.min'
-		}))
-
-		// Minify.
-		.pipe(uglify())
-
-		// Output the processed js to this directory.
-		.pipe(gulp.dest('assets/scripts/min'))
-
-		// Inject changes via browsersync.
-		.pipe(browsersync.reload({
-			stream: true
-		}))
+		}),
+		minify(options),
+      	gulp.dest('assets/scripts/min')
+		],
+    cb
+  	);
+		
 
 		// Notify on successful compile.
 		// .pipe(notify("Minified: <%= file.relative %>"));

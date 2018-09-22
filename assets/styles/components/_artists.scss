@@ -1,8 +1,8 @@
-.post-type-archive-artist {
+.post-type-archive-artist, .tax-artist_category {
 
     &.archive {
         .page-header {
-            padding: 6rem 0 3rem;
+            padding: 6rem 5% 3rem;
             p {
                 max-width: 48em;
                 font-size: 1.4rem;
@@ -204,21 +204,6 @@
         padding-bottom: 6rem;
     }
 
-    .option-heading {
-        border-top: 1px solid $light;
-        @include breakpoint(md) {
-            display: none;
-        }
-        &--first {
-            border-top: none;
-        }
-        &--title {
-            text-transform: capitalize;
-            font-style: italic;
-            padding-left: 0;
-            font-size: 2.2rem;
-        }
-    }
     .artist-menu {
         display: none;
         margin: 0 0 3rem;

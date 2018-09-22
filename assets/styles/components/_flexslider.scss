@@ -134,7 +134,10 @@ ul.slides {
 
 .flexslider-artwork-detail-slider {
     position: relative;
-    padding: 0 9rem;
+    padding: 0 4rem;
+    @include breakpoint(md) {
+        padding: 0 9rem;
+    }
     a.flex-next::after, a.flex-prev::before {
         font-size: 3rem;
     }

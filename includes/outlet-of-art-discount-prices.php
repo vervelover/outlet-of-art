@@ -115,12 +115,14 @@ function ap_custom_dynamic_sale_price( $sale_price, $product ) {
 	}
 
 	// Return sale price
-	if (intval($sconto) > 0) {
+	if ($product->get_regular_price()) {
+		if (intval($sconto) > 0) {
 		$rate = 1-(1 /100 * intval($sconto));
 		return $product->get_regular_price() * $rate;
-	} else {
-		$rate = 1;
-	}
+		} else {
+			$rate = 1;
+		}
+	}	
     
     if( empty($sale_price) || $sale_price == 0 ) {
     	return $sale_price;

@@ -56,6 +56,45 @@ function ap_fixed_summary_shipping_info() {
      <a href="#popup" class="button button--white fixed-summary__button"><?php _e('Contattaci', 'business-pro') ?></a>
      <div class="fixed-summary__sharing">
     <?php
+        $likeCount = new WP_Query(array(
+            'post_type' => 'like',
+            'meta_query' => array(
+                array(
+                    'key' => 'liked_artwork_id',
+                    'compare' => '=',
+                    'value' => get_the_ID()
+                )
+            )
+        ));
+
+        $existStatus = 'no';
+
+        if(is_user_logged_in()) {
+
+            $existQuery = new WP_Query(array(
+                'author' => get_current_user_id(),
+                'post_type' => 'like',
+                'meta_query' => array(
+                    array(
+                        'key' => 'liked_artwork_id',
+                        'compare' => '=',
+                        'value' => get_the_ID()
+                    )
+                )
+            ));
+
+            if ($existQuery->found_posts) {
+                $existStatus = 'yes';
+            }
+        }
+
+        ?>
+        <span class="like-box" data-like="<?php echo $existQuery->posts[0]->ID; ?>" data-artwork="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            <span class="like-count"><?php echo $likeCount->found_posts; ?></span>
+        </span>
+        <?php
         echo genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
     echo "</div>";
 }
@@ -134,8 +173,8 @@ function ap_custom_woocommerce_product_description_tab() {
             </div>
             <div class="option-heading">
                 <h2 class="option-heading--title"><?php _e('About', 'business-pro'); get_field('artista')[0]->post_title; ?></h2>
-                <div class="arrow-up">-</div>
-                <div class="arrow-down">+</div>
+                <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+                <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
             </div>
             <div class="option-content">
 			    <div id="single-product-description">
@@ -148,8 +187,16 @@ function ap_custom_woocommerce_product_description_tab() {
                     </h2>
                     <?php
                     $artist_page_ID = get_field('artista')[0]->ID;
-                    $artist_post_content = apply_filters('the_content', get_post_field('post_content', $artist_page_ID ));
-                    echo $artist_post_content;
+                    $artist_post_excerpt = apply_filters('the_excerpt', get_post_field('post_excerpt', $artist_page_ID ));
+                    if ($artist_post_excerpt) {
+                        echo $artist_post_excerpt;
+                    } else {
+                        $artist_post_content = apply_filters('the_content', get_post_field('post_content', $artist_page_ID ));
+                        echo '<p>';
+                        echo wp_trim_words( $artist_post_content, 50, '...');
+                        echo '</p>';
+                    }
+                    
                     ?>
                     <a class="option-content__artist-link" href="<?php echo get_permalink($artist_page_ID); ?>"><?php printf( __('Go to %s artist page >', 'business-pro'), $artistName ); ?></a>
                     <div class="option-content__space"></div>
@@ -178,9 +225,10 @@ function ap_artwork_custom_related() {
 function ap_output_artist_other_works() {
     $productID = get_the_ID();
     $artistName = get_field('artista')[0]->post_title;
-    $artistID = get_field('artista')[0]->ID;
+    $artistID = strval(get_field('artista')[0]->ID);
 
     $relatedWorks = new WP_Query(array(
+        'post__not_in' => array($productID),
         'posts_per_page' => 6,
         'post_type' => 'product',
         'orderby' => 'rand',
@@ -189,29 +237,29 @@ function ap_output_artist_other_works() {
             array(
                 'key' => 'artista',
                 'compare' => 'LIKE',
-                'value' => '"' . $artistID . '"'
+                'value' => '' . $artistID . ''
             )
         )
     ));
-
+   
     if ($relatedWorks->have_posts()) {
         // Check if there are other works by the artist other than the one we are currently processing
         // If there are no works, return false and exit before outputting the related works section
-        while( $relatedWorks->have_posts()) {
-            $relatedWorks->the_post();
-            if (get_the_ID() !== $productID) {
-                $hasPosts = true;
-            }
-            if (!$hasPosts) {
-                wp_reset_postdata();
-                return false;
-            }
-        }
+        // while( $relatedWorks->have_posts()) {
+        //     $relatedWorks->the_post();
+        //     if (get_the_ID() !== $productID) {
+        //         $hasPosts = true;
+        //     }
+        //     if (!$hasPosts) {
+        //         wp_reset_postdata();
+        //         return false;
+        //     }
+        // }
         ?>
         <div class="option-heading">
             <h2 class="option-heading--title"><?php printf( __('Other Works by %s', 'business-pro'), $artistName ); ?></h2>
-            <div class="arrow-up">-</div>
-            <div class="arrow-down">+</div>
+            <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+            <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
         </div>
         <div class="option-content">
             <div id="single-product-description">
@@ -268,7 +316,7 @@ function ap_output_artist_related_works_slider() {
         <?php
 
         echo '<div style="display:block;width:100%;float:left;position:relative;">';
-        echo do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="Italia" artist_ID='.$artistID.']');
+        echo $hasPosts;
         echo '</div>';
         echo '</div>';
     }

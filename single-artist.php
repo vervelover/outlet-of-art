@@ -37,7 +37,7 @@ remove_action('genesis_before_content_sidebar_wrap', 'business_page_header');
 remove_action('genesis_entry_content', 'genesis_do_post_content');
 
 /**
- * Change number or products per row to 3
+ * Change number or products per row to 4
  */
 add_filter('loop_shop_columns', 'loop_columns');
 if (!function_exists('loop_columns')) {

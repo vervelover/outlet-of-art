@@ -4,8 +4,10 @@ jQuery(document).ready(function($){
      * Set page header margin top equal to header
      */
     function setHeaderHeight() {
-        var headerHeight = $(".site-header").height();
-        $(".site-inner").css("margin-top", headerHeight);
+        setTimeout(function(){
+            var headerHeight = $(".site-header").height();
+            $(".site-inner").css("margin-top", headerHeight);
+        }, 300);
     }
     setHeaderHeight();
 

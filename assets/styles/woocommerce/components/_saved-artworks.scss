@@ -1,0 +1,56 @@
+.saved-artworks {
+
+	&.woocommerce {
+		ul.products[class*="columns-"] {
+			
+			li.product {
+				width: 100%;
+				margin-left: 0;
+				margin-top: 0;
+			}
+		
+		}
+	}
+
+	width: 100%;
+	float: left;
+	padding-top: 0;
+
+	h1 {
+		font-size: 3rem;
+		font-style: italic;
+		margin-top: 5rem;
+		margin-bottom: 2rem;
+	}
+
+	ul.products {
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		// @include breakpoint(sm) {
+		// 	justify-content: space-between;
+		// }
+		.one-fourth {
+			position: relative;
+			margin: 1rem 0;
+			margin-right: $margin-left;
+			width: $one-half;
+			&:nth-of-type(even),
+			&:last-of-type {
+				margin-right: 0;
+			}
+			@include breakpoint(sm) {
+				width: $one-fourth;
+				margin-right: $margin-left;
+				&:nth-of-type(2n) {
+					margin-right: $margin-left;
+				}
+				&:nth-of-type(4n) {
+					margin-right: 0;
+				}
+			}	
+		}
+	}
+	
+}

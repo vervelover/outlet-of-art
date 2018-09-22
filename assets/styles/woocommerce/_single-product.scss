@@ -111,6 +111,10 @@
     }
     .pagination-previous a,
     .pagination-next a {
+        display: none;
+        @include breakpoint(md) {
+            display: block;
+        }
         text-decoration: none;
         position: fixed;
         top: 50vh;

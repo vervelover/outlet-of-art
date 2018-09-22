@@ -214,7 +214,7 @@
         }
     }
     .woocommerce.archive & {
-        margin-left: 5%;
+        padding-left: 5%;
     }
     .single-product & {
         padding: 0;
@@ -240,29 +240,55 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
+ 
+    @include breakpoint(md) {
+        margin-left: auto;
+        width: 18rem;
+    }
+
+    &.hidden {
+        display: none;
+    }
+    
 }
 
-.product-search {
+.product-search, .search-form {
 
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: auto;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
+    transition: all .5s;
+    z-index: 999;
 
-    &__input {
-
-        color: $medium;
+    input[type="search"] {
+        color: transparent;
+        @include breakpoint(md) {
+            color: $medium;
+        }
         background-color: transparent;
         border: none;
         border-radius: none;
         padding: 0;
         width: 8rem;
+        cursor: pointer;
+        @include breakpoint(md) {
+            width: 18rem;
+            cursor: auto;
+        }
         padding-left: 1rem;
         transition: all .5s;
         font-size: 1.8rem;
 
         &::placeholder {
-            color: $medium;
+            color: transparent;
             font-size: 1.4rem;
+            @include breakpoint(md) {
+                color: $medium;
+            }
         }
 
         @include breakpoint(md) {
@@ -271,11 +297,20 @@
 
         &:focus {
             color: $black;
-            padding: 0 1rem;
+            padding: 0;
+            padding-right: 0;
+            width: 100vw;
+           
+            @include breakpoint(md) {
+                width: auto;
+                padding-right: 50vw;
+            }
+            padding-left: 1rem;
             border-radius: 100px;
-            width:18rem;
+            transition: all .5s;
             background-color: $light;
             &::placeholder {
+                text-indent: 0;
                 color: $gray;
             }
         }

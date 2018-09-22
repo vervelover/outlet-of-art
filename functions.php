@@ -255,6 +255,11 @@ function business_scripts_styles() {
 				),
 			),
 		));
+
+	wp_localize_script('like', 'likeartworksData', array(
+	        'root_url' => get_site_url(),
+	        'nonce' => wp_create_nonce('wp_rest')
+	    ));
 }
 
 // Load theme helper functions.
@@ -287,6 +292,9 @@ include_once (get_stylesheet_directory().'/includes/recently-viewed.php');
 // Outlet of Art discount prices
 include_once (get_stylesheet_directory().'/includes/outlet-of-art-discount-prices.php');
 
+// Outlet of Art like artworks rest route
+include_once (get_stylesheet_directory().'/includes/like-route.php');
+
 //* Remove the header right widget area
 unregister_sidebar( 'header-right' );
 
@@ -307,6 +315,15 @@ add_filter( 'woocommerce_get_image_size_gallery_thumbnail', function( $size ) {
 		);
 } );
 
+
+// Hide admin bar for non admins
+add_action('after_setup_theme', 'ap_hide_admin_bar');
+function ap_hide_admin_bar() {
+	if (!current_user_can('edit_posts')) {
+  		add_filter( 'show_admin_bar', '__return_false', PHP_INT_MAX );
+	}
+}
+
 // Customize Footer Text
 
 remove_action('genesis_footer', 'genesis_do_footer');
@@ -321,10 +338,20 @@ function ap_custom_footer() {
 add_filter( 'wp_nav_menu_items', 'ap_top_menu_items', 10, 2 );
 function ap_top_menu_items ( $items, $args ) {
 
-	if ($args->theme_location == 'top-menu') {
+	$logout_url = wp_logout_url();
+
+	if(is_user_logged_in()) {
+		if ($args->theme_location == 'top-menu') {
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+	    }
+	    return $items;
+	} else {
+		if ($args->theme_location == 'top-menu') {
         $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items;
-    }
-    return $items;
+	    }
+	    return $items;
+	}
+	
 }
 add_filter( 'woocommerce_currencies', 'ap_custom_currency_names' );
 function ap_custom_currency_names( $currencies ) {
@@ -455,3 +482,37 @@ function ap_loop_artwork_info($location = null) {
 	}
 	
 }
+
+/**
+ * Redirect to shop after login.
+ *
+ * @param $redirect
+ * @param $user
+ *
+ * @return false|string
+ */
+function ap_login_redirect( $redirect ) {
+    $redirect_page_id = url_to_postid( $redirect );
+    $checkout_page_id = wc_get_page_id( 'checkout' );
+    
+    if( $redirect_page_id == $checkout_page_id ) {
+        return $redirect;
+    }
+ 
+    return site_url('/');
+}
+ 
+add_filter( 'woocommerce_login_redirect', 'ap_login_redirect' );
+
+/*
+ * Redirect after registration.
+ *
+ * @param $redirect
+ *
+ * @return string
+ */
+function ap_register_redirect( $redirect ) {
+    return site_url('/');
+}
+ 
+add_filter( 'woocommerce_registration_redirect', 'ap_register_redirect' );

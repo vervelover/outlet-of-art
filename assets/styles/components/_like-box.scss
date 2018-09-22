@@ -1,0 +1,79 @@
+/* Like Box */
+.like-box {
+  float: left;
+  font-size: 2.4rem;
+  // background-color: #EDEDED;
+  // box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+  // color: red;
+  padding: 0;
+  // border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+
+.like-box:hover {
+  background-color: $gray;
+}
+
+.saved-artworks {
+  .like-box {
+    // transform: translate(-50px, 50px);
+    position: absolute;
+    top: 1rem;
+    right: 5rem;
+  }
+  .fa-heart-o, .fa-close {
+    background-color: rgba($black, .7);
+
+    &.hidden {
+      display: none;
+    }
+  }
+ 
+  .like-box[data-exists="yes"] .fa-heart-o, .fa-close {
+    visibility: visible;
+    opacity: 1;
+    color: $white;
+    border: 0;
+  }
+}
+
+.like-count {
+  padding-left: 1rem;
+  display: none;
+}
+
+.like-box .fa-heart-o, .like-box .fa-close {
+  transition: all .35s ease-out;
+  position: absolute;
+  left: 0;
+  top: .5rem;
+  padding: .7rem;
+  border-radius: 100px;
+  border: 1px solid $dark;
+}
+
+.like-box .fa-heart {
+  left: 0;
+  top: .5rem;
+  transition: all .4s ease-out;
+  position: absolute;
+  visibility: hidden;
+  transform: scale(.2);
+  opacity: 0;
+  padding: .7rem;
+  border-radius: 100px;
+  border: 1px solid $dark;
+}
+
+.like-box[data-exists="yes"] .fa-heart {
+  transform: scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+
+.like-box[data-exists="yes"] .fa-heart-o {
+  visibility: hidden;
+  opacity: 0;
+}

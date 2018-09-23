@@ -1,0 +1,93 @@
+/* Follow Box */
+.follow-box {
+  float: left;
+  font-size: 1.3rem;
+  // background-color: #EDEDED;
+  // box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+  // color: red;
+  padding: 0;
+  // border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+  span {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-family: $font-body;
+    font-weight: $bold;
+    padding-left: 1rem;
+  }
+}
+
+.follow-box:hover {
+  // background-color: $gray;
+}
+
+.post-type-archive-artist, .home {
+  .follow-box {
+    // transform: translate(-50px, 50px);
+    position: relative;
+    width: 100%;
+    color: $dark;
+    padding-top: 1rem;
+    text-align: center;
+
+    .following {
+      text-align: center;
+    }
+  }
+  
+}
+
+.home li .follow-box {
+  padding-top: 0;
+}
+
+.home {
+  .home__opere-consigliate {
+    .follow-box {
+      display: none;
+    }
+  }
+}
+
+.follow-count {
+  padding-left: 1rem;
+  display: none;
+}
+
+.follow-box .fa-plus, .follow-box .following {
+  transition: all .35s ease-out;
+  position: relative;
+  left: 0;
+  top: -.5rem;
+  padding-bottom: .7rem;
+}
+
+.follow-box .following {
+  top: -.5rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  transition: all .4s ease-out;
+  position: absolute;
+  visibility: hidden;
+  transform: scale(.2);
+  opacity: 0;
+  padding: .7rem;
+  padding-left: 0;
+  @include breakpoint(md) {
+    text-align: left;
+  }
+}
+
+.follow-box[data-exists="yes"] .following {
+  transform: scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+
+.follow-box[data-exists="yes"] .fa-plus {
+  visibility: hidden;
+  opacity: 0;
+}

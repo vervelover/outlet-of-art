@@ -75,14 +75,7 @@ if (!function_exists('loop_columns')) {
 	}
 }
 
-add_action('genesis_before_entry', 'saved_artworks_content', 5);
-function saved_artworks_content() {
-	?>
-	<h2 class="saved-artworks__title"><?php _e('Opere pubblicate di recente', 'business-pro');?></h1>
-    <?php 
-    show_followed_artists(); 
-}
-
+add_action('genesis_before_entry', 'show_followed_artists', 5);
 function show_followed_artists() {
 	$existQuery = new WP_Query(array(
         'author' => get_current_user_id(),
@@ -98,53 +91,57 @@ function show_followed_artists() {
         // Format dates to compare them by day
         $dateformatstring = "d F, Y";
 
+        // Get the date of follows with id of followed artist
 	    for ( $i = 0; $i < $existQuery->found_posts; $i++) {
 	    	$followID = $existQuery->posts[$i]->ID;
+	    	$followDate = $existQuery->posts[$i]->post_date;
 	    	$followedArtistID = intval(get_field('followed_artist_id', $followID));
 	    	array_push($savedArtistsIDs, $followedArtistID );
 	    	array_push($postedDates,array(
-	    		'date' => $existQuery->posts[$i]->post_date,
+	    		'date' => $followDate,
 	    		'postID' => $followedArtistID
 	    	));
 	    }
 
-	    foreach ($postedDates as $postedDate) {
-	    	var_dump( $postedDate['date']);
-	    	$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
-	    	array_push($allDates, $formattedDate);
-	    }
+	    $datesAndArtworks = array();
 
-	    $uniqueDates = array_unique($allDates);
-	    $postsByDate = array();
+	    // foreach ($postedDates as $postedDate) {
+	    // 	$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
+	    // 	array_push($allDates, $formattedDate);
+	    // }
 
-	    foreach ($uniqueDates as $uniqueDate) {
-	    	$i=0;
+	    // $uniqueDates = array_unique($allDates);
+	    // $postsByDate = array();
+	    
+
+	    // foreach ($uniqueDates as $uniqueDate) {
+	    // 	$i=0;
 	    	
-	    	$combinedPostDate = array();
-    		foreach ($postedDates as $postedDate) {
-	    		$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
-	    		if ($formattedDate == $uniqueDate) {
-	    			array_push($combinedPostDate, $postedDate['postID']);
-	    		}
-	    	}
+	    // 	$combinedPostDate = array();
+    	// 	foreach ($postedDates as $postedDate) {
+	    // 		$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
+	    // 		if ($formattedDate == $uniqueDate) {
+	    // 			array_push($combinedPostDate, $postedDate['postID']);
+	    // 		}
+	    // 	}
 	    	
 
-	    	array_push($postsByDate, array(
-	    		'date' => $uniqueDate,
-	    		'postID' => $combinedPostDate
-	    	));
+	    // 	array_push($postsByDate, array(
+	    // 		'date' => $uniqueDate,
+	    // 		'postID' => $combinedPostDate
+	    // 	));
 	    	
-	    	$i++;
-	    }
+	    // 	$i++;
+	    // }
 
 	    
-	    echo '<pre>';
-	    var_dump($postsByDate);
-	   
-	    echo '<p>$postedDates:</p>';
-	   
-	    echo '</pre>';
+	    //  $getAllArtworksByDate = array();
 
+	      
+	    // echo '</pre>';
+
+	    // prendi tutti gli artworks
+	    // per ogni data in postsByDate, se la data dell'artwork è successiva, prendilo
 	
 	    echo '<ul class="products columns-3">';
 	    $i = 0;
@@ -160,7 +157,6 @@ function show_followed_artists() {
 		    	'posts_per_page' => -1,
 				'post_type'      => 'product',
 				'orderby'        => 'title',
-				'order'          => 'date',
 				'meta_query'     => array(
 					array(
 						'key'     => 'artista',
@@ -172,45 +168,85 @@ function show_followed_artists() {
 		   
 		    if ($savedArtistsArtworks->have_posts()) {
 
+		    	$num = 0;
 				while ($savedArtistsArtworks->have_posts()) {
 					$savedArtistsArtworks->the_post();
-					$postDate = get_post_time('U', true);;
+					// $postDate = get_post_time('U', true);
+					$postDate = $savedArtistsArtworks->posts[$num]->post_date_gmt;
+										
+					if ($followDate < strtotime($postDate)) {
+						
+						array_push($datesAndArtworks, array(
+							'artworkID' => $savedArtistsArtworks->posts[$num]->ID,
+							'date' => $postDate
+						));
+					}		
+					$num++;
 					
-					if (1537425700 < $postDate) {
-						woocommerce_get_template_part('content', 'product');
-					}			
 				}
+				wp_reset_postdata();
+
 		    }
 		    $i++;
+		    
 		}
-		echo '</ul>';
-	
-	add_action('genesis_before_sidebar_widget_area', 'ap_followed_artists_list');
-	function ap_followed_artists_list() {
-		global $savedArtistsIDs;
-		$savedArtists = new WP_Query(array(
-			'post_type' => 'artist',
-			'post__in' => $savedArtistsIDs
-		));
-		if ($savedArtists->have_posts()) {
-			while ($savedArtists->have_posts()) {
-				$savedArtists->the_post();
-				the_title();
-				echo '<br/>';
+		
+		foreach ($datesAndArtworks as $datesAndArtwork) {
+	    	$formattedDate = date_i18n( $dateformatstring, strtotime($datesAndArtwork['date']) );
+	    	array_push($allDates, $formattedDate);
+	    }
+
+	    $uniqueDates = array_unique($allDates);
+	    $postsByDate = array();
+
+	    foreach ($uniqueDates as $uniqueDate) {
+	    	$i=0;
+	    	
+	    	$combinedPostDate = array();
+    		foreach ($datesAndArtworks as $datesAndArtwork) {
+	    		$formattedDate = date_i18n( $dateformatstring, strtotime($datesAndArtwork['date']) );
+	    		if ($formattedDate == $uniqueDate) {
+	    			array_push($combinedPostDate, $datesAndArtwork['artworkID']);
+	    		}
+	    	}
+	    	
+
+	    	array_push($postsByDate, array(
+	    		'date' => $uniqueDate,
+	    		'artworkID' => $combinedPostDate
+	    	));
+	    	
+	    	$i++;
+	    }
+
+	    foreach ($postsByDate as $key => $value) {
+	    	echo '<div style="width:100%;float:left;margin-bottom:2rem;"><h3>' . $postsByDate[$key]['date'] . '</h3></div>';
+	    	foreach ($postsByDate[$key]['artworkID'] as $artistID) {
+	    		$savedArtistsArtworks = new WP_Query(array(
+			    	'posts_per_page' => -1,
+					'post_type'      => 'product',
+					'post__in' => array($artistID)
+				));
+				$savedArtistsArtworks->the_post();
+				woocommerce_get_template_part('content', 'product');
+	    	}
+	    }
+
+		add_action('genesis_before_sidebar_widget_area', 'ap_followed_artists_list');
+		function ap_followed_artists_list() {
+			global $savedArtistsIDs;
+			$savedArtists = new WP_Query(array(
+				'post_type' => 'artist',
+				'post__in' => $savedArtistsIDs
+			));
+			if ($savedArtists->have_posts()) {
+				while ($savedArtists->have_posts()) {
+					$savedArtists->the_post();
+					the_title();
+					echo '<br/>';
+				}
 			}
 		}
-	}
-
-		
-
-
-
-
-
-
-
-
-
 
     } else {
     	_e('Non stai seguendo nessun artista', 'business-pro');

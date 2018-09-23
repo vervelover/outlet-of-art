@@ -90,13 +90,13 @@ function ap_single_artwork_artist_name() {
             $existStatus = 'yes';
         }
     }
-    ?>
-    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
-        <i class="fa fa-heart" aria-hidden="true"></i>
+    if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
+    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">       
+        <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
+        <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>
         <span class="follow-count"><?php echo $followCount->found_posts; ?></span>
     </span>
-    <?php
+    <?php if (!is_user_logged_in()) echo '</a>';
 }
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );

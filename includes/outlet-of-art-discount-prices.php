@@ -79,8 +79,8 @@ function ap_custom_dynamic_sale_price( $sale_price, $product ) {
 	if(get_field('sconto_dimensioni', 'option')) {
 		$timeBegins = strtotime(get_field('data_inizio_sconto_dimensioni', 'option'));
 		$timeBegins = strtotime(get_field('data_fine_sconto_dimensioni', 'option'));
-		$height = $product->get_height();
-		$length = $product->get_length();
+		$height = get_field('altezza');
+		$length = get_field('lunghezza');
 		$minLength = get_field('lunghezza_minima_cm', 'option');
 		$maxLength = get_field('lunghezza_massima_cm', 'option');
 		$minHeight = get_field('altezza_minima_cm', 'option');

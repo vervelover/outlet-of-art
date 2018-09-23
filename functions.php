@@ -448,15 +448,15 @@ function ap_loop_artwork_info($location = null) {
 		?>
 			<p>
 				<?php the_field('tecnica');
-				if ($product->get_length()) {
+				if (get_field('altezza')) {
 					echo ', ';
-					echo $product->get_length();
+					echo get_field('lunghezza');
 					echo 'cm x ';
-					echo $product->get_height();
+					echo get_field('altezza');
 					echo 'cm';
-					if ($product->get_width()) {
+					if (get_field('larghezza')) {
 						echo ' x ';
-						echo $product->get_width();
+						echo get_field('larghezza');
 						echo 'cm';
 					}
 				}
@@ -469,15 +469,15 @@ function ap_loop_artwork_info($location = null) {
 		<footer class="entry-footer">
 			<p class="entry-meta">
 				<?php the_field('tecnica');
-				if ($product->get_length()) {
+				if (get_field('lunghezza')) {
 					echo ', ';
-					echo $product->get_length();
+					echo get_field('lunghezza');
 					echo 'cm x ';
-					echo $product->get_height();
+					echo get_field('altezza');
 					echo 'cm';
-					if ($product->get_width()) {
+					if (get_field('larghezza')) {
 						echo ' x ';
-						echo $product->get_width();
+						echo get_field('larghezza');
 						echo 'cm';
 					}
 				}

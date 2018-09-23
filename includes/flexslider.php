@@ -200,10 +200,10 @@ function ap_flexslider_shortcode($atts = null) {
 		            $description = apply_filters('the_excerpt', get_post_field('post_excerpt', $artist_page_ID ));
 		            $tecnica = get_field('tecnica');
 		            $product = wc_get_product(get_the_ID());
-		            if ($product->get_length()) {
+		            if (get_field('lunghezza')) {
 		            	// $tecnica = $product->get_height();
-		            	$larghezza = $product->get_length();
-		            	$altezza = $product->get_height();
+		            	$larghezza = get_field('lunghezza');
+		            	$altezza = get_field('altezza');
 		            } else {
 		            	$larghezza = '';
 		            	$altezza = '';

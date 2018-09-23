@@ -124,10 +124,22 @@ ul.slides {
         h3 {
             color: $white;
             font-weight: $bold;
-            font-size: 4.2rem;
+            font-size: 3rem;
+            @include breakpoint(sm) {
+                font-size: 4.2rem;
+            }
+            
         }
         .slide-text {
             max-width: 58rem;
+            display: none;
+            @include breakpoint(xs) {
+                display: block;
+                font-size: 1.3rem;
+            }
+            @include breakpoint(sm) {
+                font-size: 1.8rem;
+            }
         }
     }
 }

@@ -52,13 +52,6 @@
             text-transform: uppercase;
         }
 
-        .artist-archive-regione {
-            text-align: center;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: $black;
-        }
-
         p {
             margin-bottom: 2rem;
         }
@@ -73,6 +66,13 @@
         font-size: 1.6rem;
         font-weight: $bolder;
     }
+}
+
+.artist-archive-regione {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: $black;
 }
 
 /* Artists single page styles */

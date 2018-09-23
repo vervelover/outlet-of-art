@@ -92,18 +92,59 @@ function show_followed_artists() {
     if ($existQuery->found_posts) {
     	global $savedArtistsIDs;
         $savedArtistsIDs = array();
-        $postedDates = array(
-        	'section' => array(
-        		'date' => array(),
-        		'postID' => array()
-        	)	
-        );
+        $postedDates = array();
+        $allDates = array();
+
+        // Format dates to compare them by day
+        $dateformatstring = "d F, Y";
 
 	    for ( $i = 0; $i < $existQuery->found_posts; $i++) {
 	    	$followID = $existQuery->posts[$i]->ID;
 	    	$followedArtistID = intval(get_field('followed_artist_id', $followID));
 	    	array_push($savedArtistsIDs, $followedArtistID );
+	    	array_push($postedDates,array(
+	    		'date' => $existQuery->posts[$i]->post_date,
+	    		'postID' => $followedArtistID
+	    	));
 	    }
+
+	    foreach ($postedDates as $postedDate) {
+	    	var_dump( $postedDate['date']);
+	    	$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
+	    	array_push($allDates, $formattedDate);
+	    }
+
+	    $uniqueDates = array_unique($allDates);
+	    $postsByDate = array();
+
+	    foreach ($uniqueDates as $uniqueDate) {
+	    	$i=0;
+	    	
+	    	$combinedPostDate = array();
+    		foreach ($postedDates as $postedDate) {
+	    		$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
+	    		if ($formattedDate == $uniqueDate) {
+	    			array_push($combinedPostDate, $postedDate['postID']);
+	    		}
+	    	}
+	    	
+
+	    	array_push($postsByDate, array(
+	    		'date' => $uniqueDate,
+	    		'postID' => $combinedPostDate
+	    	));
+	    	
+	    	$i++;
+	    }
+
+	    
+	    echo '<pre>';
+	    var_dump($postsByDate);
+	   
+	    echo '<p>$postedDates:</p>';
+	   
+	    echo '</pre>';
+
 	
 	    echo '<ul class="products columns-3">';
 	    $i = 0;
@@ -135,7 +176,7 @@ function show_followed_artists() {
 					$savedArtistsArtworks->the_post();
 					$postDate = get_post_time('U', true);;
 					
-					if (1537425793 < $postDate) {
+					if (1537425700 < $postDate) {
 						woocommerce_get_template_part('content', 'product');
 					}			
 				}
@@ -144,7 +185,7 @@ function show_followed_artists() {
 		}
 		echo '</ul>';
 	
-	add_action('genesis_sidebar', 'ap_followed_artists_list');
+	add_action('genesis_before_sidebar_widget_area', 'ap_followed_artists_list');
 	function ap_followed_artists_list() {
 		global $savedArtistsIDs;
 		$savedArtists = new WP_Query(array(

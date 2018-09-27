@@ -18,6 +18,12 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
+/** Enqueue JS scripts */
+add_action( 'wp_enqueue_scripts', 'ap_fixed_summary' );
+function ap_fixed_summary() {
+    wp_enqueue_script( 'follow', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/follow-front-page.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
+}
+
 //* Add woocommere body classes to the head
 add_filter('body_class', 'ap_woo_body_class');
 function ap_woo_body_class($classes) {
@@ -45,14 +51,18 @@ function ap_artist_before_title() {
 	<p class="fixed-summary__artist-name"><?php echo get_field('artista', $post->ID)[0]->post_title; ?></p>
 	<?php
 	echo '<p class="artist-archive-regione">'.get_field('regione', get_field('artista', $post->ID)[0]->ID).'</p>';
+}
 
+// Follow Artist
+add_action( 'woocommerce_after_shop_loop_item', 'ap_follow_artist' );
+function ap_follow_artist() {
 	$followCount = new WP_Query(array(
         'post_type' => 'follow',
         'meta_query' => array(
             array(
                 'key' => 'followed_artist_id',
                 'compare' => '=',
-                'value' => get_the_ID()
+                'value' => get_field('artista')[0]->ID
             )
         )
     ));
@@ -68,7 +78,7 @@ function ap_artist_before_title() {
                 array(
                     'key' => 'followed_artist_id',
                     'compare' => '=',
-                    'value' => get_the_ID()
+                    'value' => get_field('artista')[0]->ID
                 )
             )
         ));
@@ -78,7 +88,7 @@ function ap_artist_before_title() {
         }
     }
 	if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
-    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">       
+    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">       
         <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
         <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>
         <span class="follow-count"><?php echo $followCount->found_posts; ?></span>

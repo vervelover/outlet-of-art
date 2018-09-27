@@ -1,5 +1,8 @@
 jQuery(document).ready(function($){
-    // if menu is visible use this, else use div-toggle.jsù
+    // if menu is visible use this, else use div-toggle.js
+    /*var artworks = $('#artworks').html();
+    $('#overview').append(artworks)*/
+
     $('.artist-menu__list-item--link').click(function () {
         var clicked = $(this);
         $('.artist-menu__list-item--link').each(function(){
@@ -9,6 +12,7 @@ jQuery(document).ready(function($){
                 $(menu.attr('data-item')).hide();
             }
         });
+
         $(clicked.attr('data-item')).fadeToggle();
     });
     $(".option-content").hide();

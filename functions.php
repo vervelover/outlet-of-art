@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a01' . time());
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a04');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -346,10 +346,16 @@ add_filter( 'wp_nav_menu_items', 'ap_top_menu_items', 10, 2 );
 function ap_top_menu_items ( $items, $args ) {
 
 	$logout_url = wp_logout_url();
+	$newFollows = ap_check_new_follows(); // è in follow-route.php
 
-	if(is_user_logged_in()) {
+	if(is_user_logged_in() && $newFollows) {
 		if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/opere-salvate') . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/opere-salvate') . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="follows-count">' . $newFollows[0]["followsCount"] . '</span></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+	    }
+	    return $items;
+	} else if (is_user_logged_in() && !$newFollows) {
+		if ($args->theme_location == 'top-menu') {
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/opere-salvate') . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
 	    }
 	    return $items;
 	} else {
@@ -362,10 +368,10 @@ function ap_top_menu_items ( $items, $args ) {
 }
 add_filter( 'woocommerce_currencies', 'ap_custom_currency_names' );
 function ap_custom_currency_names( $currencies ) {
-  // select currency by currency abbreviation.
-  $currencies['USD']="Usd";
-  $currencies['EUR']="Eur";
-  return $currencies;
+    // select currency by currency abbreviation.
+    $currencies['USD']="Usd";
+    $currencies['EUR']="Eur";
+    return $currencies;
 }
 
 function ap_language_selector(){

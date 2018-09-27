@@ -91,3 +91,14 @@
   visibility: hidden;
   opacity: 0;
 }
+
+.follows-count {
+  font-size: .8rem;
+  font-weight: $bold;
+  background: rgba($gray, .7);
+  color: $white;
+  padding: .2rem .5rem;
+  border-radius: 100px;
+  left: -.8rem;
+  top: -.8rem;
+}

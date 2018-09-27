@@ -95,7 +95,7 @@ function artist_navigation() {
             <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
         </div>
         <div class="option-content">
-            <div class="option-content__content" id="artworks">
+            <div class="option-content__content" id="artworks" style="display: none">
             	<h2 class="related-artworks__title"><?php _e('Artworks', 'business-pro');?></h2>
                 <?php show_single_artist_artworks(); ?>
             </div>

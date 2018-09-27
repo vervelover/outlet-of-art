@@ -1,0 +1,53 @@
+.search {
+
+	.page-header {
+
+		.search-results-filter {
+			color: $dark;
+			width: 100%;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: $font-body;
+			font-size: 1.5rem;
+
+			&__artist-filter {
+				padding-right: 2rem;
+				border-right: 2px solid $dark;
+				cursor: pointer;
+			}
+			&__artwork-filter {
+				padding-left: 2rem;
+				cursor: pointer;
+			}
+		}
+
+	}
+
+	
+	ul.products {
+		article.entry {
+			padding: 0;
+			width: $one-fourth;
+			&:nth-of-type(4n+1) {
+				margin-left: 0;
+			}
+			img {
+				width: 242px;
+				height: 242px;
+				object-fit: cover;
+				clip-path: circle(35% at 50% 50%);
+			}
+			h2.woocommerce-loop-product__title {
+				background-color: #fff;
+				font-size: 1.4rem;
+				font-style: italic;
+				font-family: $font-heading;
+				text-transform: capitalize;
+				position: relative;
+				margin-top: 0;
+				padding-bottom: 0;
+
+			}
+		}
+	}
+}

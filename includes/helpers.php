@@ -162,7 +162,8 @@ function business_custom_header() {
 
  	} elseif ( is_search() ) {
 
- 		$id = get_page_by_path( 'search' );
+ 		add_filter( 'body_class', 'ap_no_header_image_body_class' );
+ 		return;
 
  	} elseif ( is_404() ) {
 

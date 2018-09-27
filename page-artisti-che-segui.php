@@ -104,44 +104,6 @@ function show_followed_artists() {
 	    }
 
 	    $datesAndArtworks = array();
-
-	    // foreach ($postedDates as $postedDate) {
-	    // 	$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
-	    // 	array_push($allDates, $formattedDate);
-	    // }
-
-	    // $uniqueDates = array_unique($allDates);
-	    // $postsByDate = array();
-	    
-
-	    // foreach ($uniqueDates as $uniqueDate) {
-	    // 	$i=0;
-	    	
-	    // 	$combinedPostDate = array();
-    	// 	foreach ($postedDates as $postedDate) {
-	    // 		$formattedDate = date_i18n( $dateformatstring, strtotime($postedDate['date']) );
-	    // 		if ($formattedDate == $uniqueDate) {
-	    // 			array_push($combinedPostDate, $postedDate['postID']);
-	    // 		}
-	    // 	}
-	    	
-
-	    // 	array_push($postsByDate, array(
-	    // 		'date' => $uniqueDate,
-	    // 		'postID' => $combinedPostDate
-	    // 	));
-	    	
-	    // 	$i++;
-	    // }
-
-	    
-	    //  $getAllArtworksByDate = array();
-
-	      
-	    // echo '</pre>';
-
-	    // prendi tutti gli artworks
-	    // per ogni data in postsByDate, se la data dell'artwork è successiva, prendilo
 	
 	    echo '<ul class="products columns-3">';
 	    $i = 0;

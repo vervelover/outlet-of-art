@@ -202,13 +202,13 @@
     position: relative;
     @include overlay;
     @include breakpoint(sm) {
-        padding: 15vh 0 15vh;
+        padding: 25vh 0 5vh;
         .home & {
             padding: 0;
         }
     }
     @include breakpoint(lg) {
-        padding: 20vh 0 20vh;
+        padding: 35vh 0 5vh;
         .home & {
             padding: 0;
         }
@@ -230,6 +230,30 @@
     p {
         max-width: map-get($breakpoints,sm);
         margin: 0 auto;
+    }
+
+    .single-post & {
+        text-align: left;
+
+        .wrap {
+            max-width: 48em;
+        }
+        h1 {
+            margin-bottom: 2rem;
+        }
+        span {
+            margin: 0;
+            margin-right: 5rem;
+            font-size: 1.4rem;
+        }
+        p.category-name {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: $bold;
+        }
+        .entry-meta {
+            display: flex;
+        }
     }
 }
 

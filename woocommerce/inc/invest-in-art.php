@@ -1,5 +1,10 @@
 <?php 
 
+/** Custom FlexSlider Navigation **/
+
+add_theme_support( 'wc-product-gallery-lightbox' );
+add_theme_support( 'wc-product-gallery-slider' );
+
 // Move price, remove short description and replace it with year and material
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
@@ -47,7 +52,7 @@ function ap_single_product_contact_button () {
 	}
     ?>
     <a href="#popup" class="button fixed-summary__button">
-        <?php _e('Contattaci', 'business-pro'); ?>
+        <?php _e('Richiedi Prezzo', 'business-pro'); ?>
     </a>
     <?php
 }

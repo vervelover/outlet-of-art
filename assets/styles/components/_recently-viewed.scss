@@ -11,6 +11,7 @@
 	}
 
 	&__items {
+		width: 80%;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -31,7 +32,7 @@
 				&:last-of-type {
 					margin-right: 0;
 				}
-			}	
+			}
 		}
 	}
 }

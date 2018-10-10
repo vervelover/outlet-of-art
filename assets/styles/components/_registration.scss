@@ -1,0 +1,14 @@
+.registration-box {
+	max-width: 50rem;
+	margin: 0 auto;
+
+	.registration-button {
+		margin-top: 2rem;
+		display: flex;
+		flex-direction: column;
+
+		button, input {
+			padding: 2.5rem;
+		}
+	}
+}

@@ -83,7 +83,7 @@ hr {
 
 b,
 strong {
-    font-weight: $bolder;
+    font-weight: $bold;
 }
 
 blockquote,
@@ -258,6 +258,20 @@ input[type="search"]::-webkit-search-results-button {
 
 fieldset {
     margin-bottom: 1em;
+}
+
+#phonelabel {
+    margin-top: 1.382em;
+}
+.cf7-phone-field {
+    display: flex;
+}
+#ccwrap {
+    width: 15rem;
+    margin-right: 1rem;
+    select {
+        padding: .8em;
+    }
 }
 
 

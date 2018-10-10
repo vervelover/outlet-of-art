@@ -126,9 +126,10 @@ $blog-columns: $single-column-blog;
 		width: auto;
 		display: inline-block;
 		position: absolute;
-		top: 45%;
+		top: 50%;
 		right: 0;
 		color: inherit;
+		transform: translateY(-50%);
 	}
 }
 

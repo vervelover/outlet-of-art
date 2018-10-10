@@ -289,7 +289,7 @@
   font-size: 1.5rem;
   @include breakpoint(md) {
     font-size: 1.5rem;
-    padding: 1em 1.25em;
+    padding: 1em 1.7em;
     text-align: center;
     border-top: none;
   }
@@ -1006,9 +1006,9 @@
     @include breakpoint(md) {
       font-size: 1em;
       right: 0;
-      margin: 0 0 0 .6rem;
+      margin: 0;
       // position: relative;
-      transform: translateX(0);
+      // transform: translateX(0);
     }
 }
 @media only screen and (max-width: 56em) {

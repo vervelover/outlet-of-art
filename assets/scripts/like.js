@@ -33,7 +33,8 @@ jQuery(document).ready(function($){
 					likeCount++;
 					currentLikeBox.find('.like-count').html(likeCount);
 					currentLikeBox.attr('data-like', response);
-					console.log(response);
+					currentLikeBox.find('.like-tooltiptext').html(likeartworksData.itemRemoveText);
+					// console.log(response);
 				},
 				error: function(response) {
 					console.log(response)
@@ -55,7 +56,8 @@ jQuery(document).ready(function($){
 					likeCount--;
 					currentLikeBox.find('.like-count').html(likeCount);
 					currentLikeBox.attr('data-like', '');
-					console.log(response);		
+					currentLikeBox.find('.like-tooltiptext').html(likeartworksData.itemAddText);
+					// console.log(response);		
 				},
 				error: function(response) {
 					console.log(response)

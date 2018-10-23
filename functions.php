@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a05');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a07');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -239,6 +239,10 @@ function business_scripts_styles() {
 
 	wp_enqueue_script( 'header-height', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/header-height.min.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
 
+	// Enqueue newsletter popup
+
+	wp_enqueue_script( 'popup', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/popup.min.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
+
 	// Enqueue responsive menu script.
 	wp_enqueue_script('business-menu', get_stylesheet_directory_uri().'/assets/scripts/min/menus.min.js', array('jquery'), CHILD_THEME_VERSION, true);
 
@@ -258,7 +262,9 @@ function business_scripts_styles() {
 
 	wp_localize_script('like', 'likeartworksData', array(
 	        'root_url' => get_site_url(),
-	        'nonce' => wp_create_nonce('wp_rest')
+	        'nonce' => wp_create_nonce('wp_rest'),
+	        'itemRemoveText' => __('Rimuovi dai preferiti', 'business-pro'),
+	        'itemAddText' => __('Aggiungi ai preferiti', 'business-pro')
 	    ));
 	wp_localize_script('follow', 'followedArtistsData', array(
 	        'root_url' => get_site_url(),
@@ -529,3 +535,54 @@ function ap_register_redirect( $redirect ) {
 }
  
 add_filter( 'woocommerce_registration_redirect', 'ap_register_redirect' );
+
+/**
+ * Popup contact form
+ */
+add_action('wp_footer', 'ap_output_newsletter_signup_form', 90);
+function ap_output_newsletter_signup_form() {
+    ?>
+    <div class="popup" id="popup-newsletter">
+        <div class="popup__content">
+            <div class="popup__right">
+                <a href="#" class="popup__close">&times;</a>
+                <div class="popup__content__form-container">
+                    <div class="popup__content__heading">
+                        Signup
+                    </div>
+                    <!-- Begin Mailchimp Signup Form -->
+					<div id="mc_embed_signup" class="wpcf7">
+						<form action="https://outletofart.us19.list-manage.com/subscribe/post?u=2ebedfb8b8958b4e9cfb727e5&amp;id=135b25483b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate wpcf7-form" target="_blank" novalidate>
+						    <div id="mc_embed_signup_scroll">
+							<h2>Subscribe to our mailing list</h2>
+						<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+						<div class="mc-field-group">
+							<label for="mce-FNAME">First Name </label>
+							<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+						</div>
+						<div class="mc-field-group">
+							<label for="mce-LNAME">Last Name </label>
+							<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+						</div>
+						<div class="mc-field-group">
+							<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+						</label>
+							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+						</div>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+						    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2ebedfb8b8958b4e9cfb727e5_135b25483b" tabindex="-1" value=""></div>
+						    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="wpcf7-form-control wpcf7-submit"></div>
+						    </div>
+						</form>
+					</div>
+
+					<!--End mc_embed_signup-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}

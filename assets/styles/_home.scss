@@ -5,6 +5,9 @@
     .site-inner {
         padding: 0;
     }
+    .page-header::before {
+        display: none;
+    }
 }
 
 // .front-page-1,

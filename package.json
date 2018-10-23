@@ -37,7 +37,9 @@
     "postcss-focus": "*",
     "yargs": "^9.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-sourcemaps": "^2.6.4"
+  },
   "scripts": {
     "test": "echo \"No test specified\""
   },

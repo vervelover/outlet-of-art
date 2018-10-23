@@ -57,8 +57,8 @@ remove_action( 'business_page_header', 'business_page_title', 10 );
 add_action( 'woocommerce_single_product_summary', 'ap_single_artwork_artist_name', 5 );
 add_action( 'woocommerce_single_product_summary', 'genesis_do_post_title', 5 );
 function ap_single_artwork_artist_name() {
-    echo '<span class="fixed-summary__artist-name">' . get_field('artista')[0]->post_title .'</span>';
-    
+    echo '<span class="fixed-summary__artist-name"><a style="text-decoration:none;" href="' . get_permalink(get_field('artista')[0]->ID) . '">' . get_field('artista')[0]->post_title .'</a></span>';
+
     $followCount = new WP_Query(array(
         'post_type' => 'follow',
         'meta_query' => array(
@@ -177,19 +177,19 @@ add_action('wp_footer', 'ap_output_css_only_popup_contact_form', 90);
 function ap_output_css_only_popup_contact_form() {
     ?>
     <div class="popup" id="popup">
-            <div class="popup__content">
-                <div class="popup__right">
-                    <a href="#section-tours" class="popup__close">&times;</a>
-                    <div class="popup__content__form-container">
-                        <div class="popup__content__heading">
-                            <?php echo '<span class="fixed-summary__artist-name popup__artist-name">' . get_field('artista')[0]->post_title .'</span><br/>'; ?>
-                            <?php echo '<p class="popup__artwork-name">'.get_the_title().'</p>'; ?>
-                        </div>
-                        <?php echo do_shortcode('[contact-form-7 id="1509" title="Modulo di contatto 1"]'); ?>
+        <div class="popup__content">
+            <div class="popup__right">
+                <a href="#section-tours" class="popup__close">&times;</a>
+                <div class="popup__content__form-container">
+                    <div class="popup__content__heading">
+                        <?php echo '<span class="fixed-summary__artist-name popup__artist-name">' . get_field('artista')[0]->post_title .'</span><br/>'; ?>
+                        <?php echo '<p class="popup__artwork-name">'.get_the_title().'</p>'; ?>
                     </div>
+                    <?php echo do_shortcode('[contact-form-7 id="1509" title="Modulo di contatto 1"]'); ?>
                 </div>
             </div>
         </div>
+    </div>
     <?php
 }
 

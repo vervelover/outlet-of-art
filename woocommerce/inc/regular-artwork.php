@@ -93,6 +93,17 @@ function ap_fixed_summary_shipping_info() {
             <i class="fa fa-heart-o" aria-hidden="true"></i>
             <i class="fa fa-heart" aria-hidden="true"></i>
             <span class="like-count"><?php echo $likeCount->found_posts; ?></span>
+            <div class="like-tooltip">
+                <span class="like-tooltiptext">
+                    <?php
+                    if ($existStatus == 'no') {
+                        _e('Aggiungi ai Preferiti', 'business-pro');
+                    } else {
+                        _e('Rimuovi dai Preferiti', 'business-pro');
+                    }
+                    ?>  
+                </span>
+            </div>
         </span>
         <?php
         echo genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );

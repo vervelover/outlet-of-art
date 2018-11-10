@@ -1,8 +1,7 @@
 <?php
 /**
- * This file controls the Saved Artworks Template
  *
- * @author Alessio Pangos
+ * Template Name: Saved Artworks
  *
  */
 

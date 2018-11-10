@@ -28,8 +28,9 @@ add_action( 'business_page_header', 'ap_search_results_filter', 10 );
 function ap_search_results_filter() {
 	?>
 	<div class="search-results-filter">
-		<span class="search-results-filter search-results-filter__artist-filter"><?php _e('Artisti', 'business-pro') ?></span>
-		<span class="search-results-filter search-results-filter__artwork-filter"><?php _e('Opere', 'business-pro') ?></span>
+		<span class="search-results-filter search-results-filter__all-filter active"><?php _e('All', 'business-pro') ?></span>
+		<span class="search-results-filter search-results-filter__artist-filter"><?php _e('Artists', 'business-pro') ?></span>
+		<span class="search-results-filter search-results-filter__artwork-filter"><?php _e('Artworks', 'business-pro') ?></span>
 	</div>
 	<?php
 }

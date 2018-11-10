@@ -1,9 +1,8 @@
 <?php
 
 /**
- * This file controls Registrati page
  *
- * @author Alessio Pangos
+ * Template Name: Registrati
  *
  */
 

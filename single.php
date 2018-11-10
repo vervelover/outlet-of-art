@@ -24,7 +24,7 @@ function ap_single_post_info() {
 	global $Genesis_Simple_Share;
 
 	$share =  genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
-	echo '<div class="entry-meta"><span>By ' . get_the_author() . ' ' . get_the_date() . '</span>' . $share . '</div>';
+	echo '<div class="entry-meta"><span>' . get_the_date() . '</span>' . $share . '</div>';
 }
 
 //* Run the Genesis loop

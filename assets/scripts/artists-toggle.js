@@ -1,8 +1,10 @@
 jQuery(document).ready(function($){
-    // if menu is visible use this, else use div-toggle.js
-    /*var artworks = $('#artworks').html();
-    $('#overview').append(artworks)*/
-
+    
+    if ($('.artist-menu').is(":visible")) {
+        var artworks = $('#artworks').html();
+        $('#overview').append(artworks);
+    }
+    
     $('.artist-menu__list-item--link').click(function () {
         var clicked = $(this);
         $('.artist-menu__list-item--link').each(function(){

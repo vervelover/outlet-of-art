@@ -165,23 +165,24 @@ function ap_custom_woocommerce_product_description_tab() {
     ?>
     <div class="single-product-additional-info">
         <div id="product-details" style="position:absolute;top:-10rem;"></div>
-
-            <h2 class="about-the-work"><?php _e('About The Work', 'business-pro'); ?></h2>
-            <div class="single-product-additional-info__artwork-excerpt">
-            	<?php 
-                // Get the excerpt, or trim the content if no excerpt
-	            if (has_excerpt()) { 
-	            	the_excerpt(); 
-	            } else { 
-	            	echo wp_trim_words( get_the_content(), 50, '...'); 
-	            }
-	         	?>
-	            <div id="artist-about-more" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di più', 'business-pro') ?></div>
-	        </div>
-            <div class="single-product-additional-info__artwork-content" style="display:none;">
-                <?php genesis_do_post_content(); ?>
-                <div id="artist-about-less" href="#" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di meno', 'business-pro') ?></div>
-            </div>
+            <?php if ( has_excerpt() || get_the_content() ) : ?>
+                <h2 class="about-the-work"><?php _e('About The Work', 'business-pro'); ?></h2>
+                <div class="single-product-additional-info__artwork-excerpt">
+                	<?php 
+                    // Get the excerpt, or trim the content if no excerpt
+    	            if (has_excerpt()) { 
+    	            	the_excerpt(); 
+    	            } else { 
+    	            	echo wp_trim_words( get_the_content(), 50, '...'); 
+    	            }
+    	         	?>
+    	            <div id="artist-about-more" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di più', 'business-pro') ?></div>
+    	        </div>
+                <div class="single-product-additional-info__artwork-content" style="display:none;">
+                    <?php genesis_do_post_content(); ?>
+                    <div id="artist-about-less" href="#" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di meno', 'business-pro') ?></div>
+                </div>
+            <?php endif; ?>
             <div class="option-heading">
                 <h2 class="option-heading--title"><?php _e('About', 'business-pro'); get_field('artista')[0]->post_title; ?></h2>
                 <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
@@ -317,7 +318,7 @@ function ap_output_artist_related_works_slider() {
     $artistID = get_field('artista')[0]->ID;
     // Check if there are related posts
     $regioneArtista = get_field('regione', $artistID);
-    $hasPosts = do_shortcode('[shortcode-flexslider ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="'.$regioneArtista.'" artist_ID='.$artistID.']');
+    $hasPosts = do_shortcode('[shortcode-flexslider limit=10 ulid="artwork-detail-slider" location="carousel" animation="slide" slideshowspeed="6" regione="'.$regioneArtista.'" artist_ID='.$artistID.']');
     if ($hasPosts) {
 
         ?>

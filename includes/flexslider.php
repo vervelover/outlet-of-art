@@ -138,7 +138,7 @@ function ap_flexslider_shortcode($atts = null) {
 
 		$args = array(
 			'post_type'      => 'product',
-			'posts_per_page' => $fs_atts['limit'],
+			'posts_per_page' => -1,
 			'orderby'        => 'rand',
 		);
 		$carousel = true;
@@ -148,7 +148,7 @@ function ap_flexslider_shortcode($atts = null) {
 
 		$args = array(
 			'post_type'      => 'slider',
-			'posts_per_page' => $fs_atts['limit'],
+			'posts_per_page' => -1,
 			'orderby'        => 'menu_order',
 			'order'          => 'ASC',
 		);
@@ -168,6 +168,8 @@ function ap_flexslider_shortcode($atts = null) {
 	$the_query = new WP_Query($args);
 	$slides    = array();
 	if ($the_query->have_posts()) {
+		$numPosts = 0;
+		$maxPosts = intval($fs_atts['limit']);
 		while ($the_query->have_posts()) {
 			$the_query->the_post();
 
@@ -193,7 +195,8 @@ function ap_flexslider_shortcode($atts = null) {
 				$loopArtistID = get_field('artista')[0]->ID;
                 $artist_regione = get_field('regione', $loopArtistID );
 
-				if ( $fs_atts['regione'] == $artist_regione && $currentArtistID !== $loopArtistID) {
+				if ( $fs_atts['regione'] == $artist_regione && $currentArtistID !== $loopArtistID && $numPosts < $maxPosts) {
+					$numPosts++;
 					$slideTitle = get_the_title();
 		            $slideImg = get_the_post_thumbnail($the_query->ID,'wooommerce_thumbnail');
 		            $artistName = get_field('artista')[0]->post_title;

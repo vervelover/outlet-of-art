@@ -1,9 +1,8 @@
 <?php
 
 /**
- * This file controls Login page
  *
- * @author Alessio Pangos
+ * Template Name: Accedi
  *
  */
 

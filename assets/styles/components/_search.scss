@@ -10,10 +10,19 @@
 			font-family: $font-body;
 			font-size: 1.5rem;
 
+			&.active {
+				font-weight: $bold;
+				text-decoration: underline;
+			}
+
+			&__all-filter,
 			&__artist-filter {
 				padding-right: 2rem;
 				border-right: 2px solid $dark;
 				cursor: pointer;
+			}
+			&__artist-filter {
+				padding-left: 2rem;
 			}
 			&__artwork-filter {
 				padding-left: 2rem;

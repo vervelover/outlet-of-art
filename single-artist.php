@@ -70,6 +70,7 @@ function artist_navigation() {
 			<li  class="artist-menu__list-item"><a class="artist-menu__list-item--link" id="artworks-artist-menu-item" data-item="#artworks"><?php _e('Artworks', 'business-pro'); ?></a></li>
 			<li  class="artist-menu__list-item"><a class="artist-menu__list-item--link" id="shows-artist-menu-item" data-item="#shows"><?php _e('Shows', 'business-pro'); ?></a></li>
 			<li  class="artist-menu__list-item"><a class="artist-menu__list-item--link" id="articles-artist-menu-item" data-item="#articles"><?php _e('Articles', 'business-pro'); ?></a></li>
+			<li  class="artist-menu__list-item"><a class="artist-menu__list-item--link" id="auction-artist-menu-item" data-item="#auction"><?php _e('Auction Results', 'business-pro'); ?></a></li>
 		</ul>
 
         <div class="option-heading option-heading--first">
@@ -123,9 +124,25 @@ function artist_navigation() {
             </div>
         </div>
 
+        <div class="option-heading">
+            <h2 class="option-heading--title"><?php _e('Auction Results', 'business-pro');?></h2>
+            <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+            <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
+        </div>
+        <div class="option-content">
+            <div class="option-content__content" id="auction" style="display: none">
+                <?php show_single_artist_auction_results(); ?>
+            </div>
+        </div>
+
 	</div>
 
 	<?php
+	function ap_output_artist_recently_viewed() {
+		do_action('ap_recently_viewed_products');
+	}
+	ap_output_artist_recently_viewed();
+
 }
 
 function show_single_artist_artworks() {
@@ -320,6 +337,95 @@ function show_single_artist_articles() {
 	if ($noArticles && $noExternalArticles) {
 		echo '<p>';
 		_e('There are no related articles', 'business-pro');
+		echo '</p>';
+	}
+}
+
+function show_single_artist_auction_results() {
+	if (get_field('abilita_auction_result_1')) {
+		?>
+		<div class="auction-results">
+			<div class="auction-results__desktop-heading">
+				<div class="auction-results__desk-title">
+					<?php _e('Title', 'business-pro'); ?>
+				</div>
+				<div class="auction-results__desk-title">
+					<?php _e('Auction House', 'business-pro'); ?>
+				</div>
+				<div class="auction-results__desk-title">
+					<?php _e('Date', 'business-pro'); ?>
+				</div>
+				<div class="auction-results__desk-title">
+					<?php _e('Estimate', 'business-pro'); ?>
+				</div>
+				<div class="auction-results__desk-title">
+					<?php _e('Sale Price', 'business-pro'); ?>
+				</div>
+			</div>
+		<?php
+		for ( $i = 1; $i <= 10; $i++ ) {
+			if (get_field('abilita_auction_result_'.$i.'')) {
+				?>
+				<div class="auction-results__entry">
+					<div class="auction-results__img-plus-title">
+						<div class="auction-results__mobile-title">
+							<?php _e('Title', 'business-pro'); ?>
+						</div>
+						<div class="auction-results__image">
+							<?php 
+								echo '<img class="artists-wrapper__featured-artwork--image" src="'.get_field('immagine_opera_auction_results_'.$i.'')['sizes']['woocommerce_thumbnail'].'" title="'.get_field('immagine_opera_auction_results_'.$i.'')['title'].'" alt="'.get_field('immagine_opera_auction_results_'.$i.'')['alt'].'" width="'.get_field('immagine_opera_auction_results_'.$i.'')['sizes']['woocommerce_thumbnail-width'].'" height="'.get_field('immagine_opera_auction_results_'.$i.'')['sizes']['woocommerce_thumbnail-height'].'">';
+							?>
+						</div>
+						<div class="auction-results__info">
+							<div class="auction-results__title">
+								<?php the_field('titolo_opera_auction_results_'.$i.'') ?>
+							</div>
+							<div class="auction-results__material">
+								<?php the_field('materiale_opera_auction_results_'.$i.'') ?>
+							</div>
+							<div class="auction-results__anno">
+								<?php the_field('anno_opera_auction_results_'.$i.'') ?>
+							</div>
+						</div>
+					</div>
+					<div class="auction-results__auction-house">
+						<div class="auction-results__mobile-title">
+							<?php _e('Auction House', 'business-pro'); ?>
+						</div>
+						<?php the_field('auction_house_'.$i.'') ?>
+					</div>
+					<div class="auction-results__date">
+						<div class="auction-results__mobile-title">
+							<?php _e('Date', 'business-pro'); ?>
+						</div>
+						<?php 
+							if (get_field('data_auction_results_'.$i.'')) {
+								$dateformatstring = "d F, Y";
+								$unixtimestamp = strtotime(get_field('data_auction_results_'.$i.''));
+								echo date_i18n($dateformatstring, $unixtimestamp);
+							}
+						?>
+					</div>
+					<div class="auction-results__estimate">
+						<div class="auction-results__mobile-title">
+							<?php _e('Estimate', 'business-pro'); ?>
+						</div>
+						<?php the_field('estimate_'.$i.'') ?>
+					</div>
+					<div class="auction-results__sale-price">
+						<div class="auction-results__mobile-title">
+							<?php _e('Sale Price', 'business-pro'); ?>
+						</div>
+						<?php the_field('sale_price_'.$i.'') ?>
+					</div>
+				</div>
+				<?php 
+			}
+		}
+		echo '</div>';
+	} else {
+		echo '<p>';
+		_e('There are no auction results for this artist yet.', 'business-pro');
 		echo '</p>';
 	}
 }

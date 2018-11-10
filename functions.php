@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a07');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a10');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -290,11 +290,14 @@ include_once (get_stylesheet_directory().'/includes/customize.php');
 // Load default settings for the theme.
 include_once (get_stylesheet_directory().'/includes/defaults.php');
 
-// Load theme's recommended plugins.
-include_once (get_stylesheet_directory().'/includes/plugins.php');
+// Load Auction Results ACF Fields
+include_once (get_stylesheet_directory().'/includes/auction-results-acf-fields.php');
 
 // Load Flexslider
 include_once (get_stylesheet_directory().'/includes/flexslider.php');
+
+// Load Newsletter Cookie
+include_once (get_stylesheet_directory().'/includes/newsletter-cookie.php');
 
 // Recently viewed products
 include_once (get_stylesheet_directory().'/includes/recently-viewed.php');
@@ -537,44 +540,40 @@ function ap_register_redirect( $redirect ) {
 add_filter( 'woocommerce_registration_redirect', 'ap_register_redirect' );
 
 /**
- * Popup contact form
+ * Popup newsletter
  */
-add_action('wp_footer', 'ap_output_newsletter_signup_form', 90);
+add_action('wp_footer', 'ap_output_newsletter_signup_form', 95);
 function ap_output_newsletter_signup_form() {
     ?>
-    <div class="popup" id="popup-newsletter">
-        <div class="popup__content">
-            <div class="popup__right">
-                <a href="#" class="popup__close">&times;</a>
+    <div class="popup popup--newsletter" id="popup-newsletter">
+        <div class="popup__content popup__content--newsletter">
+        	<div class="popup__left popup__left--newsletter">
+        		
+        	</div>
+            <div class="popup__right popup__right--newsletter">
+                <a href="#" class="popup__close--newsletter">&times;</a>
                 <div class="popup__content__form-container">
-                    <div class="popup__content__heading">
-                        Signup
-                    </div>
                     <!-- Begin Mailchimp Signup Form -->
 					<div id="mc_embed_signup" class="wpcf7">
 						<form action="https://outletofart.us19.list-manage.com/subscribe/post?u=2ebedfb8b8958b4e9cfb727e5&amp;id=135b25483b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate wpcf7-form" target="_blank" novalidate>
 						    <div id="mc_embed_signup_scroll">
-							<h2>Subscribe to our mailing list</h2>
-						<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+							<h2 class="popup__title popup__title--newsletter"><?php _e('Sign up for our email list', 'business-pro'); ?></h2>
+						<div class="popup__subtitle indicates-required"><?php _e('Find out about new art and collections added weekly', 'business-pro'); ?></div>
 						<div class="mc-field-group">
-							<label for="mce-FNAME">First Name </label>
-							<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+							<input type="text" value="" name="FNAME" class="popup__input popup__input--newsletter" id="mce-FNAME" placeholder="<?php _e('First Name', 'business-pro'); ?>">
 						</div>
 						<div class="mc-field-group">
-							<label for="mce-LNAME">Last Name </label>
-							<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+							<input type="text" value="" name="LNAME" class="popup__input popup__input--newsletter" id="mce-LNAME" placeholder="<?php _e('Last Name', 'business-pro'); ?>">
 						</div>
 						<div class="mc-field-group">
-							<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-						</label>
-							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+							<input type="email" value="" name="EMAIL" class="required email popup__input popup__input--newsletter" id="mce-EMAIL" placeholder="<?php _e('Email address', 'business-pro'); ?>">
 						</div>
 							<div id="mce-responses" class="clear">
 								<div class="response" id="mce-error-response" style="display:none"></div>
 								<div class="response" id="mce-success-response" style="display:none"></div>
 							</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 						    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2ebedfb8b8958b4e9cfb727e5_135b25483b" tabindex="-1" value=""></div>
-						    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="wpcf7-form-control wpcf7-submit"></div>
+						    <div class="clear"><input type="submit" value="<?php _e('Sign in', 'business-pro'); ?>" name="subscribe" id="mc-embedded-subscribe" class="wpcf7-form-control wpcf7-submit popup__submit popup__submit--newsletter"></div>
 						    </div>
 						</form>
 					</div>

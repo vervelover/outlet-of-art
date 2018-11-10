@@ -1,0 +1,80 @@
+$grid-template-columns: minmax(200px, 400px) 1fr 1fr 1fr 1fr;
+
+.auction-results {
+	width: 100%;
+	margin-bottom: 10rem;
+	border-bottom: 1px solid $light;
+
+	&__desktop-heading {
+		border-top: 1px solid $light;
+		display: flex;
+		padding: 2rem 0;
+		width: 100%;
+		display: none;
+		@include breakpoint(md) {
+			display: grid;
+			grid-template-columns: $grid-template-columns;
+		}
+	}
+	&__desk-title,
+	&__mobile-title {
+		font-family: $font-body;
+		font-size: 1rem;
+		font-weight: $bold;
+		text-transform: uppercase;
+		color: $dark;
+	}
+	&__mobile-title {
+		display: block;
+		padding: 3rem 0 1rem;
+		@include breakpoint(md) {
+			display: none;
+		}
+	}
+	&__entry {
+		padding: 2rem 0;
+		border-top: 1px solid $light;
+		color: $dark;
+		@include breakpoint(md) {
+			display: grid;
+			grid-template-columns: $grid-template-columns;
+		}
+		div {
+			padding-right: 1rem;
+		}
+	}
+	&__img-plus-title {
+		display: flex;
+		flex-direction: column;
+		@include breakpoint(md) {
+			flex-direction: row;
+		}
+	}
+	&__image {
+		padding-right: 2rem;
+		width: 190px;	
+		max-width: 30%;	
+	}
+	&__info {
+
+	}
+	&__title {
+		font-family: $font-heading;
+		font-size: 1.4rem;
+		font-style: italic;
+	}
+	&__material,
+	&__anno {
+		font-family: $font-heading;
+		font-size: 1.2rem;
+	}
+	&__auction-house {
+		font-family: $font-heading;
+		font-size: 1.4rem;
+	}
+	&__date,
+	&__estimate,
+	&__sale-price {
+		@extend .auction-results__auction-house;
+	}
+}

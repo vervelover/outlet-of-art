@@ -171,7 +171,7 @@ gulp.task('styles', function () {
 
 		// Process sass
 		.pipe(sass({
-			outputStyle: 'compressed'
+			outputStyle: 'expanded'
 		}))
 
 		// Pixel fallbacks for rem units.
@@ -217,7 +217,7 @@ gulp.task('styles', function () {
 
 		// Process sass again.
 		.pipe(sass({
-			outputStyle: 'compressed'
+			outputStyle: 'expanded'
 		}))
 
 		// Combine similar rules.

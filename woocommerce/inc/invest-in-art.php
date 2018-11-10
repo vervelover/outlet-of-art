@@ -115,28 +115,30 @@ function ap_invest_in_art_about() {
 	<div class="single-product-additional-info single-product-additional-info--invest-in-art">
         <div id="product-details"></div>
 
-			<div class="invest-in-art-section">
-				<div class="invest-in-art-section__left">
-					 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('About The Work', 'business-pro'); ?></h2>
-				</div>
-	            <div class="invest-in-art-section__right">
-		            <div class="single-product-additional-info__artwork-excerpt single-product-additional-info__artwork-excerpt--invest-in-art">
-		            	<?php 
-		                // Get the excerpt, or trim the content if no excerpt
-			            if (has_excerpt()) { 
-			            	the_excerpt(); 
-			            } else { 
-			            	echo wp_trim_words( get_the_content(), 50, '...'); 
-			            }
-			         	?>
-			            <div id="artist-about-more" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di più', 'business-pro') ?></div>
+			<?php if ( has_excerpt() || get_the_content() ) : ?>
+				<div class="invest-in-art-section">
+					<div class="invest-in-art-section__left">
+						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('About The Work', 'business-pro'); ?></h2>
+					</div>
+		            <div class="invest-in-art-section__right">
+			            <div class="single-product-additional-info__artwork-excerpt single-product-additional-info__artwork-excerpt--invest-in-art">
+			            	<?php 
+			                // Get the excerpt, or trim the content if no excerpt
+				            if (has_excerpt()) { 
+				            	the_excerpt(); 
+				            } else { 
+				            	echo wp_trim_words( get_the_content(), 50, '...'); 
+				            }
+				         	?>
+				            <div id="artist-about-more" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di più', 'business-pro') ?></div>
+				        </div>
+			            <div class="single-product-additional-info__artwork-content single-product-additional-info__artwork-content--invest-in-art" style="display:none;">
+			                <?php genesis_do_post_content(); ?>
+			                <div id="artist-about-less" href="#" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di meno', 'business-pro') ?></div>
+			            </div>
 			        </div>
-		            <div class="single-product-additional-info__artwork-content single-product-additional-info__artwork-content--invest-in-art" style="display:none;">
-		                <?php genesis_do_post_content(); ?>
-		                <div id="artist-about-less" href="#" class="option-content__artist-link option-content__artist-link--about"><?php _e('Leggi di meno', 'business-pro') ?></div>
-		            </div>
 		        </div>
-	        </div>
+		    <?php endif; ?>
 
 			<?php if ( get_field('provenance') ): ?>
 		        <div class="invest-in-art-section">

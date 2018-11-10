@@ -179,7 +179,7 @@ function ap_output_css_only_popup_contact_form() {
     <div class="popup" id="popup">
         <div class="popup__content">
             <div class="popup__right">
-                <a href="#section-tours" class="popup__close">&times;</a>
+                <a href="#" class="popup__close">&times;</a>
                 <div class="popup__content__form-container">
                     <div class="popup__content__heading">
                         <?php echo '<span class="fixed-summary__artist-name popup__artist-name">' . get_field('artista')[0]->post_title .'</span><br/>'; ?>

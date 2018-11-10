@@ -240,4 +240,12 @@
             }
         }
     }
+
+    .recently-viewed {
+        padding-top: 3rem;
+
+        &__title {
+            color: $dark;
+        }
+    }
 }

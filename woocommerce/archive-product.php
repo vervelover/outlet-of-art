@@ -36,9 +36,23 @@ add_action( 'business_page_header', 'woocommerce_breadcrumb', 1 );
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 
+// Add Movements & Styles Filter
+add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter', 5 );
+function movements_and_styles_filter() {
+	echo '<div class="products-filter__container">';
+		echo '<div class="products-filter__ms-filter">';
+			echo do_shortcode('[searchandfilter id="2052"]');
+		echo '</div>';
+}
+
 // Moving the catalog section up
-remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-add_action( 'business_page_header', 'woocommerce_catalog_ordering', 10 );
+// remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+// add_action( 'business_page_header', 'woocommerce_catalog_ordering', 10 );
+
+add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter_close_div', 50 );
+function movements_and_styles_filter_close_div() {
+	echo '</div>';
+}
 
 // Artist Before Title
 add_action( 'woocommerce_before_shop_loop_item_title', 'ap_artist_before_title' );

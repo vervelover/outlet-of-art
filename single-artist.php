@@ -159,7 +159,7 @@ function show_single_artist_artworks() {
 				)
 			)
 		));
-
+	
 	if ($createdProducts->have_posts()) {
 
 		add_filter('body_class', 'ap_no_padding_bottom_body_class');

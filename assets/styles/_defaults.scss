@@ -251,6 +251,13 @@ input[type="submit"] {
     }
 }
 
+select {
+    background: url("./assets/images/sort-down-solid.png") no-repeat right #f2f2f2;
+    background-size: 8px;
+    background-position: 96% 50%;
+    appearance: none;
+}
+
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button {
     display: none;

@@ -7,21 +7,14 @@
     .woocommerce-ordering {
         max-width: calc(100% - 21rem);
         width: auto;
-        float: right;
-        clear: left;
+        float: left;
+        clear: both;
 
-        padding-right: 5vw;
-   
         @include breakpoint(xs) {
             float: right;
-            clear: none;
+            clear: right;
         }
-        @include breakpoint(sm) {
-            padding-right: 5%;
-        }
-        @include breakpoint(md) {
-            padding-right: 8rem;
-        }
+
         select {
             height: auto;
             font-size: 1.5rem;
@@ -56,6 +49,38 @@
             top: 1em;
         }
     }
+    .products-filter {
+
+        &__container {
+            width: 100%;
+        }
+        &__ms-filter {
+            float: right;
+            clear: left;
+            color: $gray;
+            width: 100%;
+
+            .searchandfilter ul > li > ul {
+                display: flex;
+                margin-left: -$margin-left;
+                li {
+                    background-color: #D8D8D8;
+                    width: 20%;
+                    height: 90px;
+                    margin-left: $margin-left;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.3rem;
+                    text-transform: uppercase;
+                    font-family: $font-body;
+                    text-align: center;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+
     ul.products {
         @include breakpoint(sm) {
             display: flex;
@@ -165,7 +190,7 @@
             .entry-footer {
                 padding-top: 0;
             }
-            
+
         }
 
     }

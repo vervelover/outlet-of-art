@@ -4,17 +4,17 @@ jQuery(document).ready(function($){
 	$(".fixed-summary").width(parentwidth);
 
 	$('.fixed-summary__button').on('click', function() {
-		$('#popup, .popup__content').addClass('showpopup');
+		$('#popup, #popup .popup__content').addClass('showpopup');
 	});
 	$('.popup__close').on('click', function() {
-		$('#popup, .popup__content').removeClass('showpopup');
+		$('#popup, #popup .popup__content').removeClass('showpopup');
 	});
 
 	//Hide popup when clicking outside of it
 	$('#popup').click(function(event) { 
 		if(!$(event.target).closest('.popup__content').length) {
         	if($('.popup__content').hasClass('showpopup')) {
-            	$('#popup, .popup__content').removeClass('showpopup');
+            	$('#popup, #popup .popup__content').removeClass('showpopup');
         	}
     	}   
 	});

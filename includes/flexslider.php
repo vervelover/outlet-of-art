@@ -198,7 +198,7 @@ function ap_flexslider_shortcode($atts = null) {
 				if ( $fs_atts['regione'] == $artist_regione && $currentArtistID !== $loopArtistID && $numPosts < $maxPosts) {
 					$numPosts++;
 					$slideTitle = get_the_title();
-		            $slideImg = get_the_post_thumbnail($the_query->ID,'wooommerce_thumbnail');
+		            $slideImg = get_the_post_thumbnail($the_query->ID,'woocommerce_thumbnail');
 		            $artistName = get_field('artista')[0]->post_title;
 		            $description = apply_filters('the_excerpt', get_post_field('post_excerpt', $artist_page_ID ));
 		            $tecnica = get_field('tecnica');

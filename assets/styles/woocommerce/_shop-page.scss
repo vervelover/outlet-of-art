@@ -59,6 +59,7 @@
             clear: left;
             color: $gray;
             width: 100%;
+            margin-bottom: 2rem;
 
             .searchandfilter ul > li > ul {
                 display: flex;
@@ -76,6 +77,9 @@
                     font-family: $font-body;
                     text-align: center;
                     line-height: 1;
+                    label:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
         }
@@ -173,7 +177,7 @@
             }
             .woocommerce-LoopProduct-link {
                 display: block;
-                align-self: flex-start;
+                align-self: flex-end;
                 @include transition;
             }
             .button {
@@ -198,7 +202,7 @@
         .page-numbers {
             border: none;
             font-family: $font-body;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             li {
                 display: inline;
                 border: none;

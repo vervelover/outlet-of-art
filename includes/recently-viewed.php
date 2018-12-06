@@ -7,24 +7,24 @@
 // Set recently viewed products cookie
 add_action('init', 'ap_rv_cookie');
 function ap_rv_cookie() {
-    
+
         $post_id = url_to_postid( "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] );
-        
-        if(isset($_COOKIE['rv_artworks']) && $_COOKIE['rv_artworks']!=''){ 
+
+        if(isset($_COOKIE['rv_artworks']) && $_COOKIE['rv_artworks']!=''){
             $rv_artworks =  unserialize($_COOKIE['rv_artworks']);
             if (! is_array($rv_artworks)) {
                 $rv_artworks = array($post_id);
             }else{
                 array_unshift($rv_artworks,$post_id);
                 $rv_artworks = array_unique($rv_artworks);
-            }   
+            }
         }else{
             $rv_artworks = array($post_id);
         }
         setcookie( 'rv_artworks', serialize($rv_artworks) ,time() + ( DAY_IN_SECONDS * 31 ),'/');
-        
+
         return;
-    
+
 }
 add_action('wp_footer', 'ap_recently_viewed_products');
 function ap_recently_viewed_products(){
@@ -41,7 +41,7 @@ function ap_recently_viewed_products(){
         // Store recently viewed post ids in user meta.
         $recenty_viewed = get_user_meta(get_current_user_id(), 'recently_viewed', true);
         if( '' == $recenty_viewed ){
-            $recenty_viewed = array();            
+            $recenty_viewed = array();
         }
 
         // Prepend id to the beginning of recently viewed id array.(http://php.net/manual/en/function.array-unshift.php)
@@ -64,7 +64,7 @@ function ap_show_recently_viewed_products(){
     } else {
     	$recenty_viewed = unserialize($_COOKIE['rv_artworks']);
     }
-    
+
     if ($recenty_viewed) {
     	echo '<div class="single-product-section single-product-section__related-articles recently-viewed">';
 	    echo '<h2 class="recently-viewed__title">';
@@ -85,7 +85,7 @@ function ap_show_recently_viewed_products(){
 				?>
 				<div class="one-fifth">
 					<a href="<?php echo get_the_permalink(); ?>">
-						<?php the_post_thumbnail(); ?>
+						<?php echo get_the_post_thumbnail($recentlyViewdProducts->ID,'woocommerce_thumbnail'); ?>
 					</a>
 				</div>
 				<?php
@@ -96,5 +96,5 @@ function ap_show_recently_viewed_products(){
 	    echo '</div>';
 	    echo '</div>';
     }
-    
+
 }

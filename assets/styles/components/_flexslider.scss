@@ -128,7 +128,7 @@ ul.slides {
             @include breakpoint(sm) {
                 font-size: 4.2rem;
             }
-            
+
         }
         .slide-text {
             max-width: 58rem;
@@ -152,6 +152,9 @@ ul.slides {
     }
     a.flex-next::after, a.flex-prev::before {
         font-size: 3rem;
+    }
+    li.product {
+        display: flex !important;
     }
 }
 // .flex-control-thumbs {

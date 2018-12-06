@@ -146,6 +146,17 @@ function artist_navigation() {
 }
 
 function show_single_artist_artworks() {
+
+	// Get the artist ID in the original language (italian)
+	$curr_lang = ICL_LANGUAGE_CODE;
+
+	if ($curr_lang != 'it') {
+    	$id = icl_object_id(get_the_ID(), 'product', false, 'it');
+	}
+	else {
+	    $id = get_the_ID();
+	}
+
 	$createdProducts = new WP_Query(array(
 			'posts_per_page' => -1,
 			'post_type'      => 'product',
@@ -155,11 +166,11 @@ function show_single_artist_artworks() {
 				array(
 					'key'     => 'artista',
 					'compare' => 'LIKE',
-					'value'   => '"'.get_the_ID().'"',
+					'value'   => '"'.$id.'"',
 				)
 			)
 		));
-	
+
 	if ($createdProducts->have_posts()) {
 
 		add_filter('body_class', 'ap_no_padding_bottom_body_class');
@@ -181,6 +192,16 @@ function show_single_artist_artworks() {
 }
 
 function show_single_artist_shows() {
+	// Get the artist ID in the original language (italian)
+	$curr_lang = ICL_LANGUAGE_CODE;
+
+	if ($curr_lang != 'it') {
+    	$id = icl_object_id(get_the_ID(), 'product', false, 'it');
+	}
+	else {
+	    $id = get_the_ID();
+	}
+
 	$relatedShows = new WP_Query(array(
 			'posts_per_page' => 4,
 			'post_type'      => 'the-latest',
@@ -190,7 +211,7 @@ function show_single_artist_shows() {
 				array(
 					'key'     => 'artista_correlato',
 					'compare' => 'LIKE',
-					'value'   => '"'.get_the_ID().'"',
+					'value'   => '"'.$id.'"',
 				)
 			)
 		));
@@ -217,7 +238,7 @@ function show_single_artist_shows() {
 					<p class="entry-meta"><?php the_field('luogo'); ?><br><?php the_field('data_evento'); ?></p>
 				</footer>
 			</article>
-			<?php            
+			<?php
 		}
 		echo '</div>';
 	} else {
@@ -231,7 +252,16 @@ function show_single_artist_shows() {
 
 function show_single_artist_articles() {
 	$artistName = get_the_title();
-                        
+	// Get the artist ID in the original language (italian)
+	$curr_lang = ICL_LANGUAGE_CODE;
+
+	if ($curr_lang != 'it') {
+    	$id = icl_object_id(get_the_ID(), 'product', false, 'it');
+	}
+	else {
+	    $id = get_the_ID();
+	}
+
 	$relatedExternalArticles = new WP_Query(array(
 			'posts_per_page' => -1,
 			'post_type'      => 'articoli-esterni',
@@ -241,7 +271,7 @@ function show_single_artist_articles() {
 				array(
 					'key'     => 'artista_correlato',
 					'compare' => 'LIKE',
-					'value'   => '"'.get_the_ID().'"',
+					'value'   => '"'.$id.'"',
 				)
 			)
 		));
@@ -273,18 +303,18 @@ function show_single_artist_articles() {
 					$fileTwo = get_field('file_scaricabile_due');
 
 					if ( $fileOne )
-						echo '<a href="'.$fileOne['url'].'"><i class="fa fa-download"></i>'.$fileOne['title'].'</a><br/>';  
+						echo '<a href="'.$fileOne['url'].'"><i class="fa fa-download"></i>'.$fileOne['title'].'</a><br/>';
 					if ( $fileTwo )
-						echo '<a href="'.$fileTwo['url'].'"><i class="fa fa-download"></i>'.$fileTwo['title'].'</a><br/>';  
+						echo '<a href="'.$fileTwo['url'].'"><i class="fa fa-download"></i>'.$fileTwo['title'].'</a><br/>';
 					if ( !$fileOne && !$fileTwo )
 						echo '<a href="'.get_field('link_articolo').'">' . __('View Site', 'business-pro') . '</a>';
-					the_field('data_evento'); 
+					the_field('data_evento');
 
 					?>
 					</p>
 				</footer>
 			</article>
-			<?php            
+			<?php
 		}
 		echo '</div>';
 	} else {
@@ -292,6 +322,16 @@ function show_single_artist_articles() {
 	}
 
 	wp_reset_postdata();
+
+	// Get the artist ID in the original language (italian)
+	$curr_lang = ICL_LANGUAGE_CODE;
+
+	if ($curr_lang != 'it') {
+    	$id = icl_object_id(get_the_ID(), 'product', false, 'it');
+	}
+	else {
+	    $id = get_the_ID();
+	}
 
 	$relatedArticles = new WP_Query(array(
 			'posts_per_page' => 4,
@@ -302,7 +342,7 @@ function show_single_artist_articles() {
 				array(
 					'key'     => 'artista_correlato',
 					'compare' => 'LIKE',
-					'value'   => '"'.get_the_ID().'"',
+					'value'   => '"'.$id.'"',
 				)
 			)
 		));
@@ -325,7 +365,7 @@ function show_single_artist_articles() {
 				</a>
 				<h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="<?php the_permalink(); ?>"><p><span>Outlet Of Art</span></p><?php the_title(); ?></a></h2>
 			</article>
-			<?php            
+			<?php
 		}
 		echo '</div>';
 	} else {
@@ -372,7 +412,7 @@ function show_single_artist_auction_results() {
 							<?php _e('Title', 'business-pro'); ?>
 						</div>
 						<div class="auction-results__image">
-							<?php 
+							<?php
 								echo '<img class="artists-wrapper__featured-artwork--image" src="'.get_field('immagine_opera_auction_results_'.$i.'')['sizes']['woocommerce_thumbnail'].'" title="'.get_field('immagine_opera_auction_results_'.$i.'')['title'].'" alt="'.get_field('immagine_opera_auction_results_'.$i.'')['alt'].'" width="'.get_field('immagine_opera_auction_results_'.$i.'')['sizes']['woocommerce_thumbnail-width'].'" height="'.get_field('immagine_opera_auction_results_'.$i.'')['sizes']['woocommerce_thumbnail-height'].'">';
 							?>
 						</div>
@@ -398,7 +438,7 @@ function show_single_artist_auction_results() {
 						<div class="auction-results__mobile-title">
 							<?php _e('Date', 'business-pro'); ?>
 						</div>
-						<?php 
+						<?php
 							if (get_field('data_auction_results_'.$i.'')) {
 								$dateformatstring = "d F, Y";
 								$unixtimestamp = strtotime(get_field('data_auction_results_'.$i.''));
@@ -419,7 +459,7 @@ function show_single_artist_auction_results() {
 						<?php the_field('sale_price_'.$i.'') ?>
 					</div>
 				</div>
-				<?php 
+				<?php
 			}
 		}
 		echo '</div>';

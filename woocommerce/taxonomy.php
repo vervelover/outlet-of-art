@@ -39,7 +39,7 @@ add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter', 5 );
 function movements_and_styles_filter() {
 	echo '<div class="products-filter__container">';
 		echo '<div class="products-filter__ms-filter">';
-			echo do_shortcode('[searchandfilter id="2052"]');
+			echo do_shortcode('[searchandfilter slug="movements-styles"]');
 		echo '</div>';
 }
 

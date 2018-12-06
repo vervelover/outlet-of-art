@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a11');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a14');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -356,15 +356,17 @@ function ap_top_menu_items ( $items, $args ) {
 
 	$logout_url = wp_logout_url();
 	$newFollows = ap_check_new_follows(); // è in follow-route.php
+	$paginaOpere = get_page_by_path('opere-salvate');
+	$UrlPaginaOpere = get_permalink($paginaOpere->ID);
 
 	if(is_user_logged_in() && $newFollows) {
 		if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/opere-salvate') . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="follows-count">' . $newFollows[0]["followsCount"] . '</span></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $UrlPaginaOpere . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="follows-count">' . $newFollows[0]["followsCount"] . '</span></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
 	    }
 	    return $items;
 	} else if (is_user_logged_in() && !$newFollows) {
 		if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/opere-salvate') . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $UrlPaginaOpere . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
 	    }
 	    return $items;
 	} else {
@@ -373,7 +375,7 @@ function ap_top_menu_items ( $items, $args ) {
 	    }
 	    return $items;
 	}
-	
+
 }
 add_filter( 'woocommerce_currencies', 'ap_custom_currency_names' );
 function ap_custom_currency_names( $currencies ) {
@@ -411,12 +413,12 @@ function ap_language_selector(){
 // Change top menu after login
 add_filter( 'wp_nav_menu_args', 'ap_wp_nav_menu_args' );
 function ap_wp_nav_menu_args( $args = '' ) {
- 
-	if( is_user_logged_in() ) { 
+
+	if( is_user_logged_in() ) {
 	    $args['menu'] = 'top-menu-logged-in';
-	} else { 
+	} else {
 	    $args['menu'] = 'top-menu-logged-out';
-	} 
+	}
 	    return $args;
 }
 
@@ -442,7 +444,7 @@ function ap_custom_product_searchform($form) {
 
 /**
  * Change number of related products output
- */ 
+ */
 add_filter( 'woocommerce_output_related_products_args', 'ap_related_products_args' );
   function ap_related_products_args( $args ) {
 	$args['posts_per_page'] = 6; // 4 related products
@@ -502,7 +504,7 @@ function ap_loop_artwork_info($location = null) {
 		</footer>
 		<?php
 	}
-	
+
 }
 
 /**
@@ -516,14 +518,14 @@ function ap_loop_artwork_info($location = null) {
 function ap_login_redirect( $redirect ) {
     $redirect_page_id = url_to_postid( $redirect );
     $checkout_page_id = wc_get_page_id( 'checkout' );
-    
+
     if( $redirect_page_id == $checkout_page_id ) {
         return $redirect;
     }
- 
+
     return site_url('/');
 }
- 
+
 add_filter( 'woocommerce_login_redirect', 'ap_login_redirect' );
 
 /*
@@ -536,7 +538,7 @@ add_filter( 'woocommerce_login_redirect', 'ap_login_redirect' );
 function ap_register_redirect( $redirect ) {
     return site_url('/');
 }
- 
+
 add_filter( 'woocommerce_registration_redirect', 'ap_register_redirect' );
 
 /**
@@ -548,7 +550,7 @@ function ap_output_newsletter_signup_form() {
     <div class="popup popup--newsletter" id="popup-newsletter">
         <div class="popup__content popup__content--newsletter">
         	<div class="popup__left popup__left--newsletter">
-        		
+
         	</div>
             <div class="popup__right popup__right--newsletter">
                 <a href="#" class="popup__close--newsletter">&times;</a>

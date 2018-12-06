@@ -47,6 +47,10 @@
             text-decoration: none;
         }
     }
+    // Fix per filtro movements-styles che va duplicato in sidebar per funzionare
+    .sf-field-post-meta-movements__styles {
+        display: none !important;
+    }
 }
 
 .widget {
@@ -75,7 +79,7 @@
     }
     ul>li {
         margin-bottom: 0.5em;
-        padding-bottom: 2.5em;
+        padding-bottom: .5em;
     }
     ul>li:last-of-type {
         padding-bottom: 0;

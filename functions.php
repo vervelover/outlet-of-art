@@ -587,3 +587,21 @@ function ap_output_newsletter_signup_form() {
     </div>
     <?php
 }
+
+// Add Movements & Styles Filter
+add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter', 5 );
+function movements_and_styles_filter() {
+	echo '<div class="products-filter__container">';
+		echo '<div class="products-filter__ms-filter">';
+			echo do_shortcode('[searchandfilter slug="movements-styles"]');
+		echo '</div>';
+}
+
+// Moving the catalog section up
+// remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+// add_action( 'business_page_header', 'woocommerce_catalog_ordering', 10 );
+
+add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter_close_div', 50 );
+function movements_and_styles_filter_close_div() {
+	echo '</div>';
+}

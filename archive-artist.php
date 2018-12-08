@@ -4,7 +4,7 @@
  * This file controls the Artists Archive Template
  *
  * @author Alessio Pangos
- * 
+ *
  */
 
 /** Enqueue JS scripts */
@@ -18,20 +18,21 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_sidebar_cont
 
 add_filter( 'body_class', 'ap_artist_archive_additional_body_class' );
 function ap_artist_archive_additional_body_class( $classes ) {
-	
+
 	$classes[] = 'woocommerce';
 	return $classes;
-	
+
 }
 
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_sidebar_content' );
 
 /** Order Posts Alphabetically **/
-add_action('genesis_before_loop', 'child_before_loop');
-function child_before_loop () {
-    global $query_string;
-    query_posts($query_string . "&order=ASC&orderby=title");
-}
+// Removed because it conflicts with the Search And Filter Pro plugin
+// add_action('genesis_before_loop', 'child_before_loop');
+// function child_before_loop () {
+//     global $query_string;
+//     query_posts($query_string . "&order=ASC&orderby=title");
+// }
 
 remove_action( 'genesis_entry_header', 'business_reposition_post_meta', 0 );
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
@@ -83,7 +84,7 @@ function ap_additional_artists_fields() {
         }
     }
 	if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
-    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">       
+    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
         <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
         <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>
         <span class="follow-count"><?php echo $followCount->found_posts; ?></span>

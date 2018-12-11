@@ -103,7 +103,11 @@
     }
 
     &__sharing {
-        width: 38rem;
+        width: 100%;
+        max-width: 38rem;
+        @include breakpoint(sm) {
+            width: 38rem;
+        }
         margin: 0 auto;
         @include breakpoint(md) {
             width: 100%;
@@ -145,7 +149,9 @@
 
     & .option-heading {
         /* border-top: 1px solid $border; */
-		display: block;
+		display: flex;
+        justify-content: space-between;
+        align-items: center;
         border-top: 1px solid $light;
         @include breakpoint(md) {
             display: none;
@@ -169,7 +175,10 @@
             text-transform: capitalize;
             font-style: italic;
             padding-left: 0;
-            font-size: 2.2rem;
+            font-size: 1.6rem;
+            @include breakpoint(sm) {
+                font-size: 2.2rem;
+            }
         }
 	}
 
@@ -214,7 +223,7 @@
     	margin-right: 3.2rem;
     	line-height: 1;
     	font-size: 3.2rem;
-    	padding-top: 2.7rem;
+    	padding-top: 0;
     	color: $gray;
 
         .dashicons-arrow-right-alt2::before {

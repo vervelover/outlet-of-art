@@ -4,7 +4,11 @@
     .content-sidebar-wrap {
 
         .fixed-summary a.button {
-            min-width: 38rem;
+            width: 100%;
+            max-width: 38rem;
+            @include breakpoint(sm) {
+                min-width: 38rem;
+            }
             @include breakpoint(md) {
                 min-width: auto;
             }

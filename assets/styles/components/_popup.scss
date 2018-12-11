@@ -86,7 +86,10 @@
         display: table;
         justify-content: center;
         vertical-align: middle;
-        padding: 3rem 5rem;
+        padding: 2rem 1rem;
+        @include breakpoint(sm) {
+            padding: 3rem 5rem;
+        }
 
         &--newsletter {
             @include breakpoint(md) {
@@ -189,7 +192,10 @@
 }
 
 #mc_embed_signup_scroll {
-    padding: 4rem;
+    padding: 4rem 1rem;
+    @include breakpoint(sm) {
+        padding: 4rem;
+    }
     text-align: center;
 }
 

@@ -5,7 +5,7 @@
         border-bottom: 0;
     }
     .woocommerce-ordering {
-        max-width: calc(100% - 21rem);
+        // max-width: calc(100% - 21rem);
         width: auto;
         float: left;
         clear: both;
@@ -64,19 +64,36 @@
             .searchandfilter ul > li > ul {
                 display: flex;
                 margin-left: -$margin-left;
+                flex-wrap: wrap;
+
                 li {
-                    background-color: #D8D8D8;
-                    width: 20%;
-                    height: 90px;
-                    margin-left: $margin-left;
+                    width: calc(100% / 3);
+                    padding-left: $margin-left;
+                    height: 50px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 1.3rem;
+                    font-size: 1.1rem;
                     text-transform: uppercase;
                     font-family: $font-body;
                     text-align: center;
                     line-height: 1;
+                    @include breakpoint(md) {
+                        width: calc(100% / 6);
+                        height: 90px;
+                    }
+                    @include breakpoint(lg) {
+                        font-size: 1.3rem;
+                    }
+                    label {
+                        background-color: #D8D8D8;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
                     label:hover {
                         text-decoration: underline;
                     }

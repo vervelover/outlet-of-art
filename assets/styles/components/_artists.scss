@@ -10,13 +10,18 @@
         }
         &.sidebar-content {
             .entry {
-                width: $one-third;
+                width: calc(100% / 3);
+                margin-left: 0;
+                padding: 3rem .5rem;
+                @include breakpoint(sm) {
+                    padding: 3rem 1rem;
+                }
             }
         }
     }
 
     .content {
-        max-width: 31.2rem;
+        // max-width: 31.2rem;
         margin: 0 auto;
         @include breakpoint(xs) {
             max-width: 80rem;
@@ -191,7 +196,7 @@
     }
 
     .related-artworks {
-      
+
         &__title {
             font-size: 2.2rem;
             font-style: italic;
@@ -211,7 +216,7 @@
     .artist-menu {
         display: none;
         margin: 0 0 3rem;
-       
+
         @include breakpoint(md) {
             display: flex;
         }

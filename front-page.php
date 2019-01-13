@@ -88,7 +88,7 @@ function ap_follow_artist() {
         }
     }
 	if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
-    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">       
+    <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">
         <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
         <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>
         <span class="follow-count"><?php echo $followCount->found_posts; ?></span>
@@ -145,8 +145,8 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 				<div class="single-product-section single-product-section__related-artworks">
 			        <h2 class="home__title"><?php _e('Opere Selezionate', 'business-pro');?></h2>
 			        <p class="subtitle"><?php _e('Scopri opere originali di artisti da tutto il mondo', 'business-pro') ?></p>
-			        <ul class="products columns-4 home__opere-consigliate">
-			        	<?php 
+			        <div class="home__opere-consigliate">
+			        	<?php
 			        	$createdProducts = new WP_Query(array(
 								'posts_per_page' => -1,
 								'post_type'      => 'product',
@@ -180,11 +180,11 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 
 						wp_reset_postdata();
 			        	?>
-			        </ul>
+			        </div>
 
 			        <h2 class="home__title"><?php _e('Artisti consigliati', 'business-pro');?></h2>
-					 
-			        <?php 
+
+			        <?php
 
 			        $artistiConsigliati = new WP_Query(array(
 			        	'post_type' => 'artist',
@@ -234,7 +234,7 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 					?>
 
 					<!-- <h2 class="home__title">Sfoglia per categoria</h2> -->
-					
+
 					<?php
 
 			        function ap_output_artist_recently_viewed() {
@@ -244,13 +244,13 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 					ap_output_artist_recently_viewed();
 
 			        ?>
-			                
+
 			    </div>
 			</div>
-			
-			
+
+
 		</div>
-		<?php 
+		<?php
 
 
 		// Front page 2 widget area.

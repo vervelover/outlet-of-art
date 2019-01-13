@@ -185,7 +185,15 @@ function ap_output_css_only_popup_contact_form() {
                         <?php echo '<span class="fixed-summary__artist-name popup__artist-name">' . get_field('artista')[0]->post_title .'</span><br/>'; ?>
                         <?php echo '<p class="popup__artwork-name">'.get_the_title().'</p>'; ?>
                     </div>
-                    <?php echo do_shortcode('[contact-form-7 id="1509" title="Modulo di contatto 1"]'); ?>
+                    <?php 
+
+                    if (ICL_LANGUAGE_CODE == 'it') {
+                        echo do_shortcode('[contact-form-7 id="1509" title="Modulo di contatto 1"]'); 
+                    } else {
+                        echo do_shortcode('[contact-form-7 id="3664" title="Modulo di contatto ENG"]'); 
+                    }
+
+                    ?>
                 </div>
             </div>
         </div>

@@ -67,6 +67,11 @@ a.flex-prev::before {
         color: $white;
     }
 }
+.flexslider-homeslider {
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+}
 .flex-control-paging {
     position: absolute;
     bottom: -3rem;

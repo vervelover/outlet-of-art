@@ -214,6 +214,32 @@ function ap_custom_woocommerce_product_description_tab() {
                     <div class="option-content__space"></div>
 			   </div>
 		    </div>
+            <?php if(get_field('cornice')) : ?>
+                <div class="option-heading">
+                    <h2 class="option-heading--title"><?php _e('Frame', 'business-pro'); ?></h2>
+                    <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+                    <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
+                </div>
+                <div class="option-content">
+                    <div id="single-product-description" style="padding-bottom:4rem;">
+                        <h2 class="option-content__title"><?php _e('Frame', 'business-pro'); ?></h2>
+                        <?php the_field('cornice'); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if(get_field('dittico')) : ?>
+                <div class="option-heading">
+                    <h2 class="option-heading--title"><?php _e('Diptych', 'business-pro'); ?></h2>
+                    <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
+                    <div class="arrow-down"><span class="dashicons dashicons-arrow-right-alt2"></span></div>
+                </div>
+                <div class="option-content">
+                    <div id="single-product-description" style="padding-bottom:4rem;">
+                        <h2 class="option-content__title"><?php _e('Diptych', 'business-pro'); ?></h2>
+                        <?php the_field('dittico'); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
             
             <?php ap_output_artist_other_works(); ?>
             

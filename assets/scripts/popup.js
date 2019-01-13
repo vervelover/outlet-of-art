@@ -12,7 +12,6 @@ function setCookie(name,value,days) {
 
 jQuery(document).ready(function($){
 
-	console.log(expireData.cookieSet);
 	if (!expireData.cookieSet) {
 		setTimeout(function(){
 			$('#popup-newsletter, #popup-newsletter .popup__content').addClass('showpopup--newsletter');

@@ -439,10 +439,12 @@ function show_single_artist_auction_results() {
 							<?php _e('Date', 'business-pro'); ?>
 						</div>
 						<?php
+
 							if (get_field('data_auction_results_'.$i.'')) {
-								$dateformatstring = "d F, Y";
-								$unixtimestamp = strtotime(get_field('data_auction_results_'.$i.''));
-								echo date_i18n($dateformatstring, $unixtimestamp);
+								// $dateformatstring = "d F, Y";
+								// $unixtimestamp = strtotime(get_field('data_auction_results_'.$i.''));
+								// echo date_i18n($dateformatstring, $unixtimestamp);
+								the_field('data_auction_results_'.$i.'');
 							}
 						?>
 					</div>

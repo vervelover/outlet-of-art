@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 if( function_exists('acf_add_local_field_group') ):
 
 $total_auction_results = 10;
 $auction_fields = array();
 
-array_push($auction_fields, 
+array_push($auction_fields,
 	array(
 			'key' => 'field_5be568e0d34d0',
 			'label' => 'Auction Result 1',
@@ -178,8 +178,8 @@ array_push($auction_fields,
 				'class' => '',
 				'id' => '',
 			),
-			'display_format' => 'd/m/Y g:i a',
-			'return_format' => 'd/m/Y g:i a',
+			'display_format' => 'd F, Y',
+			'return_format' => 'd F, Y',
 			'first_day' => 1,
 		),
 		array(
@@ -223,7 +223,7 @@ array_push($auction_fields,
 );
 
 for ($i = 2; $i <= $total_auction_results; $i++) {
-	array_push($auction_fields, 
+	array_push($auction_fields,
 		array(
 			'key' => 'field_auction_result_'.$i.'',
 			'label' => 'Auction Result '.$i.'',
@@ -413,8 +413,8 @@ for ($i = 2; $i <= $total_auction_results; $i++) {
 				'class' => '',
 				'id' => '',
 			),
-			'display_format' => 'd/m/Y g:i a',
-			'return_format' => 'd/m/Y g:i a',
+			'display_format' => 'd F, Y',
+			'return_format' => 'd F, Y',
 			'first_day' => 1,
 		),
 		array(

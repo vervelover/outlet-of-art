@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a15');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a24');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -593,7 +593,7 @@ add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter', 5 );
 function movements_and_styles_filter() {
 	echo '<div class="products-filter__container">';
 		echo '<div class="products-filter__ms-filter">';
-			echo do_shortcode('[searchandfilter slug="movements-styles"]');
+			echo do_shortcode('[searchandfilter slug="filtro-opere"]');
 		echo '</div>';
 }
 

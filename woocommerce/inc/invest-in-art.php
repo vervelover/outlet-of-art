@@ -140,6 +140,28 @@ function ap_invest_in_art_about() {
 		        </div>
 		    <?php endif; ?>
 
+		    <?php if ( get_field('cornice_invest_in_art') ): ?>
+		        <div class="invest-in-art-section">
+					<div class="invest-in-art-section__left">
+						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Frame', 'business-pro'); ?></h2>
+					</div>
+		            <div class="invest-in-art-section__right">
+			            <?php the_field('cornice_invest_in_art'); ?>
+			        </div>
+		        </div>
+		    <?php endif; ?>
+
+		    <?php if ( get_field('dittico_invest_in_art') ): ?>
+		        <div class="invest-in-art-section">
+					<div class="invest-in-art-section__left">
+						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Diptych', 'business-pro'); ?></h2>
+					</div>
+		            <div class="invest-in-art-section__right">
+			            <?php the_field('dittico_invest_in_art'); ?>
+			        </div>
+		        </div>
+		    <?php endif; ?>
+
 			<?php if ( get_field('provenance') ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">

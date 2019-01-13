@@ -102,3 +102,16 @@ body .searchandfilter .meta-slider {
 		font-weight: $bold;
 	}
 }
+
+.products-filter__container {
+	h4 {
+		display: none;
+	}
+	li:not(.sf-field-taxonomy-movements_styles) {
+		display: none;
+	}
+}
+
+.sidebar .searchandfilter ul li.sf-field-taxonomy-movements_styles {
+	display: none;
+}

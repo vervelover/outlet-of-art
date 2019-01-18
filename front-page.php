@@ -236,6 +236,40 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 					<!-- <h2 class="home__title">Sfoglia per categoria</h2> -->
 
 					<?php
+					
+					$sezioniOfferta = new WP_Query(array(
+						'post_type' => 'sezione-offerta',
+						'posts_per_page' => 3
+					));
+			
+					if ($sezioniOfferta->found_posts) {
+						?>
+						<h2 class="home__title"><?php _e('Browse Art for Sale', 'business-pro');?></h2>
+						<?php 
+
+						echo '<div class="sezione-offerte">';
+						$i = 1;
+					 	while($sezioniOfferta->have_posts()) {
+					 		$sezioniOfferta->the_post();
+					 		$image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "sezione_offerta" );
+					 		?>
+							<article class="has-post-thumbnail entry one-third" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+								<a class="entry-image-link" href="<?php the_field('link_offerta'); ?>" aria-hidden="true">
+									<img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
+									<div class="sezione-offerte__contenuto">
+										<span class="sezione-offerte__testo"><?php the_field('testo_offerta'); ?></span>
+										<?php if(get_field('prezzo_offerta')) : ?>
+											</br><span class="sezione-offerte__prezzo"><?php the_field('prezzo_offerta'); ?></span>
+										<?php endif; ?>
+									</div>
+								</a>
+							</article>
+							<?php 
+							$i++;
+					 	}
+					 	echo '</div>';
+					}
+					wp_reset_postdata();
 
 			        function ap_output_artist_recently_viewed() {
 					    do_action('ap_recently_viewed_products');

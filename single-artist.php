@@ -151,7 +151,7 @@ function show_single_artist_artworks() {
 	$curr_lang = ICL_LANGUAGE_CODE;
 
 	if ($curr_lang != 'it') {
-    	$id = icl_object_id(get_the_ID(), 'product', false, 'it');
+    	$id = icl_object_id(get_the_ID(), 'artist', false, 'it');
 	}
 	else {
 	    $id = get_the_ID();

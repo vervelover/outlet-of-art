@@ -263,7 +263,15 @@ function ap_artwork_custom_related() {
 function ap_output_artist_other_works() {
     $productID = get_the_ID();
     $artistName = get_field('artista')[0]->post_title;
-    $artistID = strval(get_field('artista')[0]->ID);
+    $artistID = get_field('artista')[0]->ID;
+    $curr_lang = ICL_LANGUAGE_CODE;
+
+    if ($curr_lang != 'it') {
+        $translatedID = icl_object_id($artistID, 'artist', false, 'it');
+    }
+    else {
+        $translatedID = $artistID;
+    }
 
     $relatedWorks = new WP_Query(array(
         'post__not_in' => array($productID),
@@ -275,11 +283,11 @@ function ap_output_artist_other_works() {
             array(
                 'key' => 'artista',
                 'compare' => 'LIKE',
-                'value' => '' . $artistID . ''
+                'value' => '' . $translatedID . ''
             )
         )
     ));
-   
+
     if ($relatedWorks->have_posts()) {
         // Check if there are other works by the artist other than the one we are currently processing
         // If there are no works, return false and exit before outputting the related works section

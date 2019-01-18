@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a24');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a25');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -38,6 +38,7 @@ add_filter('widget_text', 'do_shortcode');
 
 // Set hero image size.
 add_image_size('hero', 1920, 720, true);
+add_image_size('sezione_offerta', 470, 350, true);
 
 // Set artist image size to override plugin.
 add_image_size('artist-thumbnail', 300, 300, true);

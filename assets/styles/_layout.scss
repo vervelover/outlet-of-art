@@ -64,6 +64,9 @@
 /* ## Content Widths and Positions
 --------------------------------------------- */
 
+.content {
+	max-width: 100%;
+}
 @include breakpoint(md) {
 	.content {
 		width: map-get($breakpoints,sm);

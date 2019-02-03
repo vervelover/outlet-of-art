@@ -36,7 +36,24 @@
 	ul.products {
 		article.entry {
 			padding: 0;
-			width: $one-fourth;
+			width: 100%;
+			@include except-at-breakpoint(xxs) {
+				margin-left: 0;
+			}
+			@include except-at-breakpoint(sm) {
+				&:nth-of-type(even) {
+					margin-left: 0;
+				}
+			}
+			@include breakpoint(xxs) {
+				width: $one-half
+			}
+			@include breakpoint(sm) {
+				width: $one-fourth;
+				&:nth-of-type(4n+1) {
+					margin-left: 0;
+				}
+			}
 			&:nth-of-type(4n+1) {
 				margin-left: 0;
 			}

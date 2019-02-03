@@ -97,6 +97,11 @@
     }
     &__artisti-consigliati {
         display: none;
+        &--display {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .fixed-summary__artist-name, .artist-archive-regione {
             text-align: center!important;
             margin-bottom: 1rem;
@@ -117,13 +122,30 @@
     ul.products.columns-4 {
         justify-content: space-between;
         align-items: flex-end;
-        @include breakpoint(md) {
+        @include breakpoint(sm) {
             justify-content: flex-start;
+            &--center {
+                justify-content: center;
+            }
         }
         li.product {
             width: $one-half;
             @include breakpoint(sm) {
                 width: $one-fourth;
+            }
+            img {
+                width: 225px;
+                height: 225px;
+                object-fit: cover;
+                @include breakpoint(lg) {
+                    width: 275px;
+                    height: 275px;
+                }
+            }
+        }
+        &--center {
+            li.product {
+                margin-left: 0;
             }
         }
     }
@@ -133,13 +155,18 @@
         flex-wrap: wrap;
         margin-bottom: 4rem;
         .entry {
-            width: $one-third;
-            margin-left: $margin-left;
+            width: 100%;
             padding: 0;
             position: relative;
-            @include overlaydarker();
             &:hover {
                 opacity: 0.8;
+            }
+            @include breakpoint(xs) {
+                width: $one-third;
+                margin-left: $margin-left;
+            }
+            &.opaco {
+                @include overlaydarker();
             }
         }
         .entry:nth-of-type(3n+1) {
@@ -157,8 +184,14 @@
         }
         &__testo {
             color: $white;   
-            font-size: 2.6rem;
             line-height: 1;   
+            font-size: 2.6rem;
+            @include breakpoint(xs) {
+                font-size: 1.8rem;
+            }
+            @include breakpoint(md) {
+                font-size: 2.6rem;
+            }
         }
         &__prezzo {
             color: $white; 

@@ -9,6 +9,7 @@
  */
 
 $breakpoints: (
+   xxs: 21em,
 	xs: 32em,
 	sm: 48em,
 	md: 56em,
@@ -148,6 +149,26 @@ $blog-columns: $single-column-blog;
     } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
 
         @media (min-width: $breakpoint ) {
+            @content;
+        }
+
+    } @else {
+
+        @warn "No value could be retrieved from `#{$breakpoint}`. "
+              + "Please make sure it is defined in `$breakpoints` map, or it is a valid number with supported unit of px, em or rem.";
+    }
+}
+@mixin except-at-breakpoint( $breakpoint ) {
+
+    @if map-has-key( $breakpoints, $breakpoint ) {
+
+        @media ( max-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
+            @content;
+        }
+
+    } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
+
+        @media (max-width: $breakpoint ) {
             @content;
         }
 

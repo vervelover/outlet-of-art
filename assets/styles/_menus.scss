@@ -271,6 +271,13 @@
     }
 }
 
+.nav-secondary {
+    display: none;
+    @include breakpoint(md) {
+        display: block;
+    }
+}
+
 
 /* ## Menu Toggles
 --------------------------------------------- */

@@ -90,7 +90,12 @@ function ap_single_artwork_artist_name() {
             $existStatus = 'yes';
         }
     }
-    if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
+    if (ICL_LANGUAGE_CODE === 'it') {
+        $loginUrl = '/my-account';
+    } else {
+        $loginUrl = '/en/my-account';
+    }
+    if (!is_user_logged_in()) echo '<a href="' . site_url($loginUrl) . '">'; ?>
     <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">       
         <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
         <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>
@@ -104,16 +109,31 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 /**
  *  Include different files for regular artworks / invest in art category
  */
+$curr_lang = ICL_LANGUAGE_CODE;
 
-if ( has_term( 'investi-in-arte', 'product_cat' ) ) {
+if ($curr_lang != 'it') { 
+    if ( has_term( 'invest-in-art', 'product_cat' ) ) {
 
-    include_once (get_stylesheet_directory().'/woocommerce/inc/invest-in-art.php');
+        include_once (get_stylesheet_directory().'/woocommerce/inc/invest-in-art.php');
 
+    } else {
+
+        include_once (get_stylesheet_directory().'/woocommerce/inc/regular-artwork.php');
+
+    }
 } else {
+    if ( has_term( 'investi-in-arte', 'product_cat' ) ) {
 
-    include_once (get_stylesheet_directory().'/woocommerce/inc/regular-artwork.php');
+        include_once (get_stylesheet_directory().'/woocommerce/inc/invest-in-art.php');
 
+    } else {
+
+        include_once (get_stylesheet_directory().'/woocommerce/inc/regular-artwork.php');
+
+    }
 }
+
+
 
 /**
  * Common functions

@@ -80,6 +80,7 @@ function show_followed_artists() {
         'author' => get_current_user_id(),
         'post_type' => 'follow',
     ));
+    $existArtworks = 0;
 
     if ($existQuery->found_posts) {
     	global $savedArtistsIDs;
@@ -141,6 +142,7 @@ function show_followed_artists() {
 							'artworkID' => $savedArtistsArtworks->posts[$num]->ID,
 							'date' => $postDate
 						));
+						$existArtworks++;
 					}		
 					$num++;
 					
@@ -151,7 +153,10 @@ function show_followed_artists() {
 		    $i++;
 		    
 		}
-		
+		if ($existArtworks === 0) {
+			_e('There are no new artworks.', 'business-pro');
+		}
+
 		foreach ($datesAndArtworks as $datesAndArtwork) {
 	    	$formattedDate = date_i18n( $dateformatstring, strtotime($datesAndArtwork['date']) );
 	    	array_push($allDates, $formattedDate);
@@ -216,6 +221,9 @@ function show_followed_artists() {
 	wp_reset_postdata();
 
 }
+
+// Remove the default sidebar
+remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 
 // Artist Before Title
 add_action( 'woocommerce_before_shop_loop_item_title', 'ap_artist_before_title' );

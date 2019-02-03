@@ -143,9 +143,9 @@ function business_custom_header() {
  		add_filter( 'body_class', 'ap_no_header_image_body_class' );
  		$id = wc_get_page_id( 'shop' );
 
- 	} elseif ( is_post_type_archive('creator') ) {
-
- 		add_filter( 'body_class', 'ap_no_header_image_body_class' );
+ 	} elseif ( is_account_page() ) {
+		add_filter( 'body_class', 'ap_no_header_image_body_class' );
+ 		remove_action( 'genesis_before_content_sidebar_wrap', 'business_page_header' );
 		return;
 
  	} elseif ( is_post_type_archive() ) {

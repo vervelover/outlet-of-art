@@ -122,10 +122,7 @@ gulp.task('woo', function () {
 
 		// Minify and optimize style.css again.
 		.pipe(cssnano({
-			safe: false,
-			discardComments: {
-				removeAll: true,
-			},
+			safe: false
 		}))
 
 		// Add .min suffix.
@@ -201,10 +198,7 @@ gulp.task('styles', function () {
 
 		// Minify and optimize style.css again.
 		.pipe(cssnano({
-			safe: false,
-			discardComments: {
-				removeAll: true,
-			},
+			safe: false
 		}))
 
 		// Output non minified css to theme directory.
@@ -231,10 +225,7 @@ gulp.task('styles', function () {
 
 		// Minify and optimize style.css again.
 		.pipe(cssnano({
-			safe: false,
-			discardComments: {
-				removeAll: true,
-			},
+			safe: false
 		}))
 
 		// Add .min suffix.

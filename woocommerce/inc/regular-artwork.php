@@ -11,8 +11,13 @@ function ap_materials_and_year() {
 }
 
 add_filter( 'woocommerce_get_price_html', function( $price ) {
-
-    if ( get_field('prezzo_visibile') ) return $price;
+    if ($curr_lang != 'it') {
+            $id = icl_object_id(get_the_ID(), 'product', false, 'it');
+        }
+        else {
+            $id = get_the_ID();
+        }
+    if ( get_field('prezzo_visibile',$id) ) return $price;
 
     return '';
 
@@ -23,18 +28,18 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 add_action( 'woocommerce_single_product_summary', 'ap_single_product_contact_button', 30 );
 function ap_single_product_contact_button () {
     ?>
-    <a href="#popup" class="button fixed-summary__button">
+    <!-- <a href="#popup" class="button fixed-summary__button"> -->
         <?php 
 
-         if ( !get_field('prezzo_visibile') ) {
+        /* if ( !get_field('prezzo_visibile') ) {
             _e('Vedi Prezzo', 'business-pro'); 
          } else {
             _e('Contattaci', 'business-pro'); 
-         }
+         }*/
 
         ?>
             
-    </a>
+    <!-- </a> -->
     <?php
 }
 
@@ -47,10 +52,9 @@ function ap_fixed_summary_shipping_info() {
     </div>
     <div class="fixed-summary__services--list">
         <ul>
-            <li>Questions about this work?</li>
-            <li>Interested in other works by this artist? </li>
-            <li>Want to pay in installments?</li>
-            <li>Prova la tua opera installata . Guarda i nostri lavori</li>
+            <li><?php _e('Questions about this work?', 'business-pro'); ?></li>
+            <li><?php _e('Interested in other works by this artist?', 'business-pro'); ?></li>
+            <li><?php _e('Want to know our services?', 'business-pro'); ?></li>
         </ul>
     </div>
      <a href="#popup" class="button button--white fixed-summary__button"><?php _e('Contattaci', 'business-pro') ?></a>
@@ -87,8 +91,12 @@ function ap_fixed_summary_shipping_info() {
                 $existStatus = 'yes';
             }
         }
-
-        ?>
+        if (ICL_LANGUAGE_CODE === 'it') {
+            $loginUrl = '/my-account';
+        } else {
+            $loginUrl = '/en/my-account';
+        }
+        if (!is_user_logged_in()) echo '<a href="' . site_url($loginUrl) . '">'; ?>
         <span class="like-box" data-like="<?php echo $existQuery->posts[0]->ID; ?>" data-artwork="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
             <i class="fa fa-heart" aria-hidden="true"></i>
@@ -105,6 +113,7 @@ function ap_fixed_summary_shipping_info() {
                 </span>
             </div>
         </span>
+        <?php if (!is_user_logged_in()) echo '</a>'; ?>
         <?php
         echo genesis_share_get_icon_output( 'entry-meta', $Genesis_Simple_Share->icons );
     echo "</div>";
@@ -214,7 +223,19 @@ function ap_custom_woocommerce_product_description_tab() {
                     <div class="option-content__space"></div>
 			   </div>
 		    </div>
-            <?php if(get_field('cornice')) : ?>
+            <?php 
+            $curr_lang = ICL_LANGUAGE_CODE;
+
+            if ($curr_lang != 'it') {
+                $translatedID = icl_object_id(get_the_ID(), 'product', false, 'it');
+            }
+            else {
+                $translatedID = get_the_ID();
+            }
+
+            if(get_field('cornice', $translatedID)) : 
+                $cornice = get_field('cornice', $translatedID);
+            ?>
                 <div class="option-heading">
                     <h2 class="option-heading--title"><?php _e('Frame', 'business-pro'); ?></h2>
                     <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
@@ -223,11 +244,13 @@ function ap_custom_woocommerce_product_description_tab() {
                 <div class="option-content">
                     <div id="single-product-description" style="padding-bottom:4rem;">
                         <h2 class="option-content__title"><?php _e('Frame', 'business-pro'); ?></h2>
-                        <?php the_field('cornice'); ?>
+                        <?php echo $cornice; ?>
                     </div>
                 </div>
             <?php endif; ?>
-            <?php if(get_field('dittico')) : ?>
+            <?php if(get_field('dittico', $translatedID)) : 
+                $dittico = get_field('dittico', $translatedID);
+                ?>
                 <div class="option-heading">
                     <h2 class="option-heading--title"><?php _e('Diptych', 'business-pro'); ?></h2>
                     <div class="arrow-up"><span class="dashicons dashicons-arrow-up-alt2"></span></div>
@@ -236,7 +259,7 @@ function ap_custom_woocommerce_product_description_tab() {
                 <div class="option-content">
                     <div id="single-product-description" style="padding-bottom:4rem;">
                         <h2 class="option-content__title"><?php _e('Diptych', 'business-pro'); ?></h2>
-                        <?php the_field('dittico'); ?>
+                        <?php echo $dittico; ?>
                     </div>
                 </div>
             <?php endif; ?>

@@ -5,8 +5,10 @@ jQuery(document).ready(function($){
 
 	$('.fixed-summary__button').on('click', function() {
 		$('#popup, #popup .popup__content').addClass('showpopup');
+		$('#popup .wpcf7-form-control.wpcf7-textarea').html(contactformtext.text);
 	});
-	$('.popup__close').on('click', function() {
+	$('.popup__close').on('click', function(e) {
+		e.preventDefault();
 		$('#popup, #popup .popup__content').removeClass('showpopup');
 	});
 

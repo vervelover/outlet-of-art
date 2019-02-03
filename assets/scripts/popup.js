@@ -21,7 +21,8 @@ jQuery(document).ready(function($){
 	$('.show-newsletter').on('click', function() {
 		$('#popup-newsletter, #popup-newsletter .popup__content').addClass('showpopup--newsletter');
 	});
-	$('.popup__close--newsletter').on('click', function() {
+	$('.popup__close--newsletter').on('click', function(e) {
+		e.preventDefault();
 		$('#popup-newsletter, .popup__content').removeClass('showpopup--newsletter');
 		if (!expireData.cookieSet) {
 			setCookie('nl_cookie','1',30 * 12);

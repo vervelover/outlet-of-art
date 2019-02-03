@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a25');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a36');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -248,11 +248,18 @@ function business_scripts_styles() {
 	wp_enqueue_script('business-menu', get_stylesheet_directory_uri().'/assets/scripts/min/menus.min.js', array('jquery'), CHILD_THEME_VERSION, true);
 
 	// Localize responsive menus script.
+
+	$currentTopMenu  = 'ul#menu-top-menu';
+	if( is_user_logged_in() ) {
+	    $currentTopMenu  = 'ul#menu-top-menu-logged-in';
+	}
+
 	wp_localize_script('business-menu', 'genesis_responsive_menu', array(
 			'mainMenu'         => __('Menu', 'business-pro-theme'),
 			'subMenu'          => __('Menu', 'business-pro-theme'),
 			'menuIconClass'    => null,
 			'subMenuIconClass' => null,
+			'currentTopMenu'   =>  $currentTopMenu,
 			'menuClasses'      => array(
 				'combine'         => array(
 					'.nav-primary',
@@ -270,6 +277,11 @@ function business_scripts_styles() {
 	wp_localize_script('follow', 'followedArtistsData', array(
 	        'root_url' => get_site_url(),
 	        'nonce' => wp_create_nonce('wp_rest')
+	    ));
+
+	$contactFormText = __("Hi, I'm interested in purchasing this work. Could you please provide more information about the piece?", "business-pro");
+	wp_localize_script('fixed-summary', 'contactformtext', array(
+	        'text' => $contactFormText
 	    ));
 }
 
@@ -359,15 +371,17 @@ function ap_top_menu_items ( $items, $args ) {
 	$newFollows = ap_check_new_follows(); // è in follow-route.php
 	$paginaOpere = get_page_by_path('opere-salvate');
 	$UrlPaginaOpere = get_permalink($paginaOpere->ID);
+	$accountPage = get_page_by_path('my-account');
+	$urlMyAccount = get_permalink($accountPage->ID);
 
 	if(is_user_logged_in() && $newFollows) {
 		if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $UrlPaginaOpere . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="follows-count">' . $newFollows[0]["followsCount"] . '</span></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $urlMyAccount . '"><i class="fa fa-user" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $UrlPaginaOpere . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . site_url('/artisti-che-segui') . '"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="follows-count">' . $newFollows[0]["followsCount"] . '</span></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
 	    }
 	    return $items;
 	} else if (is_user_logged_in() && !$newFollows) {
 		if ($args->theme_location == 'top-menu') {
-        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $UrlPaginaOpere . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
+        $items = ap_language_selector() . '<li class="menu-item wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children">' . do_shortcode('[currency_switcher switcher_style=wcml-dropdown format="%symbol% %name%"]') . '</li>' . $items . '<li class="less-padding to-the-left menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $urlMyAccount . '"><i class="fa fa-user" aria-hidden="true"></i></a></li><li class="less-padding menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $UrlPaginaOpere . '"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $logout_url . '">Logout</a></li>';
 	    }
 	    return $items;
 	} else {
@@ -560,7 +574,7 @@ function ap_output_newsletter_signup_form() {
 					<div id="mc_embed_signup" class="wpcf7">
 						<form action="https://outletofart.us19.list-manage.com/subscribe/post?u=2ebedfb8b8958b4e9cfb727e5&amp;id=135b25483b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate wpcf7-form" target="_blank" novalidate>
 						    <div id="mc_embed_signup_scroll">
-							<h2 class="popup__title popup__title--newsletter"><?php _e('Sign up for our email list', 'business-pro'); ?></h2>
+							<h2 class="popup__title popup__title--newsletter"><?php _e('Sign up to our newsletter', 'business-pro'); ?></h2>
 						<div class="popup__subtitle indicates-required"><?php _e('Find out about new art and collections added weekly', 'business-pro'); ?></div>
 						<div class="mc-field-group">
 							<input type="text" value="" name="FNAME" class="popup__input popup__input--newsletter" id="mce-FNAME" placeholder="<?php _e('First Name', 'business-pro'); ?>">
@@ -605,4 +619,116 @@ function movements_and_styles_filter() {
 add_action( 'woocommerce_before_shop_loop', 'movements_and_styles_filter_close_div', 50 );
 function movements_and_styles_filter_close_div() {
 	echo '</div>';
+}
+
+// GOOGLE TAG MANAGER SCRIPTS
+
+add_action( 'wp_head', 'ap_tag_manager_head', -9999 );
+function ap_tag_manager_head() {
+	echo "<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PLM5M9T');</script>
+<!-- End Google Tag Manager -->";
+}
+
+add_action( 'genesis_before', 'ap_tag_manager_after_body_tag_opening', -99 );
+function ap_tag_manager_after_body_tag_opening() {
+	if ( current_filter() == 'genesis_before' )
+	echo '<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLM5M9T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->';
+}
+
+add_action('woocommerce_before_customer_login_form','ap_load_registration_header', 2);
+function ap_load_registration_header(){
+  if(isset($_GET['action'])=='register'){
+    ?>
+    	<section id="page-header" class="page-header" role="banner">
+    		<div class="wrap">
+    			<h1 class="entry-title"><?php _e( 'Register', 'woocommerce' ); ?></h1>
+    		</div>
+    	</section>
+    <?php 
+  } else {
+  	?>
+	  	<section id="page-header" class="page-header" role="banner">
+			<div class="wrap">
+				<h1 class="entry-title"><?php _e( 'Accedi', 'business-pro' ); ?></h1>
+			</div>
+		</section>
+	<?php
+  }
+}
+
+add_action('woocommerce_before_customer_login_form','ap_load_registration_form', 99);
+function ap_load_registration_form(){
+  if(isset($_GET['action'])=='register'){
+    woocommerce_get_template( 'myaccount/form-registration.php' );
+  } else {
+  	woocommerce_get_template( 'myaccount/form-accedi.php' );
+  }
+}
+
+add_filter( 'woocommerce_registration_errors', 'bbloomer_validate_name_fields', 10, 3 );
+ 
+function bbloomer_validate_name_fields( $errors, $username, $email ) {
+    if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
+        $errors->add( 'billing_first_name_error', __( 'First name is required', 'woocommerce' ) );
+    }
+    if ( isset( $_POST['billing_last_name'] ) && empty( $_POST['billing_last_name'] ) ) {
+        $errors->add( 'billing_last_name_error', __( 'Last name is required', 'woocommerce' ) );
+    }
+    return $errors;
+}
+
+add_action( 'woocommerce_created_customer', 'bbloomer_save_name_fields' );
+ 
+function bbloomer_save_name_fields( $customer_id ) {
+    if ( isset( $_POST['billing_first_name'] ) ) {
+        update_user_meta( $customer_id, 'billing_first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
+        update_user_meta( $customer_id, 'first_name', sanitize_text_field($_POST['billing_first_name']) );
+    }
+    if ( isset( $_POST['billing_last_name'] ) ) {
+        update_user_meta( $customer_id, 'billing_last_name', sanitize_text_field( $_POST['billing_last_name'] ) );
+        update_user_meta( $customer_id, 'last_name', sanitize_text_field($_POST['billing_last_name']) );
+    }
+ 
+}
+
+// VOCI ADDIZIONALI PAGINA MY-ACCOUNT
+add_filter ( 'woocommerce_account_menu_items', 'ap_saved_artworks_account_link' );
+function ap_saved_artworks_account_link( $menu_links ){
+ 
+ 	$artworks = __('Saved artworks', 'business-pro');
+ 	$follows = __('Followed artists', 'business-pro');
+    $new = array( 'saved-artworks' => $artworks,
+    			  'followed-artists' => $follows );
+
+    // array_slice() is good when you want to add an element between the other ones
+    $menu_links = array_slice( $menu_links, 0, 1, true ) 
+    + $new 
+    + array_slice( $menu_links, 1, NULL, true );
+ 
+    return $menu_links;
+ 
+}
+ 
+add_filter( 'woocommerce_get_endpoint_url', 'ap_saved_artworks_account_link_endpoint', 10, 4 );
+function ap_saved_artworks_account_link_endpoint( $url, $endpoint, $value, $permalink ){
+ 
+    if( $endpoint === 'saved-artworks' ) {
+ 		$artWorksPage = get_page_by_path('opere-salvate');
+		$url = get_permalink($artWorksPage->ID);
+    }
+    if( $endpoint === 'followed-artists' ) {
+ 		$followsPage = get_page_by_path('artisti-che-segui');
+        $url = get_permalink($followsPage->ID);
+    }
+
+    return $url;
+ 
 }

@@ -86,7 +86,7 @@ function ap_do_search_loop() {
 		
 		$query = new WP_Query( $args );
 		if ( $query->have_posts() ) {
-			echo '<ul class="home__artisti-consigliati products columns-4">';
+			echo '<ul class="home__artisti-consigliati home__artisti-consigliati--display products columns-4">';
 			// custom genesis loop with the above query parameters and hooks.
 			genesis_custom_loop( $args );
 			echo '</ul>';

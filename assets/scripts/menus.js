@@ -215,7 +215,7 @@
 
 			$( _getMenuSelectorString( combinedMenus ) ).show();
 			$.each( combinedMenus, function( key, value ) {
-				$( '.moved-item-' + value.replace( '.','' ) ).appendTo( value + ' ul#menu-top-menu' ).removeClass( 'moved-item-' + value.replace( '.','' ) );
+				$( '.moved-item-' + value.replace( '.','' ) ).appendTo( value + ' ' + genesis_responsive_menu.currentTopMenu ).removeClass( 'moved-item-' + value.replace( '.','' ) );
 			});
 
 		}

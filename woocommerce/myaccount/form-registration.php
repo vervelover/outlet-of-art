@@ -1,22 +1,6 @@
-<?php
+	<div class="registration-box">
 
-/**
- *
- * Template Name: Registrati
- *
- */
-
-//* Remove the post content (requires HTML5 theme support)
-remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
-
-add_action('genesis_entry_content', 'ap_woocommerce_registration_form');
-function ap_woocommerce_registration_form() {
-    ?>
-    <div class="registration-box">
-
-	<!--<h2><?php _e( 'Register', 'woocommerce' ); ?></h2>-->
-
-		<form method="post" class="register">
+		<form method="post" <?php do_action( 'woocommerce_register_form_tag' ); ?>>
 
 			<?php do_action( 'woocommerce_register_form_start' ); ?>
 
@@ -61,14 +45,10 @@ function ap_woocommerce_registration_form() {
 
 			<p class="registration-row registration-button">
 				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-				<input type="submit" class="woocommerce-Button button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' );  ?>" />
+				<input type="submit" class="woocommerce-Button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' );  ?>" />
 			</p>
 			<?php do_action( 'woocommerce_register_form_end' ); ?>
 
 		</form>
 	</div>
-    <?php
-}
-
-//* Run the Genesis loop
-genesis();
+  

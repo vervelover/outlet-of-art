@@ -87,7 +87,12 @@ function ap_follow_artist() {
             $existStatus = 'yes';
         }
     }
-	if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
+    if (ICL_LANGUAGE_CODE === 'it') {
+        $loginUrl = '/my-account';
+    } else {
+        $loginUrl = '/en/my-account';
+    }
+	if (!is_user_logged_in()) echo '<a href="' . site_url($loginUrl) . '">'; ?>
     <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_field('artista')[0]->ID ?>" data-exists="<?php echo $existStatus; ?>">
         <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
         <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>
@@ -182,7 +187,7 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 			        	?>
 			        </div>
 
-			        <h2 class="home__title"><?php _e('Artisti consigliati', 'business-pro');?></h2>
+			        <h2 class="home__title"><?php _e('Artista consigliato', 'business-pro');?></h2>
 
 			        <?php
 
@@ -197,11 +202,20 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 							)
 						)
 			        ));
+			        $i = 0;
 
 			        if($artistiConsigliati->have_posts()) {
 			        	while ($artistiConsigliati->have_posts()) {
 			        		$artistiConsigliati->the_post();
-			        		$artistID = get_the_ID();
+			        		if ($i === 0) {
+			        			if ($curr_lang != 'it') {
+							    	$artistID = icl_object_id(get_the_ID(), 'artist', false, 'it');
+								}
+								else {
+								    $artistID = get_the_ID();
+								}
+			        		}
+			        		$i++;
 			        	}
 			        }
 
@@ -221,7 +235,7 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 
 			        if ($prodottiArtistaConsigliato->have_posts()) {
 
-						echo '<ul class="home__artisti-consigliati products columns-4">';
+						echo '<ul class="home__artisti-consigliati products columns-4 columns-4--center">';
 						while ($prodottiArtistaConsigliato->have_posts()) {
 							$prodottiArtistaConsigliato->the_post();
 							woocommerce_get_template_part('content', 'product');
@@ -239,7 +253,9 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 					
 					$sezioniOfferta = new WP_Query(array(
 						'post_type' => 'sezione-offerta',
-						'posts_per_page' => 3
+						'posts_per_page' => 3,
+						'orderby' => 'title',
+						'order'   => 'ASC'	
 					));
 			
 					if ($sezioniOfferta->found_posts) {
@@ -253,7 +269,7 @@ if ( is_active_sidebar( 'front-page-1' ) ||
 					 		$sezioniOfferta->the_post();
 					 		$image_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "sezione_offerta" );
 					 		?>
-							<article class="has-post-thumbnail entry one-third" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
+							<article class="has-post-thumbnail entry one-third<?php if(get_field('opaco')) echo ' opaco'; ?>" itemscope="" itemtype="https://schema.org/CreativeWork" itemref="page-header">
 								<a class="entry-image-link" href="<?php the_field('link_offerta'); ?>" aria-hidden="true">
 									<img class="aligncenter post-image entry-image" itemprop="image" width="<?php echo $image_data[1]; ?>" height="<?php echo $image_data[2]; ?>" src="<?php echo $image_data[0]; ?>"  alt="<?php the_title(); ?>" itemprop="image">
 									<div class="sezione-offerte__contenuto">

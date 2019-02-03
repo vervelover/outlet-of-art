@@ -66,8 +66,9 @@ function ap_fixed_summary_shipping_info() {
     </div>
     <div class="fixed-summary__services--list">
         <ul>
-            <li>Auction FAQ</li>
-            <li>Ask a specialist</li>
+            <li><?php _e('Questions about this work?', 'business-pro'); ?></li>
+            <li><?php _e('Interested in other works by this artist?', 'business-pro'); ?></li>
+            <li><?php _e('Want to know our services?', 'business-pro'); ?></li>
         </ul>
     </div>
      <div class="fixed-summary__sharing">
@@ -140,24 +141,34 @@ function ap_invest_in_art_about() {
 		        </div>
 		    <?php endif; ?>
 
-		    <?php if ( get_field('cornice_invest_in_art') ): ?>
+		    <?php 
+		    $curr_lang = ICL_LANGUAGE_CODE;
+
+            if ($curr_lang != 'it') {
+                $translatedID = icl_object_id(get_the_ID(), 'product', false, 'it');
+            }
+            else {
+                $translatedID = get_the_ID();
+            }
+
+		    if ( get_field('cornice_invest_in_art', $translatedID) ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Frame', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
-			            <?php the_field('cornice_invest_in_art'); ?>
+			            <?php the_field('cornice_invest_in_art', $translatedID); ?>
 			        </div>
 		        </div>
 		    <?php endif; ?>
 
-		    <?php if ( get_field('dittico_invest_in_art') ): ?>
+		    <?php if ( get_field('dittico_invest_in_art', $translatedID) ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Diptych', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
-			            <?php the_field('dittico_invest_in_art'); ?>
+			            <?php the_field('dittico_invest_in_art', $translatedID); ?>
 			        </div>
 		        </div>
 		    <?php endif; ?>
@@ -173,13 +184,13 @@ function ap_invest_in_art_about() {
 		        </div>
 		    <?php endif; ?>
 
-		    <?php if ( get_field('literature') ): ?>
+		    <?php if ( get_field('literature', $translatedID) ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Literature', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
-			            <?php the_field('literature'); ?>
+			            <?php the_field('literature', $translatedID); ?>
 			        </div>
 		        </div>
 		    <?php endif; ?>
@@ -197,43 +208,43 @@ function ap_invest_in_art_about() {
 
 		   <?php ap_invest_in_art_external_articles(); ?>
 
-		    <?php if ( get_field('exhibited') ): ?>
+		    <?php if ( get_field('exhibited', $translatedID) ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Exhibited', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
-			            <?php the_field('exhibited'); ?>
+			            <?php the_field('exhibited', $translatedID); ?>
 			        </div>
 		        </div>
 		    <?php endif; ?>
 
-		    <?php if ( get_field('other_image') ): ?>
+		    <?php if ( get_field('other_image', $translatedID) ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Other Image', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
 			            <?php 
-			            echo '<img class="alignleft" src="'.get_field('other_image')['url'].'" title="'.get_field('other_image')['title'].'" alt="'.get_field('other_image')['alt'].'" width="'.get_field('other_image')['width'].'" height="'.get_field('other_image')['height'].'">';
+			            echo '<img class="alignleft" src="'.get_field('other_image', $translatedID)['url'].'" title="'.get_field('other_image', $translatedID)['title'].'" alt="'.get_field('other_image', $translatedID)['alt'].'" width="'.get_field('other_image', $translatedID)['width'].'" height="'.get_field('other_image', $translatedID)['height'].'">';
 			            ?>
 			        </div>
 		        </div>
 		    <?php endif; ?>
 
-		    <?php if ( get_field('download') ): ?>
+		    <?php if ( get_field('download', $translatedID) ): ?>
 		        <div class="invest-in-art-section">
 					<div class="invest-in-art-section__left">
 						 <h2 class="about-the-work about-the-work--invest-in-art"><?php _e('Download', 'business-pro'); ?></h2>
 					</div>
 		            <div class="invest-in-art-section__right">
 			            <?php 
-			            $downloadUno = get_field('download');
-						$downloadDue = get_field('download_due');
-						$downloadTre = get_field('download_tre');
-						$downloadQuattro = get_field('download_quattro');
-						$downloadCinque = get_field('download_cinque');
-						$downloadSei = get_field('download_sei');
+			            $downloadUno = get_field('download', $translatedID);
+						$downloadDue = get_field('download_due', $translatedID);
+						$downloadTre = get_field('download_tre', $translatedID);
+						$downloadQuattro = get_field('download_quattro', $translatedID);
+						$downloadCinque = get_field('download_cinque', $translatedID);
+						$downloadSei = get_field('download_sei', $translatedID);
 
 						if ( $downloadUno )
 						echo '<a class="invest-in-art-section__download" href="'.$downloadUno['url'].'"><i class="fa fa-download"></i> '.$downloadUno['title'].'</a><br/>';  

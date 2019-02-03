@@ -83,7 +83,12 @@ function ap_additional_artists_fields() {
             $existStatus = 'yes';
         }
     }
-	if (!is_user_logged_in()) echo '<a href="' . site_url('/accedi') . '">'; ?>
+    if (ICL_LANGUAGE_CODE === 'it') {
+        $loginUrl = '/my-account';
+    } else {
+        $loginUrl = '/en/my-account';
+    }
+	if (!is_user_logged_in()) echo '<a href="' . site_url($loginUrl) . '">'; ?>
     <span class="follow-box" data-follow="<?php echo $existQuery->posts[0]->ID; ?>" data-artist="<?php echo get_the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
         <i class="fa fa-plus" aria-hidden="true"><span><?php _e('Segui', 'business-pro') ?></span></i>
         <span class="following"><i class="fa fa-check" aria-hidden="true"><span style="padding-right:1rem;"><?php _e('Stai seguendo', 'business-pro') ?></span></i> <i class="fa fa-close" aria-hidden="true"><span><?php _e('Non seguire più', 'business-pro') ?></span></i></span>

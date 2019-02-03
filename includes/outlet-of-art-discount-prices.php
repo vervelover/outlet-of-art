@@ -24,12 +24,24 @@ add_filter( 'woocommerce_product_variation_get_sale_price', 'ap_custom_dynamic_s
 function ap_custom_dynamic_sale_price( $sale_price, $product ) {
 
 	// Categoria artwork
-	$categories = get_the_terms( $post->ID, 'product_cat' );
+	if ($curr_lang != 'it') {
+		$id = icl_object_id($post->ID, 'product', false, 'it');
+	}
+	else {
+	    $id = $post->ID;
+	}
+	$categories = get_the_terms( $id, 'product_cat' );
 	$catID = $categories[0]->term_id;
 
 	// Categoria artista
 	$artistID = get_field('artista')[0]->ID;
-	$artistCategory = get_the_terms( $artistID, 'artist_category' );
+	if ($curr_lang != 'it') {
+    	$tradid = icl_object_id($artistID, 'artist', false, 'it');
+	}
+	else {
+	    $tradid = $artistID;
+	}
+	$artistCategory = get_the_terms( $tradid, 'artist_category' );
 	$artistCategoryID = $artistCategory[0]->term_id;
 
 	// Defaults
@@ -136,6 +148,27 @@ function ap_custom_dynamic_sale_price_html( $price_html, $product ) {
     if( $product->is_type('variable') ) return $price_html;
     $regPrice = $product->get_regular_price();
     $salePrice = $product->get_sale_price();
+
+    // Se prodotto singolo, verifica se mostrare solo la percentuale di sconto senza il prezzo
+    if (is_product()) {
+    	if ($curr_lang != 'it') {
+    		$id = icl_object_id($product->id, 'product', false, 'it');
+		}
+		else {
+		    $id = $product->id;
+		}
+    	if (get_field('solo_percentuale', $id)) {
+    		 if ( $salePrice && $salePrice !== floatval($regPrice) ) {
+		    	$scontoPercentuale = (100-($salePrice/($regPrice/100)));
+		    	$scontoDaVisualizzare = ' <span class="sconto-percentuale sconto-percentuale__prefisso">' . __("Sconto:", "business-pro") . ' </span><span class="sconto-percentuale__valore">-' . round($scontoPercentuale,0) . '%</span>';
+		    	$price_html = $scontoDaVisualizzare;
+
+		    return $price_html;
+		    } else {
+		    	return $price_html;
+		    }
+    	}
+    }
     
     if ( $salePrice && $salePrice !== floatval($regPrice) ) {
     	$scontoPercentuale = (100-($salePrice/($regPrice/100)));

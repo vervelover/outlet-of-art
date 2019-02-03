@@ -17,6 +17,12 @@
             margin-right: 5%;
             width: 20%;
         }
+        ul {
+            margin-left: 0;
+        }
+        li {
+            list-style-type: none;
+        }
     }
     .woocommerce-MyAccount-content {
         @include breakpoint(sm) {

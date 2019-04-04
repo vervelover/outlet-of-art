@@ -22,7 +22,7 @@ include_once (get_template_directory().'/lib/init.php');
 // Define theme constants.
 define('CHILD_THEME_NAME', 'Business Pro Theme');
 define('CHILD_THEME_URL', 'https://seothemes.com/themes/business-pro');
-define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a36');
+define('CHILD_THEME_VERSION', '1.0.5.2018-08-08-a44');
 
 // Set Localization (do not remove).
 load_child_theme_textdomain('business-pro-theme', apply_filters('child_theme_textdomain', get_stylesheet_directory().'/languages', 'business-pro-theme'));
@@ -77,21 +77,27 @@ add_theme_support( 'gencwooc-featured-products-widget' );
 // Add secondary menu before header (removed header from structural wraps above, and added menu to genesis-menus above)
 add_action( 'genesis_header', 'opening_header_divs', 9 );
 function opening_header_divs() {
-	wp_nav_menu( array( 'theme_location' => 'top-menu', 'items_wrap' => '<div class="wrap"><ul id="%1$s" class="%2$s">%3$s</ul></div>', 'container_class' => 'nav-secondary genesis-nav-menu' ) );
-	echo '<div class="wrap">';
+	if(!$_REQUEST['signed_request']){
+		wp_nav_menu( array( 'theme_location' => 'top-menu', 'items_wrap' => '<div class="wrap"><ul id="%1$s" class="%2$s">%3$s</ul></div>', 'container_class' => 'nav-secondary genesis-nav-menu' ) );
+		echo '<div class="wrap">';
+	}
 }
 add_action( 'genesis_header', 'closing_header_divs' );
 function closing_header_divs() {
-	// $woosearchform = get_product_search_form(false);
-	$woosearchform = get_search_form(false);
-	echo '<div class="menu-header-search">';
-	echo $woosearchform;
-	echo '</div>';
-	echo '</div>';
+	if(!$_REQUEST['signed_request']){
+		// $woosearchform = get_product_search_form(false);
+		$woosearchform = get_search_form(false);
+		echo '<div class="menu-header-search">';
+		echo $woosearchform;
+		echo '</div>';
+		echo '</div>';
+	}
 }
 
 // Enable support for footer widgets.
-add_theme_support('genesis-footer-widgets', 4);
+if(!$_REQUEST['signed_request']){
+	add_theme_support('genesis-footer-widgets', 4);
+}
 
 // Enable viewport meta tag for mobile browsers.
 add_theme_support('genesis-responsive-viewport');
@@ -245,8 +251,10 @@ function business_scripts_styles() {
 	wp_enqueue_script( 'popup', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/min/popup.min.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
 
 	// Enqueue responsive menu script.
-	wp_enqueue_script('business-menu', get_stylesheet_directory_uri().'/assets/scripts/min/menus.min.js', array('jquery'), CHILD_THEME_VERSION, true);
-
+	if(!$_REQUEST['signed_request']){
+		wp_enqueue_script('business-menu', get_stylesheet_directory_uri().'/assets/scripts/min/menus.min.js', array('jquery'), CHILD_THEME_VERSION, true);
+	}
+	
 	// Localize responsive menus script.
 
 	$currentTopMenu  = 'ul#menu-top-menu';
@@ -282,6 +290,11 @@ function business_scripts_styles() {
 	$contactFormText = __("Hi, I'm interested in purchasing this work. Could you please provide more information about the piece?", "business-pro");
 	wp_localize_script('fixed-summary', 'contactformtext', array(
 	        'text' => $contactFormText
+	    ));
+
+	// Check if request is from Facebook
+	wp_localize_script('business-pro-theme', 'requestfromfacebook', array(
+	        'isFacebook' => $_REQUEST['signed_request']
 	    ));
 }
 
@@ -517,6 +530,7 @@ function ap_loop_artwork_info($location = null) {
 				<br><?php the_field('anno'); ?>
 			</p>
 		</footer>
+	</div>
 		<?php
 	}
 
@@ -731,4 +745,20 @@ function ap_saved_artworks_account_link_endpoint( $url, $endpoint, $value, $perm
 
     return $url;
  
+}
+
+// Remove header and footer on Iframes
+if($_REQUEST['signed_request']){
+	remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
+	remove_action( 'genesis_header', 'genesis_do_header' );
+	remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+    remove_action( 'genesis_before_content_sidebar_wrap', 'business_page_header');
+    remove_action('genesis_footer', 'genesis_do_footer');
+ 	remove_action('genesis_footer', 'genesis_footer_markup_open', 5);
+ 	remove_action('genesis_footer', 'genesis_footer_markup_close', 15);
+ 	remove_action('genesis_footer', 'ap_custom_footer');
+	remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
+	remove_filter( 'wp_nav_menu_items', 'ap_top_menu_items', 10, 2 );
+}else{
+  	return;
 }

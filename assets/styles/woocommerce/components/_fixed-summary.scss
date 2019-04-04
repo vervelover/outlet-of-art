@@ -117,6 +117,16 @@
         }
     }
 
+    &__info-box {
+        @include breakpoint(sm) {
+            height: 90px;
+            .home__artisti-consigliati & {
+                height: auto;
+            }
+        }
+        overflow: visible;
+    }
+
 }
 
 @media screen and (max-width: 56em) {

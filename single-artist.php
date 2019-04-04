@@ -29,6 +29,16 @@ function ap_woo_body_class($classes) {
 
 }
 
+// Artist Before Title
+add_action( 'woocommerce_before_shop_loop_item_title', 'ap_artist_before_title' );
+function ap_artist_before_title() {
+	global $post;
+	?>
+	<div class="fixed-summary__info-box">
+	<p class="fixed-summary__artist-name"><?php echo get_field('artista', $post->ID)[0]->post_title; ?></p>
+	<?php
+}
+
 remove_action('business_page_header', 'business_page_excerpt', 20);
 remove_action('genesis_entry_header', 'genesis_post_info', 12);
 remove_action('genesis_before_loop', 'genesis_do_breadcrumbs');

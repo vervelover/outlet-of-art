@@ -220,9 +220,9 @@ function ap_flexslider_shortcode($atts = null) {
 								<p class="entry-meta">
 								'.$tecnica.', '.$larghezza.'cm x '.$altezza.'cm <br/>'.$anno.'
 								</p>
-							</footer>';
+							</footer></div>';
 		            } else {
-		            	$footer = '';
+		            	$footer = '<footer class="entry-footer"></footer></div>';
 		            }
 
 	                $slides[] = '
@@ -230,7 +230,7 @@ function ap_flexslider_shortcode($atts = null) {
 	                	<a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="'.get_post_permalink($the_query->ID).'">
 		                	<div class="slide-media">'.sprintf($slideImg).'</div>
 		                	<div class="slide-content">
-		                		<span class="fixed-summary__artist-name">'.$artistName.'</span>
+		                		<div class="fixed-summary__info-box"><span class="fixed-summary__artist-name">'.$artistName.'</span>
 		                		<h2 class="woocommerce-loop-product__title">'.$slideTitle.'</h2>
 		                		'.$footer.'
 		                    </div>

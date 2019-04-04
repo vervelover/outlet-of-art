@@ -102,6 +102,13 @@
             flex-wrap: wrap;
         }
 
+        li.product {
+            flex-direction: column;
+            a.woocommerce-LoopProduct-link {
+                align-self: center !important;
+            }
+        }
+
         .fixed-summary__artist-name, .artist-archive-regione {
             text-align: center!important;
             margin-bottom: 1rem;

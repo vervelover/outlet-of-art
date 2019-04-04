@@ -353,7 +353,7 @@ function ap_output_artist_other_works() {
                     <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="<?php the_permalink(); ?>">
                     <?php 
                     the_post_thumbnail('woocommerce_thumbnail');
-                    echo '<p class="fixed-summary__artist-name">' . get_field('artista')[0]->post_title .'</p>';
+                    echo '<div class="fixed-summary__info-box"><p class="fixed-summary__artist-name">' . get_field('artista')[0]->post_title .'</p>';
                     echo '<h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2>';
                     ap_loop_artwork_info(); // è in functions php, mette il footer con tecnica e anno
                     ?>

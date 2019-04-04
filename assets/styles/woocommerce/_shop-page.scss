@@ -196,6 +196,7 @@
                 display: block;
                 align-self: flex-end;
                 @include transition;
+                overflow: visible;
             }
             .button {
                 text-align: center;

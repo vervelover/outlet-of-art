@@ -12,13 +12,16 @@ ul.flex-direction-nav {
     margin: 0;
     padding: 0px;
     list-style: none;
+    pointer-events: none;
 }
 
 li.flex-nav-prev {
     float: left;
+    pointer-events: all;
 }
 li.flex-nav-next {
     float: right;
+    pointer-events: all;
 }
 a.flex-next {
     visibility:hidden;
@@ -126,6 +129,7 @@ ul.slides {
         top: 50%;
         left: 10vw;
         transform: translateY(-50%);
+        pointer-events: none;
         h3 {
             color: $white;
             font-weight: $bold;

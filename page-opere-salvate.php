@@ -115,6 +115,7 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'ap_artist_before_title' 
 function ap_artist_before_title() {
 	global $post;
 	?>
+	<div class="fixed-summary__info-box">
 	<p class="fixed-summary__artist-name"><?php echo get_field('artista', $post->ID)[0]->post_title; ?></p>
 	<?php
 }

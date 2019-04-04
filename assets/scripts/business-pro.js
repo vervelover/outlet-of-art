@@ -1,6 +1,14 @@
 (function (document, $, undefined) {
 
 	/**
+	 * Target blank to all links if request comes from Facebook
+	 */
+	
+	if (requestfromfacebook.isFacebook) {
+		$('a[href^="http://"], a[href^="https://"]').attr('target','_blank');
+	}
+
+	/**
 	 * Add shrink class to header on scroll.
 	 */
 	$(window).scroll(function () {
@@ -26,6 +34,8 @@
 		}
 	} ).resize();
 
+	// Instagram share
+	$('.share-entry-meta').append('<div class="simple-social-icons"><ul><li class="ssi-instagram"><a href="https://www.instagram.com/outletofart/" target="_blank" rel="noopener noreferrer"><svg role="img" class="social-instagram" aria-labelledby="social-instagram-2"><title id="social-instagram-2">Instagram</title><use xlink:href="http://localhost/outlet-of-art/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-instagram"></use></svg></a></li></ul></div>');
 	/**
 	 * Show/hide video lightbox.
 	 */
